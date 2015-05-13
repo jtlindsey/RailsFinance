@@ -15,6 +15,7 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Category create, edit, delete
 - [ ] Transaction create, edit, delete
 - [ ] Budget create, edit, delete
+- [ ] Implement bootstrap or foundation
 - [ ] User create, edit, delete
 - [ ] Setup multi-tenancy structure without using gem
 - [ ] Home page with overview and profile summary
