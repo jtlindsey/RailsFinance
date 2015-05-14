@@ -10,7 +10,7 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 [ ] =incomplete [x] =complete
 
 ### Priority 1 Features
-- [ ] Create database schema design plan using dbdesigner.net or mysql workbench http://www.mysql.com/products/workbench/
+- [ ] Create database schema design plan using mysql workbench http://www.mysql.com/products/workbench/
 - [ ] Account create, edit, delete
 - [ ] Category create, edit, delete
 - [ ] Transaction create, edit, delete
