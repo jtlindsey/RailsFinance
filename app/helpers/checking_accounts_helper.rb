@@ -1,0 +1,2 @@
+module CheckingAccountsHelper
+end
