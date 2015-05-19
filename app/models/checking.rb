@@ -1,0 +1,2 @@
+class Checking < Asset
+end

@@ -11,6 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150519205420) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string  "type"
+    t.string  "name",          limit: 45
+    t.string  "last4",         limit: 4
+    t.string  "status",        limit: 45
+    t.integer "balance_cents"
+  end
 
 end
