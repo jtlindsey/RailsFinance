@@ -11,15 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518214913) do
-
-  create_table "checking_accounts", force: :cascade do |t|
-    t.string   "name",       limit: 45
-    t.string   "last4"
-    t.string   "status",     limit: 45
-    t.integer  "balance"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
