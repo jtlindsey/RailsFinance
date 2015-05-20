@@ -15,6 +15,7 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Category create, edit, delete
 - [ ] Transaction create, edit, delete
 - [ ] Budget create, edit, delete
+- [ ] Mobile friendly tables using single column mode when on phones (idea (3) at http://exisweb.net/responsive-table-plugins-and-patterns)
 - [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
 - [ ] Consider using activeadmin gem
 - [ ] Implement bootstrap or foundation
