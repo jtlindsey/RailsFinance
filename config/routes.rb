@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'accounts#index'
   resources :accounts
 
   resources :checkings, controller: :accounts
