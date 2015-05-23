@@ -1,4 +1,4 @@
-<%= form_for(@account) do |f| %>
+<%= form_for(@account, as: :account, url: account_path(@account)) do |f| %>
   <% if @account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
@@ -10,10 +10,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :type %><br>
-    <%= f.select :type, ['Checking'] %>
+    <%= f.select :type, Account.types %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
@@ -25,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.select :status, ['Open', 'Closed'] %>
+    <%= f.select :status, Asset.statuses %>
   </div>
   <div class="field">
     <%= f.label :balance %><br>

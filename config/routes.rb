@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'accounts#index'
   resources :accounts
 
-  resources :checkings, controller: :accounts
+  # resources :checkings, controller: :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

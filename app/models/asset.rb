@@ -6,4 +6,8 @@ class Asset < Account
   def self.statuses
     ['Open', 'Closed']
   end
+
+  def self.types
+    ['Checking', 'Saving']
+  end
 end

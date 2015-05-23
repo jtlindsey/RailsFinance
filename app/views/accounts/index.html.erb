@@ -19,9 +19,9 @@
         <!-- <td><%= account.last4 %></td> -->
         <td><%= account.status %></td>
         <td><%= account.balance %></td>
-        <td><%= link_to 'Show', account %></td>
+        <td><%= link_to 'Show', account_path(account) %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
