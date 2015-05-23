@@ -2,6 +2,7 @@ $(function() {
   //TODO Move the following two buttons into the HTML ERB template directly inside div.actions
   $('#new_account').append('<input type="button" value="Previous" id="prev" />')
   $('#new_account').append('<input type="button" value="Next" id="next" />')
+  // notice, clicking new account doesn't show this new function, it's not loaded until the page is refressed
   
   $('#new_account input[type=submit]').hide()
   if (($('#new_account').size() > 0)) {
