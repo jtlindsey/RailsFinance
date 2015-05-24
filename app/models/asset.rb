@@ -9,8 +9,10 @@ class Asset < Account
 
   def self.types
     {
-      'A Checking' => Checking, 
-      'A Saving' => Saving
+      'Checkings' => Checking, 
+      'Savings' => Saving,
+      'Cash' => Cash,
+      'Other Asset' => Otherasset
     }
   end
 end
