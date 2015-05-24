@@ -69,7 +69,8 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      account_params = params.require(:account) rescue params.require(:checking)
+      # jtl why is checking listed here? and not savings? or both?, removed it
+      account_params = params.require(:account)
       account_params.permit(:type, :name, :last4, :status, :balance)
     end
 end
