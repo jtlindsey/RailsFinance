@@ -1,5 +1,5 @@
-class Asset < Account
-  belongs_to :account
+class Liability < Account
+  belongs_to :account 
   
   validates :name, presence: true, length: {maximum: 45}
   validates :last4, length: {maximum: 4}
@@ -11,10 +11,11 @@ class Asset < Account
 
   def self.types
     {
-      'Checkings' => Checking, 
-      'Savings' => Saving,
-      'Cash' => Cash,
-      'Other Asset' => OtherAsset
+      'Personal Loan' => PersonalLoan, 
+      'Credit Card' => CreditCard,
+      'Student Loan' => StudentLoan,
+      'Other Liability' => OtherLiability,
+      'Mortgage (fixed)' => Mortgage
     }
   end
 end

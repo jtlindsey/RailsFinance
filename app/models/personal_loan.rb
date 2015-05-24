@@ -1,0 +1,2 @@
+class PersonalLoan < Liability
+end

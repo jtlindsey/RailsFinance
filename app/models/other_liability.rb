@@ -1,0 +1,2 @@
+class OtherLiability < Liability
+end

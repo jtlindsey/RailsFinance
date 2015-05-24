@@ -1,0 +1,2 @@
+class OtherAsset < Asset
+end
