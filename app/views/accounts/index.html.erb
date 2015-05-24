@@ -16,9 +16,8 @@
     <% @accounts.each do |account| %>
       <tr>
         <td><%= account.name + "-" + account.last4 + " (#{account.type})" %></td>
-        <!-- <td><%= account.last4 %></td> -->
         <td><%= account.status %></td>
-        <td><%= account.balance %></td>
+        <td><%= number_to_currency(account.balance) %></td>
         <td><%= link_to 'Show', account_path(account) %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
         <td><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
