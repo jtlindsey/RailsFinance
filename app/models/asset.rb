@@ -15,6 +15,12 @@ class Asset < Account
     # ActiveRecord::SubclassNotFound in Accounts#index
     # The single-table inheritance mechanism failed to locate the subclass: 'Other
     # line 16 on index page flagged
-    ['Checking', 'Saving']
+    # ['Checking', 'Saving']
+
+    #attempted solution
+    {
+      'A Checking' => Checking, 
+      'A Saving' => Saving
+    }
   end
 end
