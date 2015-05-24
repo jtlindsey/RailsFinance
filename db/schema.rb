@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150519205420) do
     t.string  "type"
     t.string  "name",          limit: 45
     t.string  "last4",         limit: 4
-    t.string  "status",        limit: 45
+    t.string  "status",                   default: "Open"
     t.integer "balance_cents"
   end
 

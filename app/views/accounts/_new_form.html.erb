@@ -24,10 +24,6 @@
     <%= f.text_field :last4 %>
   </div>
   <div class="field">
-    <% f.label :status %>
-    <%= f.hidden_field :status, value: 'Open' %>
-  </div>
-  <div class="field">
     <%= f.label :balance %><br>
     <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
   </div>
