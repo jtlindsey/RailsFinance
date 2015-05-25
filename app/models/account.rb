@@ -9,6 +9,6 @@ class Account < ActiveRecord::Base
   #self.inheritance_column = :_type_disabled
 
   def self.types
-    Asset.types + Liability.types
+    Asset.types #+ Liability.types
   end
 end
