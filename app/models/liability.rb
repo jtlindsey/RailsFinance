@@ -1,6 +1,4 @@
 class Liability < Account
-  belongs_to :account 
-  
   validates :name, presence: true, length: {maximum: 45}
   validates :last4, length: {maximum: 4}
   validates :status, inclusion: {in: ['Open', 'Closed']}
