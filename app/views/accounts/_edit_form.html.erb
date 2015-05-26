@@ -1,36 +1,7 @@
 <%= form_for(@account, as: :account, url: account_path(@account)) do |f| %>
-  <% if @account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
-      <% @account.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.select :type, Account.types %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :last4 %><br>
-    <%= f.text_field :last4 %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select :status, Asset.statuses %>
-  </div>
-  <div class="field">
-    <%= f.label :balance %><br>
-    <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
-  </div>
+  <%= render("account_form_fields", f: f) %>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
