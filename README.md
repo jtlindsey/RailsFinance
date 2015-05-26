@@ -7,7 +7,8 @@ The software will be easy to use so people of all ages can use it to manage thei
 Id like the desktop version of this to be based on the Node.js platform and be written in HTML, JavaScript, and CSS. That will be the next step after completing the Rails version. This feature list is primarily for the web version.
 
 ## Features Planned 
-[ ] =incomplete [x] =complete
+- [ ] =incomplete 
+- [x] =complete
 
 ### Priority 1 Features
 - [x] Create database schema design plan using mysql workbench http://www.mysql.com/products/workbench/
