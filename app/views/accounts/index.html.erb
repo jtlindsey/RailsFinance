@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row"> <!-- Assets -->
 
   <% if @checking.size > 0 %>
     <div class="col-md-4">
@@ -32,19 +32,19 @@
     </div>
   <% end %>
 
-  <% if @other_assets.size > 0 %>
+  <% if @saving.size > 0 %>
     <div class="col-md-4">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><%= "#{pluralize(@other_assets.size, 'Other Asset')} " %><%= link_to "(all)", list_accounts_path %></h3>
+          <h3 class="panel-title"><%= "#{pluralize(@saving.size, 'Saving')} " %><%= link_to "(all)", list_accounts_path %></h3>
         </div>
         <div class="panel-body">
           <table class="table table-striped">
             <tbody>
-              <% @other_assets.each do |other_asset| %>
-                <% if other_asset.status == 'Open' %>
+              <% @saving.each do |saving| %>
+                <% if saving.status == 'Open' %>
                   <tr>
-                    <td><%= "#{other_asset.name} #{other_asset.last4} | #{number_to_currency(other_asset.balance)}" %></td>
+                    <td><%= "#{saving.name} #{saving.last4} | #{number_to_currency(saving.balance)}" %></td>
                   </tr>
                 <% end %>
               <% end %>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-  <% end %>  
+  <% end %>
 
   <% if @escrow.size > 0 %>
     <div class="col-md-4">
@@ -68,29 +68,6 @@
                 <% if escrow.status == 'Open' %>
                   <tr>
                     <td><%= "#{escrow.name} #{escrow.last4} | #{number_to_currency(escrow.balance)}" %></td>
-                  </tr>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <% if @other_liability.size > 0 %>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title"><%= "#{pluralize(@other_liability.size, 'Other Liability')} " %><%= link_to "(all)", list_accounts_path %></h3>
-        </div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <tbody>
-              <% @other_liability.each do |other_liability| %>
-                <% if other_liability.status == 'Open' %>
-                  <tr>
-                    <td><%= "#{other_liability.name} #{other_liability.last4} | #{number_to_currency(other_liability.balance)}" %></td>
                   </tr>
                 <% end %>
               <% end %>
@@ -124,19 +101,19 @@
     </div>
   <% end %>
 
-  <% if @credit_card.size > 0 %>
+  <% if @other_assets.size > 0 %>
     <div class="col-md-4">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title"><%= "#{pluralize(@credit_card.size, 'Credit Card')} " %><%= link_to "(all)", list_accounts_path %></h3>
+          <h3 class="panel-title"><%= "#{pluralize(@other_assets.size, 'Other Asset')} " %><%= link_to "(all)", list_accounts_path %></h3>
         </div>
         <div class="panel-body">
           <table class="table table-striped">
             <tbody>
-              <% @credit_card.each do |credit_card| %>
-                <% if credit_card.status == 'Open' %>
+              <% @other_assets.each do |other_asset| %>
+                <% if other_asset.status == 'Open' %>
                   <tr>
-                    <td><%= "#{credit_card.name} #{credit_card.last4} | #{number_to_currency(credit_card.balance)}" %></td>
+                    <td><%= "#{other_asset.name} #{other_asset.last4} | #{number_to_currency(other_asset.balance)}" %></td>
                   </tr>
                 <% end %>
               <% end %>
@@ -145,7 +122,11 @@
         </div>
       </div>
     </div>
-  <% end %>
+  <% end %> 
+
+</div>
+<hr>
+<div class="row"> <!-- Liability -->
 
   <% if @credit_card.size > 0 %>
     <div class="col-md-4">
@@ -206,6 +187,29 @@
                 <% if personal_loan.status == 'Open' %>
                   <tr>
                     <td><%= "#{personal_loan.name} #{personal_loan.last4} | #{number_to_currency(personal_loan.balance)}" %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @other_liability.size > 0 %>
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= "#{pluralize(@other_liability.size, 'Other Liability')} " %><%= link_to "(all)", list_accounts_path %></h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <% @other_liability.each do |other_liability| %>
+                <% if other_liability.status == 'Open' %>
+                  <tr>
+                    <td><%= "#{other_liability.name} #{other_liability.last4} | #{number_to_currency(other_liability.balance)}" %></td>
                   </tr>
                 <% end %>
               <% end %>
