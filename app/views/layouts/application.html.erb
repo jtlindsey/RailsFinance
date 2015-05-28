@@ -19,12 +19,14 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'Rails Finance', accounts_path, class: "navbar-brand" %>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Options<span class="sr-only">(current)</span></a></li>
+        <%= nav_link "Options", "" %>
+        <%= nav_link "New Account", "/accounts/new" %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-inverse navbar-btn">Logout</button></li>
@@ -33,10 +35,9 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class ="container">
-  <div class="row">
-    <div class="span12"><%= yield %></div>
-  </div>
+<div class="container-fluid">
+ <%= yield %>
 </div>
+
 </body>
 </html>

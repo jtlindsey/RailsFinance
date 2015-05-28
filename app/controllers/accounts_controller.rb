@@ -5,6 +5,21 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @accounts = Account.all
+    # Assets
+    @checking = Checking.all
+    @other_assets = OtherAsset.all
+    @escrow = Escrow.all
+    @cash = Cash.all
+    @saving = Saving.all
+
+    # Liabilities
+    @other_liability = OtherLiability.all
+    @credit_card = CreditCard.all
+    @student_loan = StudentLoan.all
+    @personal_loan = PersonalLoan.all
+    #@mortgage = Mortgage.all
+
+    #Account.pluck('distinct type')
   end
 
   # GET /accounts/1
@@ -59,6 +74,10 @@ class AccountsController < ApplicationController
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def list
+    @accounts = Account.all
   end
 
   private

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'accounts#index'
   resources :accounts
 
+  get 'list_accounts', to: 'accounts#list'
+
   # resources :checkings, controller: :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
