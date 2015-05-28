@@ -1,0 +1,2 @@
+class Escrow < Asset
+end

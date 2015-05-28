@@ -12,6 +12,7 @@ class Asset < Account
       'Checkings' => Checking, 
       'Savings' => Saving,
       'Cash' => Cash,
+      'Escrow' => Escrow,
       'Other Asset' => OtherAsset
     }
   end
