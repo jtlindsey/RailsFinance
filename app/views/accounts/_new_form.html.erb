@@ -1,5 +1,7 @@
 <%= form_for(@account, as: :account, url: accounts_path) do |f| %>
   <%= render 'account_form_fields', f: f %>
+  <input type="button" value="Previous" id="prev" style="display: none;" />
+  <input type="button" value="Next" id="next" />
   <div class="actions">
     <%= f.submit %>
   </div>
