@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :categories
   root 'accounts#index'
   resources :accounts
 
