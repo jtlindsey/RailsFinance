@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions
   root 'accounts#index'
   resources :accounts
 
