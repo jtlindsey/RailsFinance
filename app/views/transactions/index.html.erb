@@ -25,7 +25,7 @@
         <td><%= "temp" %></td> <!-- transction check# -->
         <td><%= transaction.for %></td>
         <td><%= "temp" %></td> <!-- transction category -->
-        <td><%= transaction.comment %></td> <!-- transction comment -->
+        <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
         <td><%= "temp" %></td> <!-- transction withdrawal -->
         <td><%= "temp" %></td> <!-- transction deposit -->
         <td><%= "temp" %></td> <!-- transction new balance -->
@@ -44,7 +44,7 @@
     <tr><td>Check#</td><td><%= "temp" %></td></tr>
     <tr><td>For</td><td><%= transaction.for %></td></tr>
     <tr><td>Category</td><td><%= "temp" %></td></tr>
-    <tr><td>Comment</td><td><%= transaction.comment %></td></tr>
+    <tr><td>Comment</td><td><%= truncate(transaction.comment) %></td></tr>
     <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
     <tr><td>Deposit</td><td><%= "temp" %></td></tr>
     <tr><td>Balance</td><td><%= "temp" %></td></tr>
