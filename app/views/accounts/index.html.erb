@@ -9,12 +9,17 @@
 
 <div class="row"> <!-- Assets -->
 
-  <%= render 'accounts', accounts: @checking + @checking + @checking, account_name: "Checking" %>
+  <%= render 'accounts', accounts: @checking, account_name: "Checking" %>
   <%= render 'accounts', accounts: @saving, account_name: "Saving" %>
   <%= render 'accounts', accounts: @escrow, account_name: "Escrow" %>
   <%= render 'accounts', accounts: @escrow, account_name: "Escrow" %>
   <%= render 'accounts', accounts: @cash, account_name: "Cash" %>
   <%= render 'accounts', accounts: @other_assets, account_name: "Other Asset" %>
+
+</div>
+<hr>
+<div class="row"> <!-- Liabilities -->
+
   <%= render 'accounts', accounts: @credit_card, account_name: "Credit Card" %>
   <%= render 'accounts', accounts: @student_loan, account_name: "Student Loan" %>
   <%= render 'accounts', accounts: @personal_loan, account_name: "Personal Loan" %>

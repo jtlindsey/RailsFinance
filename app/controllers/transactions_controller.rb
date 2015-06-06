@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
+    @account = Account.find(params[:account_id])
     @transactions = Transaction.where(:account_id => params[:account_id])
   end
 
@@ -59,9 +60,11 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
+    @account = Account.find(params[:account_id])
+    @transaction = Transaction.find(params[:id])
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
+      format.html { redirect_to account_transactions_path(@account, @transaction), notice: 'Transaction was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
