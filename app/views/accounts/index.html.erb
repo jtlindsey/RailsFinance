@@ -9,20 +9,19 @@
 
 <div class="row"> <!-- Assets -->
 
-  <%= render 'accounts', accounts: @checking, account_name: "Checking" %>
-  <%= render 'accounts', accounts: @saving, account_name: "Saving" %>
-  <%= render 'accounts', accounts: @escrow, account_name: "Escrow" %>
-  <%= render 'accounts', accounts: @escrow, account_name: "Escrow" %>
-  <%= render 'accounts', accounts: @cash, account_name: "Cash" %>
+  <%= render 'accounts', accounts: @checkings, account_name: "Checking" %>
+  <%= render 'accounts', accounts: @savings, account_name: "Saving" %>
+  <%= render 'accounts', accounts: @escrows, account_name: "Escrow" %>
+  <%= render 'accounts', accounts: @cashs, account_name: "Cash" %>
   <%= render 'accounts', accounts: @other_assets, account_name: "Other Asset" %>
 
 </div>
 <hr>
 <div class="row"> <!-- Liabilities -->
 
-  <%= render 'accounts', accounts: @credit_card, account_name: "Credit Card" %>
-  <%= render 'accounts', accounts: @student_loan, account_name: "Student Loan" %>
-  <%= render 'accounts', accounts: @personal_loan, account_name: "Personal Loan" %>
-  <%= render 'accounts', accounts: @other_liability, account_name: "Other Liability" %>
+  <%= render 'accounts', accounts: @credit_cards, account_name: "Credit Card" %>
+  <%= render 'accounts', accounts: @student_loans, account_name: "Student Loan" %>
+  <%= render 'accounts', accounts: @personal_loans, account_name: "Personal Loan" %>
+  <%= render 'accounts', accounts: @other_liabilitys, account_name: "Other Liability" %>
 
 </div>

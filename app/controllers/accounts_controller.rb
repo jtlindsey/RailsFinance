@@ -6,17 +6,17 @@ class AccountsController < ApplicationController
   def index
     @accounts = Account.all
     # Assets
-    @checking = Checking.all
+    @checkings = Checking.all
     @other_assets = OtherAsset.all
-    @escrow = Escrow.all
-    @cash = Cash.all
-    @saving = Saving.all
+    @escrows = Escrow.all
+    @cashs = Cash.all
+    @savings = Saving.all
 
     # Liabilities
-    @other_liability = OtherLiability.all
-    @credit_card = CreditCard.all
-    @student_loan = StudentLoan.all
-    @personal_loan = PersonalLoan.all
+    @other_liabilitys = OtherLiability.all
+    @credit_cards = CreditCard.all
+    @student_loans = StudentLoan.all
+    @personal_loans = PersonalLoan.all
     #@mortgage = Mortgage.all
 
     #Account.pluck('distinct type')
