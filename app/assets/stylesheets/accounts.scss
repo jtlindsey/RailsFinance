@@ -1,3 +1,12 @@
 // Place all the styles related to the Accounts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-accounts {
+  height: 180px;
+
+  .panel-body {
+    height: 140px;
+    overflow: auto;
+  }
+}

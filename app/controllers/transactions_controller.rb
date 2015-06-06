@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.where(:account_id => params[:account_id])
   end
 
   # GET /transactions/1
@@ -14,22 +14,26 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @account = Account.find(params[:account_id])
+    @transaction = @account.transactions.build
   end
 
   # GET /transactions/1/edit
   def edit
+    @account = Account.find(params[:account_id])
+    @transaction = Transaction.find(params[:id])
   end
 
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @account = Account.find(params[:account_id])
+    @transaction = @account.transactions.build(transaction_params)
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+        format.html { redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: account_transaction_path(@transaction) }
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -40,10 +44,11 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
+    @account = Account.find(params[:account_id])
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
+        format.html { redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully updated.' }
+        format.json { render :show, status: :ok, location: account_transaction_path(@account, @transaction) }
       else
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -69,6 +74,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:date, :for, :comment, :amount)
+      params.require(:transaction).permit(:date, :for, :comment, :amount, :account_id)
     end
 end

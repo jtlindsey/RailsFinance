@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :transactions
+  # resources :transactions
   root 'accounts#index'
-  resources :accounts
+
+  resources :accounts do
+    resources :transactions    
+  end
 
   get 'list_accounts', to: 'accounts#list'
 

@@ -1,4 +1,7 @@
-<%= form_for(@transaction) do |f| %>
+<%= form_for(@transaction, 
+             as: :transaction,
+             url: 
+             @transaction.id ? account_transaction_path(@account, @transaction) : account_transactions_path) do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>

@@ -22,9 +22,9 @@
         <td><%= transaction.comment %></td>
         <td><%= transaction.amount %></td>
         <td><%= transaction.transaction_type %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
+        <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
+        <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Transaction', new_transaction_path %>
+<%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]) %>

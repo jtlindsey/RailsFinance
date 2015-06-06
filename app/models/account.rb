@@ -1,4 +1,5 @@
 class Account < ActiveRecord::Base
+  has_many :transactions
   monetize :balance_cents
   
   def self.types

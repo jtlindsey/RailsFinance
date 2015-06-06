@@ -20,5 +20,5 @@
   <%= @transaction.amount %>
 </p>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<%= link_to 'Edit', edit_account_transaction_path(account_id: params[:account_id], id: params[:id]) %> |
+<%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>
