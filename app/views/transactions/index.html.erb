@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= link_to "#{@account.name} #{@account.last4} Transactions", account_path(@account.id) %></h2>
+<h2><%= link_to "#{@account.name} #{@account.last4} Transactions", account_path(@account.id), title: 'Edit Account' %></h2>
 
 <!-- new code tables -->
 
