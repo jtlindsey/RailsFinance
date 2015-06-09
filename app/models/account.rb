@@ -17,4 +17,13 @@ class Account < ActiveRecord::Base
     %w(type status name balance)
   end
 
+  def balance
+    self.transactions.map {|transaction| transaction.applied_amount}.sum
+  end
+
+  # TODO today we calculate balance dynamically. 
+  # Evaluate if we should remove balance setting
+  # from the account creation wizard/edit given it is derived from all transactions
+  # Alternatively, rename balance to "known_balance"
+
 end

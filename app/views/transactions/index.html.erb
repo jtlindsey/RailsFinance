@@ -25,8 +25,7 @@ Need to add feature for deposit, withdrwal, and transfer
   </thead>
 
   <tbody>
-    <% calculate_balance = 0 %>
-    <% @transactions.each do |transaction| %>
+    <% @transactions.order(:created_at).each do |transaction| %>
       <tr>
         <td><%= transaction.date %></td>
         <td><%= "temp" %></td> <!-- transction check# -->
@@ -35,17 +34,15 @@ Need to add feature for deposit, withdrwal, and transfer
         <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
 
         <% if transaction.transaction_type == 'Deposit' %>
-          <td><%= transaction.amount %></td> <!-- transction deposit -->
+          <td><%= transaction.applied_amount %></td> <!-- transction deposit -->
           <td><%= "" %></td> <!-- transction withdrawal -->
-          <% calculate_balance += transaction.amount %>
         <% end %>
         <% if transaction.transaction_type == 'Withdrawal' %>
           <td><%= "" %></td> <!-- transction deposit -->
-          <td><%= transaction.amount * -1 %></td> <!-- transction withdrawal -->
-          <% calculate_balance += (transaction.amount * -1) %>
+          <td><%= transaction.applied_amount %></td> <!-- transction withdrawal -->
         <% end %>
 
-        <td><%= calculate_balance %></td> <!-- transction new balance -->
+        <td><%= transaction.new_balance %></td>
 
 
         <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
