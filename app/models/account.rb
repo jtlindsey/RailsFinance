@@ -13,6 +13,7 @@ class Account < ActiveRecord::Base
   end
 
   def fields
+    #for editing fields for account edit. Shows fields in order typed below.
     %w(type status name balance)
   end
 
