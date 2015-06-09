@@ -10,7 +10,7 @@ Need to add feature for deposit, withdrwal, and transfer
 
 <!-- new code tables -->
 
-<table class="visible-sm-block visible-md-block visible-lg-block table table-striped">
+<table class="visible-sm-block visible-md-block visible-lg-block table table-striped table-hover">
   <thead>
     <tr>
       <th>Date</th>
@@ -25,6 +25,7 @@ Need to add feature for deposit, withdrwal, and transfer
   </thead>
 
   <tbody>
+    <% calculate_balance = 0 %>
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.date %></td>
@@ -36,13 +37,17 @@ Need to add feature for deposit, withdrwal, and transfer
         <% if transaction.transaction_type == 'Deposit' %>
           <td><%= transaction.amount %></td> <!-- transction deposit -->
           <td><%= "" %></td> <!-- transction withdrawal -->
+          <% calculate_balance += transaction.amount %>
         <% end %>
         <% if transaction.transaction_type == 'Withdrawal' %>
           <td><%= "" %></td> <!-- transction deposit -->
           <td><%= transaction.amount * -1 %></td> <!-- transction withdrawal -->
+          <% calculate_balance += (transaction.amount * -1) %>
         <% end %>
 
-        <td><%= "temp" %></td> <!-- transction new balance -->
+        <td><%= calculate_balance %></td> <!-- transction new balance -->
+
+
         <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
         <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
         <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
