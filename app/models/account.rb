@@ -1,6 +1,8 @@
 class Account < ActiveRecord::Base
   has_many :transactions
   monetize :balance_cents
+
+  after_create :add_initial_amount_transaction
   
   def self.types
     Asset.types.merge(Liability.types)
@@ -26,4 +28,11 @@ class Account < ActiveRecord::Base
   # from the account creation wizard/edit given it is derived from all transactions
   # Alternatively, rename balance to "known_balance"
 
+  def add_initial_amount_transaction
+    # TODO fill in the rest of the fields
+    # Transaction.create!(
+      # amount: balance_cents / 100.00,
+      # account_id: self.id
+    # )
+  end
 end

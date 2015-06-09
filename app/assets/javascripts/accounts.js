@@ -1,4 +1,8 @@
 $(document).on('page:change', function() {
+  var getFieldCount = function() {
+    return $('.field').size();
+  };
+
   // TODO make sure switching type reorders fields also in the future
   if ($('#edit_account').size() > 0) {
     var account_fields = JSON.parse($('#account_fields').val());
@@ -51,11 +55,24 @@ $(document).on('page:change', function() {
     //   }
     // }
 
+    var determineAvailableUserActionsAfterPerformingNext = function() {
+      var newVisibleIndex = getVisibleIndex();
+      var maxIndex = getFieldCount() - 1;
+      //TODO inspect completness of next line's code
+      // if ((newVisibleIndex == maxIndex) || (determineNextElementIndexPerAccountSubtypeFields(newVisibleIndex) == -1)) {
+      if (newVisibleIndex == maxIndex) {
+        $('#next').hide();
+        $('#new_account input[type=submit]').show();
+      }
+      if (newVisibleIndex > 0) {
+        $('#prev').show();
+      }
+    };
+
     // TODO Support ordered showing of fields
     $('#next').click(function() { 
         var visibleIndex = getVisibleIndex(); //0-based index
         var visibleCssIndex = getVisibleIndex() + 1; //1-based index
-        var fieldCount = $('.field').size();
 
         // + 1 for designer indexing 
         $('.field:nth-of-type(' + visibleCssIndex + ')').hide({
@@ -64,44 +81,34 @@ $(document).on('page:change', function() {
             var nextElementCssIndex = nextElementIndex + 1;
             // + 1 for designer indexing and + 1 for the next element
             $('.field:nth-of-type(' + nextElementCssIndex + ')').show({
-              complete: function() {
-                var newVisibleIndex = getVisibleIndex();
-                var maxIndex = fieldCount - 1;
-                //TODO inspect completness of next line's code
-                // if ((newVisibleIndex == maxIndex) || (determineNextElementIndexPerAccountSubtypeFields(newVisibleIndex) == -1)) {
-                if (newVisibleIndex == maxIndex) {
-                  $('#next').hide();
-                  $('#new_account input[type=submit]').show();
-                }
-                if (newVisibleIndex > 0) {
-                  $('#prev').show();
-                }
-              }
+              complete: determineAvailableUserActionsAfterPerformingNext
             });          
           }
         });
 
       }
     );  
+
+    var determineAvailableUserActionsAfterPerformingPrevious = function() {
+      var visibleIndex = getVisibleIndex();
+      if (visibleIndex == 0) {
+        $('#prev').hide();
+      }
+      var maxIndex = getFieldCount() - 1
+      if (visibleIndex < maxIndex) {
+        $('#next').show();
+        $('#new_account input[type=submit]').hide();
+      }
+    };
+
     $('#prev').click(function() { 
         var visibleIndex = getVisibleIndex();
-        var fieldCount = $('.field').size(); 
         // + 1 for CSS indexing (1-based)
         $('.field:nth-of-type(' + (visibleIndex + 1) + ')').hide({
           complete: function() {
             // + 1 for CSS indexing and - 1 for the previous element
             $('.field:nth-of-type(' + (visibleIndex + 1 - 1) + ')').show({
-              complete: function() {
-                var visibleIndex = getVisibleIndex();
-                if (visibleIndex == 0) {
-                  $('#prev').hide();
-                }
-                var maxIndex = fieldCount - 1
-                if (visibleIndex < maxIndex) {
-                  $('#next').show();
-                  $('#new_account input[type=submit]').hide();
-                }
-              }
+              complete: determineAvailableUserActionsAfterPerformingPrevious
             });          
           }
         });
