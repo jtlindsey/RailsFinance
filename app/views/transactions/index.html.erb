@@ -18,8 +18,8 @@ Need to add feature for deposit, withdrwal, and transfer
       <th>For</th>
       <th>Category</th>
       <th>Comment</th>
-      <th>Withdrawal</th>
       <th>Deposit</th>
+      <th>Withdrawal</th>
       <th>Balance</th>
     </tr>
   </thead>
@@ -32,8 +32,16 @@ Need to add feature for deposit, withdrwal, and transfer
         <td><%= transaction.for %></td>
         <td><%= "temp" %></td> <!-- transction category -->
         <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
-        <td><%= "temp" %></td> <!-- transction withdrawal -->
-        <td><%= "temp" %></td> <!-- transction deposit -->
+
+        <% if transaction.transaction_type == 'Deposit' %>
+          <td><%= transaction.amount %></td> <!-- transction deposit -->
+          <td><%= "" %></td> <!-- transction withdrawal -->
+        <% end %>
+        <% if transaction.transaction_type == 'Withdrawal' %>
+          <td><%= "" %></td> <!-- transction deposit -->
+          <td><%= transaction.amount * -1 %></td> <!-- transction withdrawal -->
+        <% end %>
+
         <td><%= "temp" %></td> <!-- transction new balance -->
         <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
         <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
