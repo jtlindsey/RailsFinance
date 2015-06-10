@@ -69,6 +69,9 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
+    account = Account.find(params[:id])
+    Transaction.where(account_id: account).destroy_all
+
     @account.destroy
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
