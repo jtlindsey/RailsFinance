@@ -81,6 +81,8 @@ class AccountsController < ApplicationController
 
   def list
     @accounts = Account.all
+    @assets_list = Account.order(:name).where(asset_liability: 'Asset')
+    @liabilities_list = Account.order(:name).where(asset_liability: 'Liability')
   end
 
   private

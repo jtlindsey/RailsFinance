@@ -1,30 +1,76 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing All Accounts</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">All Assets</div>
+      <div class="panel-body">
 
-<table class="visible-sm-block visible-md-block visible-lg-block table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Balance</th>
-    </tr>
-  </thead>
+        <table class="visible-sm-block visible-md-block visible-lg-block table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= "#{account.name} #{account.last4} (#{account.type})" %></td>
-        <td><%= account.status %></td>
-        <td><%= number_to_currency(account.balance) %></td>
-        <td><%= link_to 'Show', account_path(account) %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <tbody>
+            <% @assets_list.each do |account| %>
+              <tr>
+                <td><%= "#{account.name} #{account.last4} (#{account.type})" %></td>
+                <td><%= account.status %></td>
+                <td><%= number_to_currency(account.balance) %></td>
+                <td><%= link_to 'Show', account_path(account) %></td>
+                <td><%= link_to 'Edit', edit_account_path(account) %></td>
+                <td><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">All Liabilities</div>
+      <div class="panel-body">
+
+        <table class="visible-sm-block visible-md-block visible-lg-block table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @liabilities_list.each do |account| %>
+              <tr>
+                <td><%= "#{account.name} #{account.last4} (#{account.type})" %></td>
+                <td><%= account.status %></td>
+                <td><%= number_to_currency(account.balance) %></td>
+                <td><%= link_to 'Show', account_path(account) %></td>
+                <td><%= link_to 'Edit', edit_account_path(account) %></td>
+                <td><%= link_to 'Destroy', account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Mobile -->
 <% @accounts.each_with_index do |account, i| %>
   <table class="visible-xs-block table table-striped">
   <tbody>
@@ -39,7 +85,7 @@
   </tbody>
   </table>
 <% end %>
-
+<!-- Mobile -->
 <br>
 
 <%= link_to 'New Account', new_account_path %>
