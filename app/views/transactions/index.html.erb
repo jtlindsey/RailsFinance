@@ -34,15 +34,15 @@ Need to add feature for deposit, withdrwal, and transfer
         <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
 
         <% if transaction.transaction_type == 'Deposit' %>
-          <td><%= transaction.applied_amount %></td> <!-- transction deposit -->
+          <td><%= number_to_currency(transaction.applied_amount) %></td> <!-- transction deposit -->
           <td><%= "" %></td> <!-- transction withdrawal -->
         <% end %>
         <% if transaction.transaction_type == 'Withdrawal' %>
           <td><%= "" %></td> <!-- transction deposit -->
-          <td><%= transaction.applied_amount %></td> <!-- transction withdrawal -->
+          <td><%= number_to_currency(transaction.applied_amount) %></td> <!-- transction withdrawal -->
         <% end %>
 
-        <td><%= transaction.new_balance %></td>
+        <td><%= number_to_currency(transaction.new_balance) %></td>
 
 
         <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
