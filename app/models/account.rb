@@ -3,7 +3,17 @@ class Account < ActiveRecord::Base
   monetize :balance_cents
 
   after_create :opening_deposit_transaction
-  
+  after_initialize :init
+
+  def init
+    case type
+    when 'Checking' || 'Saving' || 'Cash' || 'Escrow' || 'OtherAsset'
+      self.asset_liability = 'Asset'
+    when 'PersonalLoan' || 'CreditCard' || 'StudentLoan' || 'OtherLiability' || 'Mortgage'
+      self.asset_liability = 'Liability'
+    end
+  end
+ 
   def self.types
     Asset.types.merge(Liability.types)
   end
