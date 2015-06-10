@@ -23,11 +23,6 @@ class Account < ActiveRecord::Base
     self.transactions.map {|transaction| transaction.applied_amount}.sum
   end
 
-  # TODO today we calculate balance dynamically. 
-  # Evaluate if we should remove balance setting
-  # from the account creation wizard/edit given it is derived from all transactions
-  # Alternatively, rename balance to "known_balance"
-
   def opening_deposit_transaction
     Transaction.create!(
       amount: balance_cents / 100.00,
