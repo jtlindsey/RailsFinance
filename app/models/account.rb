@@ -6,6 +6,7 @@ class Account < ActiveRecord::Base
   after_initialize :init
 
   def init
+    #setting asset_liability column when account is created
     case type
     when 'Checking' || 'Saving' || 'Cash' || 'Escrow' || 'OtherAsset'
       self.asset_liability = 'Asset'
