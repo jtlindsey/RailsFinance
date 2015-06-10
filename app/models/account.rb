@@ -8,10 +8,10 @@ class Account < ActiveRecord::Base
   def init
     #setting asset_liability column when account is created
     case type
-    when 'Checking' || 'Saving' || 'Cash' || 'Escrow' || 'OtherAsset'
+    when 'Checking', 'Saving', 'Cash', 'Escrow', 'OtherAsset'
       self.asset_liability = 'Asset'
-    when 'PersonalLoan' || 'CreditCard' || 'StudentLoan' || 'OtherLiability' || 'Mortgage'
-      self.asset_liability = 'Liability'
+    when 'PersonalLoan', 'CreditCard', 'StudentLoan', 'OtherLiability', 'Mortgage'
+      self.asset_liability = 'Liability' 
     end
   end
  
