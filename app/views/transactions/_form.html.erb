@@ -17,14 +17,9 @@
     <%= f.label :transaction_type %><br>
     <%= f.select :transaction_type, %w(Choose Deposit Withdrawal Transfer) %>
   </div>
-
   <div class="field">
-    <%= f.label :old_balance %><br>
-    <%= f.text_field :old_balance %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
   </div>
   <div class="field">
     <%= f.label :for %><br>
@@ -35,8 +30,8 @@
     <%= f.text_area :comment %>
   </div>
   <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date %>
   </div>
   <div class="actions">
     <%= f.submit %>
