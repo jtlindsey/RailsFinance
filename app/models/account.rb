@@ -39,7 +39,7 @@ class Account < ActiveRecord::Base
       amount: balance_cents / 100.00,
       account_id: self.id,
       transaction_type: 'Deposit',
-      for: 'Opening Deposit',
+      payee: 'Opening Deposit',
       comment: 'Opening Deposit',
       created_at: DateTime.now,
       updated_at: DateTime.now,
