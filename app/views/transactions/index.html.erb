@@ -29,7 +29,7 @@ Need to add feature for deposit, withdrwal, and transfer
       <tr>
         <td><%= transaction.date %></td>
         <td><%= "temp" %></td> <!-- transction check# -->
-        <td><%= transaction.for %></td>
+        <td><%= transaction.from_to_name %></td>
         <td><%= "temp" %></td> <!-- transction category -->
         <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
 
@@ -58,7 +58,7 @@ Need to add feature for deposit, withdrwal, and transfer
   <tbody>
     <tr><td>Date</td><td><%= "#{transaction.date}" %></td></tr>
     <tr><td>Check#</td><td><%= "temp" %></td></tr>
-    <tr><td>For</td><td><%= transaction.for %></td></tr>
+    <tr><td>For</td><td><%= transaction.from_to_name %></td></tr>
     <tr><td>Category</td><td><%= "temp" %></td></tr>
     <tr><td>Comment</td><td><%= truncate(transaction.comment) %></td></tr>
     <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
