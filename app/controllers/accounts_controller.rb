@@ -83,6 +83,12 @@ class AccountsController < ApplicationController
     @accounts = Account.all
     @assets_list = Account.order(:name).where(asset_liability: 'Asset')
     @liabilities_list = Account.order(:name).where(asset_liability: 'Liability')
+
+    @assets_total = 0
+    @assets_list.each {|asset| @assets_total += asset.balance }
+
+    @liabilities_total = 0
+    @liabilities_list.each {|liability| @liabilities_total += liability.balance }
   end
 
   private
