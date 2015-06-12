@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
     @credit_cards = CreditCard.all
     @student_loans = StudentLoan.all
     @personal_loans = PersonalLoan.all
-    #@mortgage = Mortgage.all
+    @mortgage = Mortgage.all
 
     #Account.pluck('distinct type')
   end
