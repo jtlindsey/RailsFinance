@@ -13,47 +13,46 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 ### Priority 1 Features
 - [x] Create database schema design plan using mysql workbench http://www.mysql.com/products/workbench/
 - [x] Account create, edit, delete
-- [ ] Category create, edit, delete
-- [ ] Transaction create, edit, delete
+- [x] Transaction create, edit, delete
+- [x] Mobile friendly tables using single column mode when on phones
+- [x] Implement bootstrap
+- [ ] Category create, edit, delete (Inceme and Expense Categories)
 - [ ] Budget create, edit, delete
-- [ ] Mobile friendly tables using single column mode when on phones (idea (3) at http://exisweb.net/responsive-table-plugins-and-patterns)
-- [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
-- [ ] Consider using activeadmin gem
-- [ ] Implement bootstrap or foundation
+- [ ] Credit Cards, Loans, etc (Balance, Limit, Interest rage, and ability to sort by order should be paid off for lowest total interest paid)
+- [ ] Calculate Mortgage Payments
+- [ ] Track mortgage (fixed) with and without escrow
+- [ ] Handle Escrow (P&I, Taxes, Insurance, and PMI or other additions)
 - [ ] User create, edit, delete
 - [ ] Setup multi-tenancy structure without using gem
+- [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
+- [ ] Consider using activeadmin gem
 - [ ] Home page with overview and profile summary
 - [ ] Implement pie and bar charts using chartkick.com or charts.js
 - [ ] Cross platform compatible with Windows, Mac, Linux, iOS, Android OS (test on all)
 - [ ] Resize Text
+- [ ] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
+- [ ] Create query page for multiple types of querys (spending, income, expenses, by payee, by category, )
+- [ ] Add graph options to query page
 - [ ] Print as pdf (custom print.css)
 - [ ] Export to .txt and .csv file
 - [ ] Export transactions to excel
-- [ ] Create Categories and Sub-categories
-- [ ] Add files to transactions (receipts as image or pdf)
+- [ ] Add files to transactions (receipts as image or pdf, clicking on view transaction shows receipt preview and allows download of reciept copy)
 - [ ] Database backup
 - [ ] Update software without loosing existing data
-- [ ] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
 - [ ] Budgeting, test integration and tracking with categories accounts
 - [ ] Graphs..bar and pie and list (quick view change of expenses for week, month, quarter, 6-months, year)
 - [ ] Graphs for others by link to page to create
 - [ ] Graphs printable
 - [ ] Net-worth tracking
-- [ ] Calculate Mortgage Payments
-- [ ] Track mortgage (fixed) with and without escrow
-- [ ] Handle Escrow (P&I, Taxes, Insurance, and PMI or other additions)
 - [ ] Home page view grouping...(that can be changed by drag and drop?)
-- [ ] Credit Cards, Loans, etc (Balance, Limit, Interest rage, and ability to sort by order should be paid off for lowest total interest paid)
-- [ ] Assets
-- [ ] Liabilities 
 - [ ] Create Getting Started Guide (Easy Quick Start Guide)
 - [ ] Create User Guide with screen shots
 - [ ] Create Getting started video
 - [ ] Create feature video
 
 ### Priority 2 Features
-- [ ] Built in loan comparison calculators
 - [ ] Goal to purchase / saving progress page
+- [ ] Built in loan comparison calculators
 - [ ] Produce Amortization Charts
 - [ ] User accounts
 - [ ] Support ticket location for easy submission and tracking
