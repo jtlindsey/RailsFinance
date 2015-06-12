@@ -19,9 +19,9 @@
 <hr>
 <div class="row"> <!-- Liabilities -->
 
+  <%= render 'accounts', accounts: @mortgage, account_name: "Mortgage (fixed)" %>
   <%= render 'accounts', accounts: @credit_cards, account_name: "Credit Card" %>
   <%= render 'accounts', accounts: @student_loans, account_name: "Student Loan" %>
   <%= render 'accounts', accounts: @personal_loans, account_name: "Personal Loan" %>
   <%= render 'accounts', accounts: @other_liabilitys, account_name: "Other Liability" %>
-
 </div>
