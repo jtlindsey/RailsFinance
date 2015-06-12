@@ -31,8 +31,6 @@ class Account < ActiveRecord::Base
       transaction_type: 'Deposit',
       payee: 'Opening Deposit',
       comment: 'Opening Deposit',
-      created_at: DateTime.now,
-      updated_at: DateTime.now,
       date: DateTime.now
     )
   end
