@@ -1,5 +1,24 @@
 // Place custom css that apply to whole site here.
 
+/* change table hover color */
 .table-hover tbody tr:hover td {
   background-color: #505050;
+  color: #FFF;
+}
+
+.table-hover tbody tr:hover td a {
+  color: #FFF;
+}
+
+/* change link color in panel header */
+.panel-primary .panel-heading .panel-title a {
+  color: #FFF;
+}
+
+.panel-primary .panel-heading .panel-title a:hover {
+  color: #CCC;
+}
+
+.panel-primary .panel-heading .panel-title {
+  color: #FFF;
 }
