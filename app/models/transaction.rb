@@ -1,6 +1,8 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
 
+  monetize :amount_cents
+
   def previous_transactions
     # grab all transactions belonging to my same account with date/time previous to my date/time
     Transaction.where("account_id = ? AND created_at < ?", self.account_id, self.created_at).order(:created_at)

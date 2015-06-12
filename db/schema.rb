@@ -11,29 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611194554) do
+ActiveRecord::Schema.define(version: 20150612211853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string  "type"
-    t.string  "name",            limit: 45
-    t.string  "last4",           limit: 4
-    t.string  "status",                     default: "Open"
-    t.integer "balance_cents",   limit: 8
+    t.string  "name",          limit: 45
+    t.string  "last4",         limit: 4
+    t.string  "status",                   default: "Open"
+    t.integer "balance_cents", limit: 8
     t.integer "credit_limit"
     t.decimal "interest_rate"
-    t.string  "asset_liability"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.datetime "date"
     t.string   "payee"
     t.text     "comment"
-    t.decimal  "amount"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "amount_cents",     limit: 8
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "transaction_type"
     t.integer  "account_id"
   end

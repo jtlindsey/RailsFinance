@@ -70,7 +70,6 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.json
   def destroy
     account = Account.find(params[:id])
-    Transaction.where(account_id: account).destroy_all
 
     @account.destroy
     respond_to do |format|
@@ -81,8 +80,8 @@ class AccountsController < ApplicationController
 
   def list
     @accounts = Account.all
-    @assets_list = Account.order(:name).where(asset_liability: 'Asset')
-    @liabilities_list = Account.order(:name).where(asset_liability: 'Liability')
+    @assets_list = Account.order(:name).where(type: Asset.types.values)
+    @liabilities_list = Account.order(:name).where(type: Liability.types.values)
 
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }

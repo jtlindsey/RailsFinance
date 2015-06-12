@@ -1,20 +1,10 @@
 class Account < ActiveRecord::Base
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
+  # above line is to destroy all transactions when account is deleted (dependent: :destroy)
   monetize :balance_cents
 
   after_create :opening_deposit_transaction
-  after_initialize :init
 
-  def init
-    #setting asset_liability column when account is created
-    case type
-    when 'Checking', 'Saving', 'Cash', 'Escrow', 'OtherAsset'
-      self.asset_liability = 'Asset'
-    when 'PersonalLoan', 'CreditCard', 'StudentLoan', 'OtherLiability', 'Mortgage'
-      self.asset_liability = 'Liability' 
-    end
-  end
- 
   def self.types
     Asset.types.merge(Liability.types)
   end
