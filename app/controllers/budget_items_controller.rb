@@ -10,6 +10,8 @@ class BudgetItemsController < ApplicationController
   # GET /budget_items/1
   # GET /budget_items/1.json
   def show
+    #use show for showing current budget since index 'shows' and shows edit and destroy
+    @budget_items = BudgetItem.all
   end
 
   # GET /budget_items/new

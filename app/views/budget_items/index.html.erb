@@ -10,8 +10,8 @@
           <thead>
             <tr>
               <th>Category</th>
-              <th>Amount</th>
               <th>Period</th>
+              <th>Amount</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -20,8 +20,8 @@
             <% @budget_items.each do |budget_item| %>
               <tr>
                 <td><%= budget_item.category %></td>
-                <td><%= number_to_currency(budget_item.amount) %></td>
                 <td><%= budget_item.period %></td>
+                <td><%= number_to_currency(budget_item.amount) %></td>
                 <td><%= link_to 'Show', budget_item %></td>
                 <td><%= link_to 'Edit', edit_budget_item_path(budget_item) %></td>
                 <td><%= link_to 'Destroy', budget_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
