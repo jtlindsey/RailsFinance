@@ -6,18 +6,19 @@ class AccountsController < ApplicationController
   def index
     @accounts = Account.all
     # Assets
-    @checkings = Checking.all
-    @other_assets = OtherAsset.all
-    @escrows = Escrow.all
-    @cashs = Cash.all
-    @savings = Saving.all
+    @checkings = Account.order("lower(name)").where(type: 'Checking')
+    @savings = Account.order("lower(name)").where(type: 'Saving')
+    @escrows = Account.order("lower(name)").where(type: 'Escrow')
+    @cashs = Account.order("lower(name)").where(type: 'Cash')
+    @other_assets = Account.order("lower(name)").where(type: 'OtherAsset')
+
 
     # Liabilities
-    @other_liabilitys = OtherLiability.all
-    @credit_cards = CreditCard.all
-    @student_loans = StudentLoan.all
-    @personal_loans = PersonalLoan.all
-    @mortgage = Mortgage.all
+    @credit_cards = Account.order("lower(name)").where(type: 'CreditCard')
+    @other_liabilitys = Account.order("lower(name)").where(type: 'OtherLiability')
+    @student_loans = Account.order("lower(name)").where(type: 'StudentLoan')
+    @personal_loans = Account.order("lower(name)").where(type: 'PersonalLoan')
+    @mortgage = Account.order("lower(name)").where(type: 'Mortgage')
 
     #Account.pluck('distinct type')
   end
@@ -80,8 +81,8 @@ class AccountsController < ApplicationController
 
   def list
     @accounts = Account.all
-    @assets_list = Account.order(:name).where(type: Asset.types.values)
-    @liabilities_list = Account.order(:name).where(type: Liability.types.values)
+    @assets_list = Account.order("lower(name)").where(type: Asset.types.values)
+    @liabilities_list = Account.order("lower(name)").where(type: Liability.types.values)
 
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
