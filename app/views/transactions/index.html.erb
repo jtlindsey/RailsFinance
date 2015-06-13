@@ -1,16 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>**TODO**</p>
-Change fields based on account type (if needed...review first)
-<p>**TODO**</p>
-
-<h3>Transactions</h3>
-
 <div class="row visible-sm-block visible-md-block visible-lg-block">
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading panels-text">
-        <%= "#{@account.name} #{@account.last4}-(#{@account.type}) " %><%= link_to "Edit", account_path(@account.id), title: 'Edit Account' %>
+        <%= "(#{@account.type})-#{@account.name} #{@account.last4} " %><%= link_to "Edit", account_path(@account.id), title: 'Edit Account' %>
       </div>
       <div class="panel-body">
 
@@ -31,7 +25,7 @@ Change fields based on account type (if needed...review first)
           <tbody>
             <% @transactions.order(:created_at).each do |transaction| %>
               <tr>
-                <td><%= transaction.date %></td>
+                <td><%= transaction.date.to_date %></td>
                 <td><%= "temp" %></td> <!-- transction check# -->
                 <td><%= transaction.payee %></td>
                 <td><%= "temp" %></td> <!-- transction category -->
@@ -66,7 +60,7 @@ Change fields based on account type (if needed...review first)
 <% @transactions.each_with_index do |transaction, i| %>
   <table class="visible-xs-block table table-striped">
   <tbody>
-    <tr><td>Date</td><td><%= "#{transaction.date}" %></td></tr>
+    <tr><td>Date</td><td><%= "#{transaction.date.to_date}" %></td></tr>
     <tr><td>Check#</td><td><%= "temp" %></td></tr>
     <tr><td>Payee</td><td><%= transaction.payee %></td></tr>
     <tr><td>Category</td><td><%= "temp" %></td></tr>
@@ -87,3 +81,8 @@ Change fields based on account type (if needed...review first)
 <br>
 
 <%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]) %>
+
+<br><br>
+<h2>**TODO**</h2>
+Change fields based on account type (...example, don't show check# on savings transactions)
+<h2>**TODO**</h2>
