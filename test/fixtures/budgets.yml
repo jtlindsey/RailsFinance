@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  amount: 1
+  period: MyString
+  due_date: 2015-06-13 00:47:31
+
+two:
+  category: MyString
+  amount: 1
+  period: MyString
+  due_date: 2015-06-13 00:47:31
