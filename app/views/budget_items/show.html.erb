@@ -1,37 +1,19 @@
 <p id="notice"><%= notice %></p>
-<h1>Show Budget and Condition and progress charts, Budgeted vs Actual </h1>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading panels-text">Budget Items</div>
-      <div class="panel-body">
+<p>
+  <strong>Category:</strong>
+  <%= @budget_item.category %>
+</p>
 
-        <table class="table table-striped table-hover table-condensed">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Period</th>
-              <th>Budgeted Amount</th>
-              <th>Current Amount</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
+<p>
+  <strong>Amount:</strong>
+  <%= @budget_item.amount %>
+</p>
 
-          <tbody>
-            <% @budget_items.each do |budget_item| %>
-              <tr>
-                <td><%= budget_item.category %></td>
-                <td><%= budget_item.period %></td>
-                <td><%= number_to_currency(budget_item.amount) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+<p>
+  <strong>Period:</strong>
+  <%= @budget_item.period %>
+</p>
 
-      </div>
-    </div>
-  </div>
-</div>
-
+<%= link_to 'Edit', edit_budget_item_path(@budget_item) %> |
 <%= link_to 'Back', budget_items_path %>

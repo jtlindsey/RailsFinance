@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'list_accounts', to: 'accounts#list'
   get 'options', to: 'accounts#options'
+  get 'budget_show_all', to: 'budget_items#show_all'
 
   # resources :checkings, controller: :accounts
 
