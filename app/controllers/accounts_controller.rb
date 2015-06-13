@@ -4,14 +4,12 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
     # Assets
     @checkings = Account.order("lower(name)").where(type: 'Checking')
     @savings = Account.order("lower(name)").where(type: 'Saving')
     @escrows = Account.order("lower(name)").where(type: 'Escrow')
     @cashs = Account.order("lower(name)").where(type: 'Cash')
     @other_assets = Account.order("lower(name)").where(type: 'OtherAsset')
-
 
     # Liabilities
     @credit_cards = Account.order("lower(name)").where(type: 'CreditCard')
@@ -99,7 +97,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      # jtl why is checking listed here? and not savings? or both?, removed it
       account_params = params.require(:account)
       account_params.permit(:type, :name, :last4, :status, :balance)
     end
