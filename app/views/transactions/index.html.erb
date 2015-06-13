@@ -10,7 +10,7 @@ Change fields based on account type (if needed...review first)
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading panels-text">
-        <%= link_to "#{@account.name} #{@account.last4}", account_path(@account.id), title: 'Edit Account' %><%= "-(#{@account.type}) Transactions" %>
+        <%= "#{@account.name} #{@account.last4}-(#{@account.type}) " %><%= link_to "Edit", account_path(@account.id), title: 'Edit Account' %>
       </div>
       <div class="panel-body">
 
