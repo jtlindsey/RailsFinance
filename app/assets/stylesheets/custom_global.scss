@@ -3,22 +3,22 @@
 /* change table hover color */
 .table-hover tbody tr:hover td {
   background-color: #000;
-  color: #FFF;
+  color: #9d9d9d;
 }
 
 .table-hover tbody tr:hover td a {
-  color: #FFF;
+  color: #9d9d9d;
 }
 
 /* change link color in panel header */
 .panel-primary .panel-heading a {
   color: #000;
 }
-
 .panel-primary .panel-heading a:hover {
   color: #000;
 }
 
+/* color in panel header */
 .panel-primary .panel-heading {
   color: #FFF;
 }
