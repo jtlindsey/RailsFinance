@@ -1,10 +1,10 @@
-<%= form_for(@budget) do |f| %>
-  <% if @budget.errors.any? %>
+<%= form_for(@budget_item) do |f| %>
+  <% if @budget_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+      <h2><%= pluralize(@budget_item.errors.count, "error") %> prohibited this budget_item from being saved:</h2>
 
       <ul>
-      <% @budget.errors.full_messages.each do |message| %>
+      <% @budget_item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -17,15 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.number_field :amount %>
+    <%= f.text_field :amount %>
   </div>
   <div class="field">
     <%= f.label :period %><br>
     <%= f.text_field :period %>
-  </div>
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= f.datetime_select :due_date %>
   </div>
   <div class="actions">
     <%= f.submit %>

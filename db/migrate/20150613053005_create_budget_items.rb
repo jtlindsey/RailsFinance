@@ -1,6 +1,6 @@
-class CreateBudgets < ActiveRecord::Migration
+class CreateBudgetItems < ActiveRecord::Migration
   def change
-    create_table :budgets do |t|
+    create_table :budget_items do |t|
       t.string :category
       t.integer :amount
       t.string :period

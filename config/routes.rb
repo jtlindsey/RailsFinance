@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :budgets
+  resources :budget_items
   # resources :transactions
   root 'accounts#index'
 
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   get 'list_accounts', to: 'accounts#list'
+  get 'options', to: 'accounts#options'
 
   # resources :checkings, controller: :accounts
 

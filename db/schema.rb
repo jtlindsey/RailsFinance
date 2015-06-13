@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613044731) do
+ActiveRecord::Schema.define(version: 20150613055522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,13 +26,12 @@ ActiveRecord::Schema.define(version: 20150613044731) do
     t.decimal "interest_rate"
   end
 
-  create_table "budgets", force: :cascade do |t|
+  create_table "budget_items", force: :cascade do |t|
     t.string   "category"
-    t.integer  "amount"
+    t.integer  "amount_cents"
     t.string   "period"
-    t.datetime "due_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "transactions", force: :cascade do |t|
