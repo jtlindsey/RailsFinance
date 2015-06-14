@@ -1,6 +1,10 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
 
+  validates :amount, :numericality => {:greater_than => 0}
+  validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
+  validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
+
   monetize :amount_cents
 
   def previous_transactions
@@ -26,5 +30,10 @@ class Transaction < ActiveRecord::Base
 
   def new_balance
     old_balance + self.applied_amount
+  end
+
+  def self.category_list
+    #list of categories for form
+    Category.order(:name).map {|category| category.name.to_s }
   end
 end

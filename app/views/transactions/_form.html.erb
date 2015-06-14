@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, @category_list, {include_blank: 'Please Select'} %>
+    <%= f.select :category, Transaction.category_list, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>

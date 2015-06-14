@@ -17,18 +17,12 @@ class TransactionsController < ApplicationController
   def new
     @account = Account.find(params[:account_id])
     @transaction = @account.transactions.build
-    category_list
   end
 
   # GET /transactions/1/edit
   def edit
     @account = Account.find(params[:account_id])
     @transaction = Transaction.find(params[:id])
-    category_list
-  end
-
-  def category_list
-    @category_list = Category.order(:name).map {|category| category.name}
   end
 
   # POST /transactions
