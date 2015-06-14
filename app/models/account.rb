@@ -30,6 +30,7 @@ class Account < ActiveRecord::Base
       account_id: self.id,
       transaction_type: 'Deposit',
       payee: 'Opening Deposit',
+      category: 'Opening Deposit',
       comment: 'Opening Deposit',
       date: DateTime.now
     )
