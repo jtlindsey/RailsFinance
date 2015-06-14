@@ -17,12 +17,14 @@ class TransactionsController < ApplicationController
   def new
     @account = Account.find(params[:account_id])
     @transaction = @account.transactions.build
+    @category_list = Category.order(:name).map {|category| category.name}
   end
 
   # GET /transactions/1/edit
   def edit
     @account = Account.find(params[:account_id])
     @transaction = Transaction.find(params[:id])
+    @category_list = Category.order(:name).map {|category| category.name}
   end
 
   # POST /transactions
@@ -77,6 +79,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_type, :date, :payee, :comment, :amount, :account_id)
+      params.require(:transaction).permit(:transaction_type, :date, :payee, :category, :comment, :amount, :account_id)
     end
 end

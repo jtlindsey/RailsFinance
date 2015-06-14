@@ -5,4 +5,5 @@ class Category < ActiveRecord::Base
   def self.category_types
     ['Income', 'Expense']
   end
+
 end

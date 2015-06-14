@@ -26,6 +26,10 @@
     <%= f.text_field :payee %>
   </div>
   <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select :category, @category_list %>
+  </div>
+  <div class="field">
     <%= f.label :comment %><br>
     <%= f.text_area :comment %>
   </div>
