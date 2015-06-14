@@ -15,7 +15,7 @@
   <% end %>
   <div class="field">
     <%= f.label :transaction_type %><br>
-    <%= f.select :transaction_type, %w(Choose Deposit Withdrawal Transfer) %>
+    <%= f.select :transaction_type, %w(Deposit Withdrawal Transfer), {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :amount %><br>
@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, @category_list %>
+    <%= f.select :category, @category_list, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>
