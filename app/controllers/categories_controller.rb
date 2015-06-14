@@ -7,7 +7,6 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     @categories_income = Category.order(:name).where(category_type: 'Income')
     @categories_expense = Category.order(:name).where(category_type: 'Expense')
-    #Account.order("lower(name)").where(type: 'Checking')
   end
 
   # GET /categories/1
