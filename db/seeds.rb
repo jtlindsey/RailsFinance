@@ -16,3 +16,14 @@ accounts = Account.create([
   { type: 'PersonalLoan', name: 'PNC seed', last4: '8465', balance: 1500.74},
   { type: 'OtherLiability', name: 'Loan From Jim seed', balance: 942.58}
   ])
+
+categories = Category.create([
+  { category_type: 'Expense', name: 'Food-Grocery'},
+  { category_type: 'Expense', name: 'Food-Eatout'}, 
+  { category_type: 'Expense', name: 'Automotive-Maintenance'},
+  { category_type: 'Expense', name: 'Automotive-Gas'},
+  { category_type: 'Expense', name: 'Utilities-Electric'},
+  { category_type: 'Expense', name: 'Utilities-Water'},
+  { category_type: 'Expense', name: 'Utilities-Gas'},
+  { category_type: 'Expense', name: 'Telephone'}    
+  ])
