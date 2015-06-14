@@ -27,5 +27,5 @@ categories = Category.create([
   { category_type: 'Expense', name: 'Utilities-Gas'},
   { category_type: 'Expense', name: 'Telephone'},
   { category_type: 'Income', name: 'PrimaryJob'},
-  { category_type: 'Income' name: 'OtherIncome'}    
+  { category_type: 'Income', name: 'OtherIncome'}    
   ])
