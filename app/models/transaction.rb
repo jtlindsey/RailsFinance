@@ -3,7 +3,7 @@ class Transaction < ActiveRecord::Base
 
   validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
   validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
-  validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
+  #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
 
   monetize :amount_cents
 
@@ -32,8 +32,16 @@ class Transaction < ActiveRecord::Base
     old_balance + self.applied_amount
   end
 
+  def self.transaction_type
+    #list of transaction types
+    %w(Deposit Withdrawal Transfer)
+  end
+
   def self.category_list
     #list of categories for form
-    Category.order(:name).map {|category| category.name.to_s }
+    [
+      ['Income', Category.where(category_type: 'Income').order(:name).map {|category| category.name.to_s }],
+      ['Expense', Category.where(category_type: 'Expense').order(:name).map {|category| category.name.to_s }
+    ]]
   end
 end
