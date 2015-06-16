@@ -23,6 +23,11 @@
     <%= f.label :period %><br>
     <%= f.select :period, BudgetItem.period_list, {include_blank: 'Please Select'} %>
   </div>
+  <div class="field">
+    <%= f.label :watch, "Watch?" %><br>
+    <%= f.check_box :watch %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
