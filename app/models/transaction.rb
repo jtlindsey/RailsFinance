@@ -41,7 +41,7 @@ class Transaction < ActiveRecord::Base
     #list of categories for form
     [
       ['Income', Category.where(category_type: 'Income').order(:name).map {|category| category.name.to_s }],
-      ['Expense', Category.where(category_type: 'Expense').order(:name).map {|category| category.name.to_s }
-    ]]
+      ['Expense', Category.where(category_type: 'Expense').order(:name).map {|category| category.name.to_s }]
+    ]
   end
 end
