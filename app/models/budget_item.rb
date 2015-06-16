@@ -9,6 +9,10 @@ class BudgetItem < ActiveRecord::Base
     %w(Weekly Monthly Quarterly Bi-Annually Yearly)
   end
 
+  def budget_spent
+    @budget_spent ||= Transaction.where(category: category).inject(0) {|output, transaction| output + transaction.amount}      
+  end
+
   # def self.budget_progress_show
   #   budget_progress = 0
   #   Transaction.where(category: 'Automotive-Gas').each {|transaction| budget_progress += transaction.amount}

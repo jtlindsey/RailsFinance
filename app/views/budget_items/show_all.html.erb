@@ -19,44 +19,21 @@
           </thead>
 
           <tbody>
-            <% budget_spent = 0 %>
             <% @budget_items.each do |budget_item| %>
               <tr>
                 <td><%= budget_item.category %></td>
                 <td><%= budget_item.period %></td>
                 <td><%= number_to_currency(budget_item.amount) %></td>
 
-                  <% Transaction.where(category: budget_item.category).each {|transaction| budget_spent += transaction.amount} %>
-
-                  <% if budget_item.amount >= budget_spent %>
-                    <% @status = budget_spent %>
-                  <% else %>
-                    <% @status = "#{budget_spent} ( $#{budget_spent - budget_item.amount} Over Budget! )"%>
-                  <% end %>
-
-                  <% if budget_spent != 0 && (budget_spent / budget_item.amount * 100) > 100 %>
-                    <% @over_budget_tag = "progress-bar-danger" %>
-                    <% calculated_bar_width = 100 %>
-
-                  <% elsif budget_spent != 0 && (budget_spent / budget_item.amount * 100) > 75 %>
-                    <% @over_budget_tag = "progress-bar-warning" %>
-                    <% calculated_bar_width = (budget_spent / budget_item.amount * 100) %>
-
-                  <% else %>
-                    <% @over_budget_tag = "" %>
-                    <% calculated_bar_width = (budget_spent / budget_item.amount * 100) %>
-                  <% end %>
-
-                <td><%= number_to_currency(budget_spent) %></td>
+                <td><%= number_to_currency(budget_item.budget_spent) %></td>
                 <td>
                   <div class="progress">
-                    <div class="progress-bar <%= @over_budget_tag %> progress-bar-striped active" 
+                    <div class="progress-bar <%= over_budget_tag(budget_item) %> progress-bar-striped active" 
                       role="progressbar" aria-valuenow="100" aria-valuemin="0" 
                       aria-valuemax="<%= budget_item.amount %>" 
-                      style="width: <%= calculated_bar_width %>%"> $<%= @status %>
+                      style="width: <%= calculated_bar_width(budget_item) %>%"> $<%= status(budget_item) %>
                     </div>
                   </div>
-                  <% budget_spent = 0 %>
                 </td>
               </tr>
             <% end %>
