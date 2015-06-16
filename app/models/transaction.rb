@@ -1,7 +1,7 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
 
-  validates :amount, :numericality => {:greater_than => 0}
+  validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
   validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
 

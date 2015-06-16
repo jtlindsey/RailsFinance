@@ -8,4 +8,16 @@ class BudgetItem < ActiveRecord::Base
     #list of periods for form
     %w(Weekly Monthly Quarterly Bi-Annually Yearly)
   end
+
+  # def self.budget_progress_show
+  #   budget_progress = 0
+  #   Transaction.where(category: 'Automotive-Gas').each {|transaction| budget_progress += transaction.amount}
+  #   budget_progress
+  # end
+
+  # def testing_querys
+  #   #Account.joins(:transactions).where(transactions: {category: 'Automotive-Gas'}).count
+  #   #Transaction.where(category: 'Automotive-Gas').count
+  #   #Transaction.where(category: 'Automotive-Gas').each {|transaction| @test += transaction.amount}
+  # end
 end
