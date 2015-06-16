@@ -36,6 +36,16 @@ $(document).on('page:change', function() {
 
   $('#new_account input[type=submit]').hide();
 
+  var getVisibleIndex = function() {
+    var accountType = $('#account_type').val();
+    var visibleIndex = -1;
+    $('.field.' + accountType).filter(function(i) {
+      return ($(this).is(':visible')) ? (visibleIndex = i) && true : false;
+    });
+    return visibleIndex;
+  };
+
+
   if (($('#new_account').size() > 0)) {
     var determineAvailableUserActionsAfterPerformingNext = function() {
       var newVisibleIndex = getVisibleIndex();
@@ -65,17 +75,9 @@ $(document).on('page:change', function() {
       firstFieldToShow = $('.field label[for=account_' + firstErrorField + ']').closest('.field');
     }
     firstFieldToShow.show({
+      duration: 0,
       complete: determineAvailableUserActionsAfterPerformingNext
     });
-
-    var getVisibleIndex = function() {
-      var accountType = $('#account_type').val();
-      var visibleIndex = -1;
-      $('.field.' + accountType).filter(function(i) {
-        return ($(this).is(':visible')) ? (visibleIndex = i) && true : false;
-      });
-      return visibleIndex;
-    };
 
     // TODO Support ordered showing of fields
     $('#next').click(function() {
@@ -83,10 +85,12 @@ $(document).on('page:change', function() {
         var visibleIndex = getVisibleIndex();
         var fieldToHide = $('.field.'+accountType)[visibleIndex];
         $(fieldToHide).hide({
+          duration: 0,
           complete: function() {
             var nextElementIndex = visibleIndex + 1;
             var fieldToShow = $('.field.'+accountType)[nextElementIndex];
             $(fieldToShow).show({
+              duration: 0,
               complete: determineAvailableUserActionsAfterPerformingNext
             });
           }
@@ -112,10 +116,12 @@ $(document).on('page:change', function() {
         var visibleIndex = getVisibleIndex();
         var fieldToHide = $('.field.'+accountType)[visibleIndex];
         $(fieldToHide).hide({
+          duration: 0,
           complete: function() {
             var previousElementIndex = visibleIndex - 1;
             var fieldToShow = $('.field.'+accountType)[previousElementIndex];
             $(fieldToShow).show({
+              duration: 0,
               complete: determineAvailableUserActionsAfterPerformingPrevious
             });
           }

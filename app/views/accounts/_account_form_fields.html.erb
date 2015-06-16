@@ -1,4 +1,6 @@
-  <%= hidden_field_tag 'account_fields', Account.types_fields.to_json, id: 'account_fields' %>
+<!--Kept for historical reason until we're set on whether we'll keep things duplicated 
+or unify them again across new and edit  -->
+<!--   <%= hidden_field_tag 'account_fields', Account.types_fields.to_json, id: 'account_fields' %>
   <%= hidden_field_tag 'account_errors', @account.errors.to_json, id: 'account_errors' %>
 
   <% if @account.errors.any? %>
@@ -44,3 +46,4 @@
   </div>
 
 
+ -->
