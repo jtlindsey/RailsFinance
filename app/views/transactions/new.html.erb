@@ -1,5 +1,34 @@
 <h1>New Transaction</h1>
 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+  <li><a data-toggle="tab" href="#deposit">Deposit</a></li>
+  <li><a data-toggle="tab" href="#withdrawal">Withdrawal</a></li>
+  <li><a data-toggle="tab" href="#transfer">Transfer</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <h4>HOME</h4>
+    <p>Choose a transaction. or list transacions here?</p>
+  </div>
+  <div id="deposit" class="tab-pane fade">
+    <h3>Deposit</h3>
+    <p>Some deposit render-deposit form.</p>
+  </div>
+  <div id="withdrawal" class="tab-pane fade">
+    <h3>Withdrawal</h3>
+    <p>Some withdrawal render-withdrawal form.</p>
+  </div>
+  <div id="transfer" class="tab-pane fade">
+    <h3>Transfer</h3>
+    <p>Some transfer render-withdrawal from.</p>
+  </div>
+</div>
+
+<br>
+<br>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>
