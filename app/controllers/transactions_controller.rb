@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @account = Account.find(params[:account_id])
-    @transactions = Transaction.where(:account_id => params[:account_id])
+    @transactions = Transaction.order(date: :desc).where(:account_id => params[:account_id])
   end
 
   # GET /transactions/1
