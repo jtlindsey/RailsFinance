@@ -63,10 +63,10 @@ class Transaction < ActiveRecord::Base
     ]
   end
   
-  # def self.account_list
+  # def self.account_transfer_list
   #   #list all accounts except current for account transfer
   #   @account_transfer_list = Account.order('LOWER(name)').where.not(id: @account.id).map do |account| 
   #     "#{account.name} #{account.last4} #{account.type}"
   #   end
-  # end        
+  # end
 end

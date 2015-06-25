@@ -18,13 +18,12 @@ class TransactionsController < ApplicationController
     @account = Account.find(params[:account_id])
     @transaction = @account.transactions.build
 
+    #move to model and view
     #list all accounts except current for account transfer
     @account_transfer_list = Account.order('LOWER(name)').where.not(id: @account.id).map do |account| 
-      "#{account.name} #{account.last4} #{account.type}"
+      "#{account.name} #{account.last4} $#{account.balance} #{account.type}"
     end   
   end
-
-
 
   # GET /transactions/1/edit
   def edit
