@@ -13,10 +13,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :transaction_type %><br>
-    <%= f.select :transaction_type, Transaction.transaction_type, {include_blank: 'Please Select'} %>
-  </div>
+    <%= f.hidden_field :transaction_type, :value =>'Deposit' %>
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>
@@ -27,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, Transaction.category_list, {include_blank: 'Please Select'} %>
+    <%= f.select :category, Transaction.deposit_category_list, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>
@@ -35,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date %>
+    <%= f.date_select :date  %>
   </div>
   <div class="actions">
     <%= f.submit %>

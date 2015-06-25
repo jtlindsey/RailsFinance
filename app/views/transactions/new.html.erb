@@ -14,21 +14,19 @@
   </div>
   <div id="deposit" class="tab-pane fade">
     <h3>Deposit</h3>
-    <p>Some deposit render-deposit form.</p>
+    <%= render 'deposit' %>
   </div>
   <div id="withdrawal" class="tab-pane fade">
     <h3>Withdrawal</h3>
-    <p>Some withdrawal render-withdrawal form.</p>
+    <%= render 'withdrawal' %>
   </div>
   <div id="transfer" class="tab-pane fade">
-    <h3>Transfer</h3>
-    <p>Some transfer render-withdrawal from.</p>
+    <h3>Transfer from <%= "#{@account.name} #{@account.last4} (#{@account.type})" %></h3>
+    <%= render 'transfer' %>
   </div>
 </div>
 
 <br>
 <br>
-
-<%= render 'form' %>
 
 <%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>

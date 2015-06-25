@@ -40,8 +40,33 @@ class Transaction < ActiveRecord::Base
   def self.category_list
     #list of categories for form
     [
-      ['Income', Category.where(category_type: 'Income').order(:name).map {|category| category.name.to_s }],
-      ['Expense', Category.where(category_type: 'Expense').order(:name).map {|category| category.name.to_s }]
+      ['Income', Category.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }],
+      ['Expense', Category.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
     ]
   end
+
+  def self.deposit_category_list
+    [
+      ['Income', Category.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }]
+    ]
+  end
+
+  def self.withdrawal_category_list
+    [
+      ['Expense', Category.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
+    ]
+  end
+
+  def self.transfer_category_list
+    [
+      ['Transfer', ['Pay-Bill-Transfer','Other-Transfer']]
+    ]
+  end
+  
+  # def self.account_list
+  #   #list all accounts except current for account transfer
+  #   @account_transfer_list = Account.order('LOWER(name)').where.not(id: @account.id).map do |account| 
+  #     "#{account.name} #{account.last4} #{account.type}"
+  #   end
+  # end        
 end

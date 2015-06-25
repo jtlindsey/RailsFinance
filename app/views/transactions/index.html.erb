@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]) %>
 <div class="row visible-sm-block visible-md-block visible-lg-block">
   <div class="col-md-12">
     <div class="panel panel-primary">
@@ -79,5 +79,3 @@
 <!-- End Mobile -->
 
 <br>
-
-<%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]) %>
