@@ -23,9 +23,15 @@
               <tr>
                 <td><%= budget_item.category %></td>
                 <td><%= budget_item.period %></td>
+
+                <!-- based on period -->
                 <td><%= number_to_currency(budget_item.amount) %></td>
 
-                <td><%= number_to_currency(budget_item.budget_spent) %></td>
+                <!-- based on period -->
+                <!-- for all budget_item for all calls for budget_spent method -->
+                  <!-- the method is pass in budget(budget_item.period) -->
+
+                <td><%= number_to_currency(budget_item.budget_spent(budget_item.period)) %></td>
                 <td>
                   <div class="progress">
                     <div class="progress-bar <%= over_budget_tag(budget_item) %> progress-bar-striped active" 
