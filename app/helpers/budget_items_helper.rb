@@ -13,12 +13,7 @@ module BudgetItemsHelper
     end
   end
 
-  def none_zero_or_nil(budget_item)
-
-  end
-
   def calculated_bar_width(budget_item)
-    #byebug
     case 
     #if budget spent !=0 and if user spent more than budget do...
     when budget_item.budget_spent(budget_item.period) != 0 && (budget_item.budget_spent(budget_item.period) / budget_item.amount * 100) > 100
