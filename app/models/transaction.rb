@@ -1,11 +1,57 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
+  #belongs_to :deposit, class_name: "Transaction"
 
-  validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
-  validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
+  #validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
+  #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
 
   monetize :amount_cents
+
+  # for virtual attributes in transactions form, entire transfer form changed to virual attributes
+  attr_accessor :from_account_id, :to_account_id
+
+  def to_account_payee
+  end
+
+  def self.deposit_from_account_payee(from_account_id)
+    a = Account.find_by(id: from_account_id)
+    "From account: #{a.name} #{a.last4}"
+  end
+
+  def self.withdrawal_to_account_payee(to_account_id)
+    a = Account.find_by(id: to_account_id)
+    "To account: #{a.name} #{a.last4}"
+  end
+
+  def self.transfer(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee)
+    Transaction.transaction do 
+      @deposit_transaction = Transaction.create(
+        amount: amount, 
+        date: ocurred_on, 
+        transaction_type: "Deposit", 
+        comment: comment, 
+        category: category, 
+        #payee: payee, 
+        payee: deposit_from_account_payee(from_account_id),
+        account_id: to_account_id
+        #deposit
+      )
+      #byebug
+      @withdrawal_transaction = Transaction.create(
+        amount: amount, 
+        date: ocurred_on, 
+        transaction_type: "Withdrawal", 
+        comment: comment, 
+        category: category, 
+        payee: withdrawal_to_account_payee(to_account_id),  
+        account_id: from_account_id, 
+        transfer_ref: @deposit_transaction.id
+      )
+      #byebug
+    end
+  end
+
 
   def previous_transactions
     # grab all transactions belonging to my same account with date/time previous to my date/time
@@ -61,8 +107,8 @@ class Transaction < ActiveRecord::Base
     [
       ['Transfer', ['Pay-Bill-Transfer','Other-Transfer']]
     ]
-  end
-  
+  end 
+
   # def self.account_transfer_list
   #   #list all accounts except current for account transfer
   #   @account_transfer_list = Account.order('LOWER(name)').where.not(id: @account.id).map do |account| 

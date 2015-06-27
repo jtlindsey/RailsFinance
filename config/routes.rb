@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root 'accounts#index'
 
   resources :accounts do
-    resources :transactions    
+    resources :transactions
+    #will be for transfers controller when refactoring is done for transfers
+    #resources :transfers, only: %i[show post]    
   end
 
   get 'list_accounts', to: 'accounts#list'

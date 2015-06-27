@@ -13,18 +13,16 @@
       </ul>
     </div>
   <% end %>
+
     <%= f.hidden_field :transaction_type, :value =>'Transfer' %>
+    <%= f.hidden_field :from_account_id, :value => @account.id %>
   <div class="field">
     <%= f.label :value, 'Transfer To:' %><br>
-    <%= select_tag :to_account, options_for_select(@account_transfer_list), {include_blank: 'Please Select'} %> <!-- select account (all but current) -->
+    <%= f.collection_select :to_account_id, @account_transfer_list, :id, :account_details, {include_blank: 'Please Select'} %>    
   </div>
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :payee %><br>
-    <%= f.text_field :payee %>
   </div>
   <div class="field">
     <%= f.label :category %><br>

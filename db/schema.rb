@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616132543) do
+ActiveRecord::Schema.define(version: 20150627012755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150616132543) do
     t.string   "transaction_type"
     t.integer  "account_id"
     t.string   "category"
+    t.integer  "transfer_ref"
   end
 
 end

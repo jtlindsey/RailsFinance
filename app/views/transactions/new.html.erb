@@ -1,4 +1,4 @@
-<h4>New Transaction, <%= "#{@account.name} #{@account.last4} (#{@account.type}) Balance: #{number_to_currency(@account.last4)}" %></h4>
+<h4>New Transaction, <%= "#{@account.name} #{@account.last4} (#{@account.type}) Balance: #{number_to_currency(@account.balance_cents * 0.01)}" %></h4>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#home">Home</a></li>

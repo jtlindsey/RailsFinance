@@ -5,6 +5,17 @@ class Account < ActiveRecord::Base
 
   after_create :opening_deposit_transaction
 
+  #gives me access to helpers outside the view when account_details method is called
+  #need to handle this better. affects line 1 in transactions/new.html.erb
+  def get_helpers
+    ActionController::Base.helpers
+  end
+
+  #custom collection select name for account transfer select menu
+  def account_details
+    "#{name} #{last4} (#{type}) #{get_helpers.number_to_currency(balance)}"
+  end
+
   def self.types
     Asset.types.merge(Liability.types)
   end

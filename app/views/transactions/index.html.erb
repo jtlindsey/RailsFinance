@@ -23,7 +23,7 @@
           </thead>
 
           <tbody>
-            <% @transactions.order(:created_at).each do |transaction| %>
+            <% @transactions.each do |transaction| %>
               <tr>
                 <td><%= transaction.date.to_date %></td>
                 <td><%= "temp" %></td> <!-- transction check# -->
@@ -44,7 +44,11 @@
 
 
                 <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
+                <% if transaction.transfer_ref != nil %>
+                <td>Delete Only</td>
+                <% else %>
                 <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
+                <% end %>
                 <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>
@@ -70,7 +74,11 @@
     <tr><td>Balance</td><td><%= "temp" %></td></tr>
     <tr>
       <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
+      <% if transaction.transfer_ref != nil %>
+      <td>Delete Only</td>
+      <% else %>
       <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
+      <% end %>
       <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   </tbody>
