@@ -11,12 +11,12 @@ class BudgetItem < ActiveRecord::Base
 
   def budget_spent(budget_item_period)
     case budget_item_period
-    # when "Weekly"
-      #
+    when "Weekly"
+      Transaction.where(date: Date.today.at_beginning_of_week..Date.today.at_end_of_week).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     # when "Bi-Weekly"
       #
     when "Monthly"
-      Transaction.where(date: Time.now.beginning_of_month..Time.now.end_of_month).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      Transaction.where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     # when "Quarterly"
       #
     # when "Bi-Annually"
