@@ -20,7 +20,7 @@ class BudgetItem < ActiveRecord::Base
   end
 
   def budget_spent(budget_item_period)
-    byebug
+    #byebug
     case budget_item_period
     when "Weekly"
       Transaction.where(date: Date.today.at_beginning_of_week..Date.today.at_end_of_week).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
