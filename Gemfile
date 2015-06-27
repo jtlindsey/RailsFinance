@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.4'
 
+#temporary for console ouput formatting
+gem 'awesome_print'
+
 gem 'autoprefixer-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
