@@ -10,6 +10,7 @@ class BudgetItem < ActiveRecord::Base
   end
 
   def bi_week
+    #week and bi-week start on monday and end on sunday
     case 
     when Date.today.cweek.odd?
       Date.commercial(Date.today.year, Date.today.cweek, 1)..Date.commercial(Date.today.year, Date.today.cweek+1, 7)
