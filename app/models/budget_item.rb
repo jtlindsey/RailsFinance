@@ -17,12 +17,12 @@ class BudgetItem < ActiveRecord::Base
       #
     when "Monthly"
       Transaction.where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
-    # when "Quarterly"
-      #
+    when "Quarterly"
+      Transaction.where(date: Date.today.at_beginning_of_quarter..Date.today.at_end_of_quarter).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     # when "Bi-Annually"
       #
-    # when "Yearly"
-      #
+    when "Yearly"
+      Transaction.where(date: Date.today.at_beginning_of_year..Date.today.at_end_of_year).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     end
 
     #Transaction.where(category: category).inject(0) {|output, transaction| output + transaction.amount}      
