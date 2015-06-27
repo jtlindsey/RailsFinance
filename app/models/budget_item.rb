@@ -1,12 +1,12 @@
 class BudgetItem < ActiveRecord::Base
   validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
-  validates :period, inclusion: {in: %w(Weekly Bi-Weekly Monthly Quarterly Bi-Annually Yearly), message: 'has not been selected' }
+  validates :period, inclusion: {in: %w(Weekly Bi-Weekly Monthly Quarterly Yearly), message: 'has not been selected' }
     
   monetize :amount_cents
 
   def self.period_list
     #list of periods for form
-    %w(Weekly Bi-Weekly Monthly Quarterly Bi-Annually Yearly)
+    %w(Weekly Bi-Weekly Monthly Quarterly Yearly)
   end
 
   def bi_week
@@ -29,8 +29,6 @@ class BudgetItem < ActiveRecord::Base
       Transaction.where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     when "Quarterly"
       Transaction.where(date: Date.today.at_beginning_of_quarter..Date.today.at_end_of_quarter).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
-    # when "Bi-Annually"
-      #
     when "Yearly"
       Transaction.where(date: Date.today.at_beginning_of_year..Date.today.at_end_of_year).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
     end
