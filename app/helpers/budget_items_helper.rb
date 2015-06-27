@@ -1,8 +1,10 @@
 module BudgetItemsHelper
 
   def over_budget_tag(budget_item)
-    if budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) > 100
+    #if user is equal or over budget
+    if budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) >= 100
       "progress-bar-danger"
+    #if user spents more than 75% of budget
     elsif budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) > 75
       "progress-bar-warning"
     else
@@ -11,14 +13,21 @@ module BudgetItemsHelper
   end
 
   def calculated_bar_width(budget_item)
-    if budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) > 100
+    #byebug
+    case 
+    #if budget spent !=0 and if user spent more than budget do...
+    when budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) > 100
       100
-    else
+    #if budget spent !=0 and if user spent less than or equal to budget do...
+    when budget_item.budget_spent != 0 && (budget_item.budget_spent / budget_item.amount * 100) <= 100
       (budget_item.budget_spent / budget_item.amount * 100)
+    else
+      #if user spent nothing from budget
+      0
     end
   end
 
-  def status(budget_item)
+  def status_text(budget_item)
     if budget_item.amount >= budget_item.budget_spent
       budget_item.budget_spent
     else
