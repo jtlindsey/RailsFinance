@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
 
     @liabilities_total = 0
     @liabilities_list.each {|liability| @liabilities_total += liability.balance }
-    
+
   end
   # GET /accounts
   # GET /accounts.json
@@ -115,6 +115,6 @@ class AccountsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
       account_params = params.require(:account)
-      account_params.permit(:type, :name, :last4, :status, :balance)
+      account_params.permit(:type, :name, :last4, :status, :balance, :credit_limit, :interest_rate, :favorite, )
     end
 end

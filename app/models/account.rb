@@ -28,7 +28,7 @@ class Account < ActiveRecord::Base
 
   def fields
     #for editing fields for account edit. Shows fields in order typed below.
-    %w(type status name balance)
+    %w(type status favorite name balance)
   end
 
   def balance

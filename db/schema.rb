@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627012755) do
+ActiveRecord::Schema.define(version: 20150628004444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150627012755) do
     t.integer "balance_cents", limit: 8
     t.integer "credit_limit"
     t.decimal "interest_rate"
+    t.boolean "favorite",                 default: false
   end
 
   create_table "budget_items", force: :cascade do |t|

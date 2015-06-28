@@ -21,6 +21,11 @@
 </p>
 
 <p>
+  <strong>Favorite:</strong>
+  <%= @account.favorite ? 'Yes' : 'No' %>
+</p>
+
+<p>
   <strong>Balance:</strong>
   <%= number_to_currency(@account.balance) %>
 </p>
