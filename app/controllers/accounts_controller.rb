@@ -1,6 +1,18 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
+
+  def financial_summary
+    @accounts = Account.all
+    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
+    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
+
+    @assets_total = 0
+    @assets_list.each {|asset| @assets_total += asset.balance }
+
+    @liabilities_total = 0
+    @liabilities_list.each {|liability| @liabilities_total += liability.balance }    
+  end
   # GET /accounts
   # GET /accounts.json
   def index

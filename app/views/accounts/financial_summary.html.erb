@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">All Assets</div>
+      <div class="panel-body">
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @assets_list.each do |account| %>
+              <tr>
+                <td><%= link_to "#{account.name} #{account.last4}", account_transactions_path(account_id: account.id) %><%= " (#{account.type})" %></td>
+                <td><%= account.status %></td>
+                <td><%= number_to_currency(account.balance) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="panel-footer clearfix">
+        <div class="pull-right">
+          <Strong>Subtotal Assets <%= number_to_currency(@assets_total) %></Strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">All Liabilities</div>
+      <div class="panel-body">
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @liabilities_list.each do |account| %>
+              <tr>
+                <td><%= link_to "#{account.name} #{account.last4}", account_transactions_path(account_id: account.id) %><%= " (#{account.type})" %></td>
+                <td><%= account.status %></td>
+                <td><%= number_to_currency(account.balance) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="panel-footer clearfix">
+        <div class="pull-right">
+          <Strong>Subtotal Liabilities <%= number_to_currency(@liabilities_total) %></Strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+

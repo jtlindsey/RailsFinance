@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   get 'list_accounts', to: 'accounts#list'
   get 'options', to: 'accounts#options'
+  get 'financial_summary', to: 'accounts#financial_summary'
   get 'budget_show_all', to: 'budget_items#show_all'
-
   # resources :checkings, controller: :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
