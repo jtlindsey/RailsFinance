@@ -10,43 +10,9 @@
 }
 */
 
-/* table body scroll with fixed header */
-table.scroll {
-    width: 100%;
-}
-
-table.scroll th,
-table.scroll td,
-table.scroll tr,
-table.scroll thead,
-table.scroll tbody { display: block; }
-
-table.scroll thead tr {
-    /* fallback */
-    width: 97%;
-    /* minus scroll bar width */
-    width: -webkit-calc(100% - 16px);
-    width:    -moz-calc(100% - 16px);
-    width:         calc(100% - 16px);
-}
-
-table.scroll tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-table.scroll tbody {
-    height: 100px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-table.scroll tbody td,
-table.scroll thead th {
-    width: 32%;
-    float: left;
+/* Set panel height */
+.fixed-panel-height {
+      height: 260px;
 }
 
 
@@ -54,13 +20,7 @@ table.scroll thead th {
 
 
 
-
-
-
-
-
-
-
+/* remove after layout change */
 .panel-accounts {
   height: 180px;
 
