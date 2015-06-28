@@ -2,6 +2,65 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* using on home page in favorites, will likely use this and remove .panel-accounts y-axis scroll */
+/*.fixed-panel-accounts {
+      height: 220px;
+      width: 99.9%;
+      overflow-y: auto;
+}
+*/
+
+/* table body scroll with fixed header */
+table.scroll {
+    width: 100%;
+}
+
+table.scroll th,
+table.scroll td,
+table.scroll tr,
+table.scroll thead,
+table.scroll tbody { display: block; }
+
+table.scroll thead tr {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: -webkit-calc(100% - 16px);
+    width:    -moz-calc(100% - 16px);
+    width:         calc(100% - 16px);
+}
+
+table.scroll tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+table.scroll tbody {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+table.scroll tbody td,
+table.scroll thead th {
+    width: 32%;
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .panel-accounts {
   height: 180px;
 
