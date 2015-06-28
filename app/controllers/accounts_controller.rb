@@ -14,6 +14,7 @@ class AccountsController < ApplicationController
     @liabilities_list.each {|liability| @liabilities_total += liability.balance }
 
   end
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -31,7 +32,7 @@ class AccountsController < ApplicationController
     @personal_loans = Account.order('LOWER(name)').where(type: 'PersonalLoan')
     @mortgage = Account.order('LOWER(name)').where(type: 'Mortgage')
 
-    #Account.pluck('distinct type')
+    @favorite_accounts = Account.order('LOWER(name)').where(favorite: true)
   end
 
   # GET /accounts/1
