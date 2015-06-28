@@ -11,7 +11,8 @@ class AccountsController < ApplicationController
     @assets_list.each {|asset| @assets_total += asset.balance }
 
     @liabilities_total = 0
-    @liabilities_list.each {|liability| @liabilities_total += liability.balance }    
+    @liabilities_list.each {|liability| @liabilities_total += liability.balance }
+    
   end
   # GET /accounts
   # GET /accounts.json
