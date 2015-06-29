@@ -4,10 +4,35 @@
 
 /* using on home page in favorites, will likely use this and remove .panel-accounts y-axis scroll */
 .fixed-panel-budget-watch {
-      height: 270px;
-      width: 99.9%;
-      overflow-y: auto;
+  height: 270px;
+  width: 99.9%;
+  overflow-y: auto;
 }
+
+/* test */
+table.my-table-body-test {
+  width: 100%;
+}
+table.my-table-body-test tbody,
+table.my-table-body-test thead { display: block; }
+
+table.my-table-body-test thead tr th {
+  text-align: left;
+  width: 48%;
+}
+
+table.my-table-body-test tbody { 
+  height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+table.my-table-body-test tbody td { width: 20%; }
+/*table.my-table-body-test thead th { width: auto; }*/
+
+
+
+
 
 
 
