@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.4'
 
+#datatabes for sorting and searching tables
+gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'jquery-ui-rails'
+
 #temporary for console ouput formatting
 gem 'awesome_print'
 
