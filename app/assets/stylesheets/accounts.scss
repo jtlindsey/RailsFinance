@@ -9,73 +9,35 @@
   overflow-y: auto;
 }
 
-/* test */
-table.my-table-body-test {
-  width: 100%;
-}
-table.my-table-body-test tbody,
-table.my-table-body-test thead { display: block; }
-
-table.my-table-body-test thead tr th {
-  text-align: left;
-  width: 48%;
+/* fixed panel height */
+.fixed-panel-height {
+  height: 270px;
 }
 
-table.my-table-body-test tbody { 
-  height: 100px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
-table.my-table-body-test tbody td { width: 20%; }
-/*table.my-table-body-test thead th { width: auto; }*/
+/* test table scroll fixed header */
+table.my-table-body-test thead, tbody, tr, td, th { display: block; }
 
-
-
-
-
-
-
-/* table body scroll with fixed header */
-table.scroll-table-body {
-    width: 100%;
-    height: 220px;
-}
-
-table.scroll-table-body th,
-table.scroll-table-body td,
-table.scroll-table-body tr,
-table.scroll-table-body thead,
-table.scroll-table-body tbody { display: block; }
-
-table.scroll-table-body thead tr {
-    /* fallback */
-    width: 97%;
-    /* minus scroll bar width */
-    width: -webkit-calc(100% - 16px);
-    width:    -moz-calc(100% - 16px);
-    width:         calc(100% - 16px);
-}
-
-table.scroll-table-body tr:after {
+table.my-table-body-test tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
 
-table.scroll-table-body tbody {
-    height: 165px;
-    overflow-y: auto;
-    width: auto !important;
-    overflow-x: hidden !important;
+table.my-table-body-test thead th {
+    /*height: 30px;*/
+    /*text-align: left;*/
 }
 
-table.scroll-table-body tbody td,
-table.scroll-table-body thead th {
-    width: 32%;
-    float: left;
+table.my-table-body-test tbody {
+    height: 189px;
+    overflow-y: auto;
+}
 
+table.my-table-body-test tbody td, thead th {
+    width: 33.3%; /*this*/
+    float: left;
 }
 
 
