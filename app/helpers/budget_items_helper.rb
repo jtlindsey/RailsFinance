@@ -29,10 +29,19 @@ module BudgetItemsHelper
 
   def status_text(budget_item)
     if budget_item.amount >= budget_item.budget_spent(budget_item.period)
-      budget_item.budget_spent(budget_item.period)
+      number_to_currency(budget_item.budget_spent(budget_item.period))
     else
-      "#{budget_item.budget_spent(budget_item.period)} ( $#{budget_item.budget_spent(budget_item.period) - budget_item.amount} Over Budget! )"
+      "#{number_to_currency(budget_item.budget_spent(budget_item.period))} ( #{number_to_currency(budget_item.budget_spent(budget_item.period) - budget_item.amount)} Over Budget! )"
     end
   end 
+
+  def status_text_header(budget_item)
+    if budget_item.amount >= budget_item.budget_spent(budget_item.period)
+      "#{number_to_currency(budget_item.budget_spent(budget_item.period))} of #{number_to_currency(budget_item.amount)}/#{budget_item.period} spent."
+    else
+      "#{number_to_currency(budget_item.budget_spent(budget_item.period))} of #{number_to_currency(budget_item.amount)}/#{budget_item.period} 
+        ( #{number_to_currency(budget_item.budget_spent(budget_item.period) - budget_item.amount)} Over Budget! )"
+    end
+  end
 
 end

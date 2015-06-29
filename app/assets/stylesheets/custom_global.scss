@@ -27,6 +27,12 @@
 .progress {
   background: #9d9d9d;
 }
+/* show overflow text */
+.progress span {
+    display: block;
+    width: 150%;
+    color: black;
+ }
 
 /* change nav hover color */
 .navbar-inverse .navbar-nav > li > a:hover {

@@ -33,6 +33,15 @@ class AccountsController < ApplicationController
     @mortgage = Account.order('LOWER(name)').where(type: 'Mortgage')
 
     @favorite_accounts = Account.order('LOWER(name)').where(favorite: true)
+    @budget_items = BudgetItem.all.count
+
+    if BudgetItem.all.count >= 1 && BudgetItem.where(watch: true).count < 1
+      @budget_tracking_message = "Click Here to add Budget Items to Watch List." 
+    elsif BudgetItem.all.count < 1
+      @budget_tracking_message = "Click Here To Create a Budget."
+    end
+
+    @budget_watching = BudgetItem.where(watch: true)
   end
 
   # GET /accounts/1

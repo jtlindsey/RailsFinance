@@ -37,7 +37,7 @@
                     <div class="progress-bar <%= over_budget_tag(budget_item) %> progress-bar-striped active" 
                       role="progressbar" aria-valuenow="100" aria-valuemin="0" 
                       aria-valuemax="<%= budget_item.amount %>" 
-                      style="width: <%= calculated_bar_width(budget_item) %>%"> $<%= status_text(budget_item) %>
+                      style="width: <%= calculated_bar_width(budget_item) %>%"><%= status_text(budget_item) %>
                     </div>
                   </div>
                 </td>
