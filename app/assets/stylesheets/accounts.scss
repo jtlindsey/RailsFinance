@@ -33,22 +33,19 @@
 .table-scroll-rows th { 
   display: block; 
 }
-
 .table-scroll-rows tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
-
 .table-scroll-rows tbody {
     height: 189px;
     overflow-y: auto;
 }
-
 .table-scroll-rows tbody td, 
 .table-scroll-rows thead th {
-    width: 33.3%; 
+    width: 50%; 
     float: left;
 }
 /* end on home page table scroll rows and keep fixed header */
