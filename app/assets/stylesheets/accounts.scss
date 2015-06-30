@@ -14,35 +14,6 @@
   height: 270px;
 }
 
-
-/* test table scroll fixed header */
-table.my-table-body-test thead, tbody, tr, td, th { display: block; }
-
-table.my-table-body-test tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-table.my-table-body-test thead th {
-    /*height: 30px;*/
-    /*text-align: left;*/
-}
-
-table.my-table-body-test tbody {
-    height: 189px;
-    overflow-y: auto;
-}
-
-table.my-table-body-test tbody td, thead th {
-    width: 33.3%; /*this*/
-    float: left;
-}
-
-
-
-
 /* remove after layout change */
 .panel-accounts {
   height: 180px;
@@ -52,3 +23,34 @@ table.my-table-body-test tbody td, thead th {
     overflow: auto;
   }
 }
+
+
+/* begin on home page table scroll rows and keep fixed header */
+.table-scroll-rows thead, 
+.table-scroll-rows tbody, 
+.table-scroll-rows tr, 
+.table-scroll-rows td, 
+.table-scroll-rows th { 
+  display: block; 
+}
+
+.table-scroll-rows tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.table-scroll-rows tbody {
+    height: 189px;
+    overflow-y: auto;
+}
+
+.table-scroll-rows tbody td, 
+.table-scroll-rows thead th {
+    width: 33.3%; 
+    float: left;
+}
+/* end on home page table scroll rows and keep fixed header */
+
+
