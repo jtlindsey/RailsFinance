@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
     @personal_loans = Account.order('LOWER(name)').where(type: 'PersonalLoan')
     @mortgage = Account.order('LOWER(name)').where(type: 'Mortgage')
 
-    @favorite_accounts = Account.order('LOWER(name)').where(favorite: true)
+    @favorite_accounts = Account.order('LOWER(name)').where(status: 'Open').where(favorite: true)
 
     if BudgetItem.all.count >= 1 && BudgetItem.where(watch: true).count < 1
       @budget_tracking_message = "Click Here to add Budget Items to Watch List." 
