@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.4'
 
+#for charts
+gem 'googlecharts', '~> 1.6.10'
+
 #datatabes for sorting and searching tables
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'jquery-ui-rails'

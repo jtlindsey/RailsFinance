@@ -41,6 +41,13 @@ class AccountsController < ApplicationController
     end
 
     @budget_watching = BudgetItem.where(watch: true)
+
+    @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
+              :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
+
+
+
+
   end
 
   # GET /accounts/1
