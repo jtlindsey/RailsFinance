@@ -32,7 +32,7 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Implement pie and bar charts using chartkick.com or charts.js
 - [ ] Cross platform compatible with Windows, Mac, Linux, iOS, Android OS (test on all)
 - [ ] Resize Text
-- [ ] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
+- [x] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
 - [ ] Create query page for multiple types of querys (spending, income, expenses, by payee, by category, )
 - [ ] Add graph options to query page
 - [ ] Print as pdf (custom print.css)
@@ -46,19 +46,20 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Graphs for others by link to page to create
 - [ ] Graphs printable
 - [ ] Net-worth tracking
-- [ ] Home page view grouping...(that can be changed by drag and drop?)
 - [ ] Create Getting Started Guide (Easy Quick Start Guide)
 - [ ] Create User Guide with screen shots
 - [ ] Create Getting started video
 - [ ] Create feature video
 
 ### Priority 2 Features
+- [ ] 4 Color theme options via settings in user accounts page for each user
 - [ ] Goal to purchase / saving progress page
 - [ ] Built in loan comparison calculators
 - [ ] Produce Amortization Charts
 - [ ] User accounts
 - [ ] Support ticket location for easy submission and tracking
 - [ ] Desktop / Web app sync
+- [ ] Home page view grouping...(that can be changed by drag and drop?)
 
 ### Paid Version
 The following features might be released in a paid version if not in the free open source version.
