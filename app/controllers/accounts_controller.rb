@@ -46,7 +46,7 @@ class AccountsController < ApplicationController
               :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
 
 
-
+    @accounts = Account.all
 
   end
 

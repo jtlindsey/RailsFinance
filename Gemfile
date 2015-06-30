@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.4'
 
+#for alternate style of charts
+gem 'chartkick'
+
 #for charts
 gem 'googlecharts', '~> 1.6.10'
 

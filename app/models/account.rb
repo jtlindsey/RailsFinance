@@ -32,7 +32,7 @@ class Account < ActiveRecord::Base
     money.to_s.gsub(/[$,]/,'').to_f
   end
 
-  def self.spending_by_category
+  def self.spending_by_category_google_charts
     @category_names = []
     @category_totals = []
     Category.order(:name).where(category_type: 'Expense').each do |category|
@@ -43,6 +43,16 @@ class Account < ActiveRecord::Base
     Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
   end
 
+  def self.spending_by_category_chartkick
+    @category_names = []
+    @category_totals = []
+    Category.order(:name).where(category_type: 'Expense').each do |category|
+        @category_totals.push(convert_money_to_number(spending_query(category)))
+        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
+    end
+
+    @spending = Hash[@category_names.zip @category_totals]
+  end
 
   def self.types
     Asset.types.merge(Liability.types)
