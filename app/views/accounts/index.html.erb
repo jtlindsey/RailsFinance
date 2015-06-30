@@ -67,7 +67,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Spending by Category</div>
       <div class="panel-body fixed-panel-height">
-        <%= image_tag(Account.spending_by_category_google_charts) %>
+        <%#= image_tag(Account.spending_by_category_google_charts) %>
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@
 
         <%#= pie_chart Account.spending_by_category_chartkick %>
         <!-- not working -->
-        <%#= pie_chart Account.spending_by_category_chartkick, 'is3D' :true %>
+<%= pie_chart Account.spending_by_category_chartkick, library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key'} %>
 
       </div>
     </div>
