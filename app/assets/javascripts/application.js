@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require googlechartjsapi
+//= require chartkick_googlechartjsapi
 //= require chartkick
 //= require turbolinks
 //= require bootstrap-sprockets

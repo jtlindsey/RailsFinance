@@ -77,13 +77,9 @@
       <div class="panel-heading">Net Worth</div>
       <div class="panel-body fixed-panel-height">
 
-        <%#= image_tag(Account.spending_by_category) %>
-
-<!-- produces negative values not allowed -->
-<%#= pie_chart @accounts.group(:name).sum('balance_cents') %>
-
-<%#= pie_chart Account.spending_by_category_google_charts %>
-<%= pie_chart Account.spending_by_category_chartkick  %>
+        <%= pie_chart Account.spending_by_category_chartkick %>
+        <!-- not working -->
+        <%#= pie_chart Account.spending_by_category_chartkick, is3D: true %>
 
       </div>
     </div>
