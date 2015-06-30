@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
 
   #gives me access to helpers outside the view when account_details method is called
   #need to handle this better. affects line 1 in transactions/new.html.erb
-  #being used on new transaction page view at top
+  #being used in _transfer collection select method
   def get_helpers
     ActionController::Base.helpers
     #change to this or translation?... ApplicationController.helpers
@@ -24,19 +24,23 @@ class Account < ActiveRecord::Base
   end
 
   def self.spending_query(category)
-    Transaction.where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+    Transaction.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+  end
+
+  def self.convert_money_to_number(money)
+    #had to convert money to number for use with googlecharts spending by category
+    money.to_s.gsub(/[$,]/,'').to_f
   end
 
   def self.spending_by_category
     @category_names = []
     @category_totals = []
-    Category.where(category_type: 'Expense').each do |category|
-        @category_totals.push(get_helpers2.number_to_currency(spending_query(category)))
+    Category.order(:name).where(category_type: 'Expense').each do |category|
+        @category_totals.push(convert_money_to_number(spending_query(category)))
         @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
     end
-    Gchart.pie_3d(:size => '650x200',
-              :data => [34,489,64,648,89,64,54,984], :labels => @category_names )
-    #still have problem with @category_totals need to be changed back into integer
+
+    Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
   end
 
 
