@@ -79,7 +79,10 @@
 
         <%#= pie_chart Account.spending_by_category_chartkick %>
         <!-- not working -->
-<%= pie_chart Account.spending_by_category_chartkick, library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key'} %>
+
+<%= pie_chart Account.spending_by_category_chartkick, library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key', height: 265, 
+  chartArea: {top:0, left:20, height: '100%'} } %>
+
 
       </div>
     </div>

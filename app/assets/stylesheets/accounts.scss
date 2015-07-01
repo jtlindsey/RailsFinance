@@ -12,6 +12,11 @@
 /* fixed panel height */
 .fixed-panel-height {
   height: 270px;
+  padding: 0px;
+  margin: 0px;
+  /* added to hide issue with piechart */
+  overflow: inherit;
+
 }
 
 /* remove after layout change */
