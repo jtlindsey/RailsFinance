@@ -67,7 +67,11 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Spending by Category</div>
       <div class="panel-body fixed-panel-height">
-        <%#= image_tag(Account.spending_by_category_google_charts) %>
+
+        <%= pie_chart Account.spending_by_category_chartkick, 
+        library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key', 
+          height: 265, chartArea: {top:0, left:20, height: '100%'} } %>
+
       </div>
     </div>
   </div>
@@ -77,11 +81,7 @@
       <div class="panel-heading">Net Worth</div>
       <div class="panel-body fixed-panel-height">
 
-        <%#= pie_chart Account.spending_by_category_chartkick %>
-        <!-- not working -->
 
-<%= pie_chart Account.spending_by_category_chartkick, library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key', height: 265, 
-  chartArea: {top:0, left:20, height: '100%'} } %>
 
 
       </div>
