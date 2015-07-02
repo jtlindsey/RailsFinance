@@ -54,23 +54,38 @@ class Account < ActiveRecord::Base
     @spending = Hash[@category_names.zip @category_totals]
   end
 
-  def self.networth
-    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
-    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
+  # def self.networth
+  #   @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
+  #   @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
 
+  #   @assets_total = 0
+  #   @assets_list.each {|asset| @assets_total += asset.balance }
+
+  #   @liabilities_total = 0
+  #   @liabilities_list.each {|liability| @liabilities_total += liability.balance }
+
+  #   [
+  #     ["Assets", convert_money_to_number(@assets_total)], 
+  #     ["Liabilities", convert_money_to_number(@liabilities_total)]
+  #   ]
+  # end
+
+
+#alternate for networth bar chart
+  def self.assets
+    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
 
+    convert_money_to_number(@assets_total)
+  end
+  def self.liabilities
+    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
     @liabilities_total = 0
     @liabilities_list.each {|liability| @liabilities_total += liability.balance }
-
-# byebug
-
-    [
-      ["Assets", convert_money_to_number(@assets_total)], 
-      ["Liabilities", convert_money_to_number(@liabilities_total)]
-    ]
+    convert_money_to_number(@liabilities_total)
   end
+#end alternate
 
   def self.types
     Asset.types.merge(Liability.types)

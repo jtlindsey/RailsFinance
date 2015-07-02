@@ -82,8 +82,15 @@
       <div class="panel-body fixed-panel-height">
 
 
-<%= column_chart Account.networth, 
-        library: {backgroundColor: "#FFF", height: 265 } %>
+        <%#= column_chart Account.networth, 
+                library: {
+                  backgroundColor: "#FFF", height: 265,
+                  :colors => ['green', 'red']
+                } %>
+
+
+        <%= column_chart networth_data, colors: ["green", "#FF0000"], library: {
+                  backgroundColor: "#FFF", height: 265} %>
 
 
       </div>
