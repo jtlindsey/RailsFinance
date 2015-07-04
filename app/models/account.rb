@@ -47,11 +47,15 @@ class Account < ActiveRecord::Base
     @category_names = []
     @category_totals = []
     Category.order(:name).where(category_type: 'Expense').each do |category|
-        @category_totals.push(convert_money_to_number(spending_query(category)))
+        @category_totals.push(convert_money_to_number(spending_query_by_month(category)))
         @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
     end
 
     @spending = Hash[@category_names.zip @category_totals]
+  end
+
+  def self.spending_query_by_month(category)
+    Transaction.order(:category).where(transaction_type: 'Withdrawal').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
   end
 
   # def self.networth
