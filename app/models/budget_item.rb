@@ -9,6 +9,12 @@ class BudgetItem < ActiveRecord::Base
     %w(Weekly Bi-Weekly Monthly Quarterly Yearly)
   end
 
+  def self.watch_items
+    where(watch: true).to_a.sort do |a,b|
+      b.spent.to_f/b.amount_cents.to_f <=> a.spent.to_f/a.amount_cents.to_f
+    end
+  end  
+
   def bi_week
     #week and bi-week start on monday and end on sunday
     case 
@@ -19,20 +25,27 @@ class BudgetItem < ActiveRecord::Base
     end
   end
 
+  def spent
+    budget_spent(period)
+  end
+
   def budget_spent(budget_item_period)
     #byebug
-    case budget_item_period
+    #TODO Refactor to avoid duplication of inject
+    #Also look into having case statement set only the date because it's the only part that varies
+    date = case budget_item_period
     when "Weekly"
-      Transaction.where(date: Date.today.at_beginning_of_week..Date.today.at_end_of_week).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      Date.today.at_beginning_of_week..Date.today.at_end_of_week
     when "Bi-Weekly"
-      Transaction.where(date: bi_week).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      bi_week
     when "Monthly"
-      Transaction.where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      Date.today.beginning_of_month..Date.today.end_of_month
     when "Quarterly"
-      Transaction.where(date: Date.today.at_beginning_of_quarter..Date.today.at_end_of_quarter).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      Date.today.at_beginning_of_quarter..Date.today.at_end_of_quarter
     when "Yearly"
-      Transaction.where(date: Date.today.at_beginning_of_year..Date.today.at_end_of_year).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
+      Date.today.at_beginning_of_year..Date.today.at_end_of_year
     end
+    Transaction.where(date: date).where(category: category).inject(0) {|output, transaction| output + transaction.amount}
 
     #Transaction.where(category: category).inject(0) {|output, transaction| output + transaction.amount}      
     #@budget_spent ||= Transaction.where(category: category).inject(0) {|output, transaction| output + transaction.amount}      

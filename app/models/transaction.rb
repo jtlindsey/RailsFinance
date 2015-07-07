@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
+  # has_one :linked_transaction, class: 'Transaction', foreign_key: 'transfer_ref'
   #belongs_to :deposit, class_name: "Transaction"
 
   #validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
@@ -7,6 +8,8 @@ class Transaction < ActiveRecord::Base
   #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
 
   monetize :amount_cents
+
+  before_destroy :delete_corresponding_transactions
 
   # for virtual attributes in transactions form, entire transfer form changed to virual attributes
   attr_accessor :from_account_id, :to_account_id
@@ -24,9 +27,10 @@ class Transaction < ActiveRecord::Base
     "To account: #{a.name} #{a.last4}"
   end
 
+  # TODO look into exception implementations
   def self.transfer(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee)
-    Transaction.transaction do 
-      @deposit_transaction = Transaction.create(
+    ActiveRecord::Base.transaction do 
+      @deposit_transaction = Transaction.create!(
         amount: amount, 
         date: ocurred_on, 
         transaction_type: "Deposit", 
@@ -38,7 +42,7 @@ class Transaction < ActiveRecord::Base
         #deposit
       )
       #byebug
-      @withdrawal_transaction = Transaction.create(
+      @withdrawal_transaction = Transaction.create!(
         amount: amount, 
         date: ocurred_on, 
         transaction_type: "Withdrawal", 
@@ -48,7 +52,10 @@ class Transaction < ActiveRecord::Base
         account_id: from_account_id, 
         transfer_ref: @deposit_transaction.id
       )
+
+      @deposit_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
       #byebug
+      [@withdrawal_transaction, @deposit_transaction]
     end
   end
 
@@ -115,4 +122,17 @@ class Transaction < ActiveRecord::Base
   #     "#{account.name} #{account.last4} #{account.type}"
   #   end
   # end
+
+  def delete_corresponding_transactions
+    #destroy corresponding transactions
+    puts 'transfer_ref.inspect'
+    puts transfer_ref.inspect
+    if transfer_ref != nil
+      linked_transaction = Transaction.find_by(id: transfer_ref)
+      linked_transaction.delete
+    end 
+    #end destroy corresponding transactions
+    true
+  end
 end
+

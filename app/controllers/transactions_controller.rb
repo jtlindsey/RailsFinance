@@ -40,7 +40,7 @@ class TransactionsController < ApplicationController
                                     transaction_params["date(2i)"],
                                     transaction_params["date(3i)"]
                                     )
-      withdrawal = Transaction.transfer(
+      withdrawal, deposit = Transaction.transfer(
                                       transaction_params[:amount], 
                                       ocurred_on,
                                       transaction_params[:from_account_id],
@@ -52,10 +52,6 @@ class TransactionsController < ApplicationController
       #byebug
       # refactor this. not sure if could be problem during simultaneous transactions
       #finds last deposit transaction and links it to withdrawal transaction via transfer_ref
-      a = Transaction.where(transaction_type: 'Deposit').last
-      a.transfer_ref = withdrawal.id
-      a.save
-      # refactor this. end
 
       redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
       # probably should be a new route ie..
@@ -92,17 +88,8 @@ class TransactionsController < ApplicationController
   def destroy
     @account = Account.find(params[:account_id])
     @transaction = Transaction.find(params[:id])
-
+    @transaction.destroy
     #byebug
-    #destroy corresponding transactions
-    if @transaction.transfer_ref != nil
-      linked_transaction = Transaction.find_by(id: @transaction.transfer_ref)
-      linked_transaction.destroy
-      @transaction.destroy
-    else
-      @transaction.destroy
-    end 
-    #end destroy corresponding transactions
 
     respond_to do |format|
       format.html { redirect_to account_transactions_path(@account, @transaction), notice: 'Transaction was successfully destroyed.' }

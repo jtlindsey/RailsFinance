@@ -40,7 +40,7 @@ class AccountsController < ApplicationController
       @budget_tracking_message = "Click Here To Create a Budget."
     end
 
-    @budget_watching = BudgetItem.where(watch: true)
+    @budget_watching = BudgetItem.watch_items
 
     @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
               :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
