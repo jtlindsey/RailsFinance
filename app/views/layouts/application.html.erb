@@ -8,6 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %> 
+<% if alert.present? %>
+  <p class="alert"><%= alert %></p>  
+<% end %>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,9 +36,14 @@
         <%= nav_link "All Accounts", "/list_accounts" %>
         <%= nav_link "New Account", "/accounts/new" %>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><button type="button" class="btn btn-inverse navbar-btn">Logout</button></li>
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="user-welcome"><%= nav_link current_user.email, "/" %></li>
+          <li>
+          <%= link_to 'Logout', destroy_user_session_path(current_user), method: :delete, class: "btn btn-inverse navbar-btn" %>
+          </li>
+        </ul>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

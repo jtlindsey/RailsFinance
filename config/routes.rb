@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :categories
   resources :budget_items
   # resources :transactions
   root 'accounts#index'
+  # root 'welcome#index'
 
   resources :accounts do
     resources :transactions
