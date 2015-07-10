@@ -53,6 +53,8 @@
           </thead>
 
           <tbody>
+            <% a = [] %>
+            <% subtotal = 0 %>
             <% @liabilities_list.each do |account| %>
               <tr>
                 <td><%= account.type %></td>
@@ -60,9 +62,21 @@
                 <td><%= account.status %></td>
                 <td><%= number_to_currency(account.balance) %></td>
               </tr>
-              <%# while account.type do %>
-                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= account.balance %></td></tr>
-              <%# end %>
+                <% a.push(account.type) %>
+
+
+              <% if a.last == account.type %>
+                <% subtotal += account.balance %>
+                <% a.push(account.type) unless a.include?(account.type) %>
+              <% end %>
+
+              <%# byebug %>
+
+              <% if a[a.length-2] != a[a.length-1] %>
+                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= subtotal %></td></tr>
+                <% a.clear %>
+                <% subtotal = 0 %>
+              <% end %>
             <% end %>
           </tbody>
         </table>
