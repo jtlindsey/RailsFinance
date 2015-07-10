@@ -60,6 +60,9 @@
                 <td><%= account.status %></td>
                 <td><%= number_to_currency(account.balance) %></td>
               </tr>
+              <%# while account.type do %>
+                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= account.balance %></td></tr>
+              <%# end %>
             <% end %>
           </tbody>
         </table>
