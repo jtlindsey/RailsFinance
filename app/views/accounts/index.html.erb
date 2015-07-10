@@ -78,7 +78,7 @@
 
   <div class="col-md-6">
     <div class="panel panel-primary">
-      <div class="panel-heading">Net Worth</div>
+      <div class="panel-heading">Net Worth <%= number_to_currency(Account.user_networth) %></div>
       <div class="panel-body fixed-panel-height">
 
 
@@ -138,37 +138,3 @@
 
 </div>
 
-
-
-<div class="row">
-<h1> will remove below this line </h1>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-<div class="row"> <!-- Assets -->
-
-  <%= render 'accounts', accounts: @checkings, account_name: "Checking" %>
-  <%= render 'accounts', accounts: @savings, account_name: "Saving" %>
-  <%= render 'accounts', accounts: @escrows, account_name: "Escrow" %>
-  <%= render 'accounts', accounts: @cashs, account_name: "Cash" %>
-  <%= render 'accounts', accounts: @other_assets, account_name: "Other Asset" %>
-
-</div>
-<hr>
-<div class="row"> <!-- Liabilities -->
-
-  <%= render 'accounts', accounts: @mortgage, account_name: "Mortgage (fixed)" %>
-  <%= render 'accounts', accounts: @credit_cards, account_name: "Credit Card" %>
-  <%= render 'accounts', accounts: @student_loans, account_name: "Student Loan" %>
-  <%= render 'accounts', accounts: @personal_loans, account_name: "Personal Loan" %>
-  <%= render 'accounts', accounts: @other_liabilitys, account_name: "Other Liability" %>
-</div>

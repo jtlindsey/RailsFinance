@@ -19,36 +19,21 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    # Assets
-    @checkings = Account.order('LOWER(name)').where(type: 'Checking')
-    @savings = Account.order('LOWER(name)').where(type: 'Saving')
-    @escrows = Account.order('LOWER(name)').where(type: 'Escrow')
-    @cashs = Account.order('LOWER(name)').where(type: 'Cash')
-    @other_assets = Account.order('LOWER(name)').where(type: 'OtherAsset')
-
-    # Liabilities
-    @credit_cards = Account.order('LOWER(name)').where(type: 'CreditCard')
-    @other_liabilitys = Account.order('LOWER(name)').where(type: 'OtherLiability')
-    @student_loans = Account.order('LOWER(name)').where(type: 'StudentLoan')
-    @personal_loans = Account.order('LOWER(name)').where(type: 'PersonalLoan')
-    @mortgage = Account.order('LOWER(name)').where(type: 'Mortgage')
-
     @favorite_accounts = Account.order('LOWER(name)').where(status: 'Open').where(favorite: true)
+    @budget_watching = BudgetItem.watch_items
 
+    # @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
+              # :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
+
+    @accounts = Account.all
+
+    # Budget message...move to model
     if BudgetItem.all.count >= 1 && BudgetItem.where(watch: true).count < 1
       @budget_tracking_message = "Click Here to add Budget Items to Watch List." 
     elsif BudgetItem.all.count < 1
       @budget_tracking_message = "Click Here To Create a Budget."
     end
-
-    @budget_watching = BudgetItem.watch_items
-
-    @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
-              :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
-
-
-    @accounts = Account.all
-
+    # END Budget message...move to model
   end
 
   # GET /accounts/1
@@ -108,9 +93,9 @@ class AccountsController < ApplicationController
   end
 
   def list
-    @accounts = Account.all
-    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
-    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
+    # @accounts = Account.all
+    @assets_list = Account.order(:type).order('LOWER(name)').where(type: Asset.types.values)
+    @liabilities_list = Account.order(:type).order('LOWER(name)').where(type: Liability.types.values)
 
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
@@ -119,8 +104,7 @@ class AccountsController < ApplicationController
     @liabilities_list.each {|liability| @liabilities_total += liability.balance }
   end
 
-  def options
-    
+  def options    
   end
 
   private

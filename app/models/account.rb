@@ -76,6 +76,12 @@ class Account < ActiveRecord::Base
 
 
 #alternate for networth bar chart
+  def self.user_networth
+    a = Account.where(type: Asset.types.values).inject(0) { |sum, account| sum + account.balance }
+    l = Account.where(type: Liability.types.values).inject(0) { |sum, account| sum + account.balance }
+    a - l
+  end
+
   def self.assets
     @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
     @assets_total = 0

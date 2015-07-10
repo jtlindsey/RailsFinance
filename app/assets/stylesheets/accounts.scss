@@ -3,55 +3,60 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* using on home page in favorites, will likely use this and remove .panel-accounts y-axis scroll */
-.fixed-panel-budget-watch {
-  height: 270px;
-  padding: 2px;
-  margin: 2px;
-  /*width: 99.9%;*/
-  overflow-y: auto;
+@media screen and (min-width: 480px) {
+  .fixed-panel-budget-watch {
+    height: 270px;
+    padding: 2px;
+    margin: 2px;
+    /*width: 99.9%;*/
+    overflow-y: auto;
+  }
 }
-
 /* fixed panel height for pie chart, bar chart, favorites panel */
-.fixed-panel-height {
-  height: 270px;
-  padding: 2px;
-  margin: 2px;
-}
-
-
-/* remove after layout change */
-.panel-accounts {
-  height: 180px;
-
-  .panel-body {
-    height: 140px;
-    overflow: auto;
+@media screen and (min-width: 480px) {
+  .fixed-panel-height {
+    height: 270px;
+    padding: 2px;
+    margin: 2px;
   }
 }
 
+/* remove after layout change */
+@media screen and (min-width: 480px) {
+  .panel-accounts {
+    height: 180px;
+
+    .panel-body {
+      height: 140px;
+      overflow: auto;
+    }
+  }
+}
 
 /* begin on home page table scroll rows and keep fixed header */
-.table-scroll-rows thead, 
-.table-scroll-rows tbody, 
-.table-scroll-rows tr, 
-.table-scroll-rows td, 
-.table-scroll-rows th { 
-  display: block; 
-}
-.table-scroll-rows tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-.table-scroll-rows tbody {
-    height: 202px;
-    overflow-y: auto;
-}
-.table-scroll-rows tbody td, 
-.table-scroll-rows thead th {
-    width: 50%; 
-    float: left;
+@media screen and (min-width: 480px) {
+  .table-scroll-rows thead, 
+  .table-scroll-rows tbody, 
+  .table-scroll-rows tr, 
+  .table-scroll-rows td, 
+  .table-scroll-rows th { 
+    display: block; 
+  }
+  .table-scroll-rows tr:after {
+      content: ' ';
+      display: block;
+      visibility: hidden;
+      clear: both;
+  }
+  .table-scroll-rows tbody {
+      height: 202px;
+      overflow-y: auto;
+  }
+  .table-scroll-rows tbody td, 
+  .table-scroll-rows thead th {
+      width: 50%; 
+      float: left;
+  }
 }
 /* end on home page table scroll rows and keep fixed header */
 

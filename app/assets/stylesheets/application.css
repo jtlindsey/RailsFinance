@@ -6,6 +6,16 @@
   *= require main
 */
 
+.navbar {
+  margin-bottom: 0px !important;
+}
+
+.session-info {
+  text-align: right;
+  padding-right: 15px;
+  font-style: italic;
+}
+
 .user-welcome {
   color: gray;
 }
