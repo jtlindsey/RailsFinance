@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     #resources :transfers, only: %i[show post]    
   end
 
+  # working with the following as alternate to code inside of application controller
+  # https://github.com/plataformatec/devise/wiki/How-To:-Change-the-default-sign_in-and-sign_out-routes
+  # devise_for :users, :path => '', :path_names => {:sign_out => 'logout'}
+
+
   get 'list_accounts', to: 'accounts#list'
   get 'options', to: 'accounts#options'
   get 'financial_summary', to: 'accounts#financial_summary'
