@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :pages
   resources :categories
   resources :budget_items
   # resources :transactions
