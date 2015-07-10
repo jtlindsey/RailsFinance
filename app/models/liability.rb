@@ -23,8 +23,17 @@ class Liability < Account
       types.values.sort_by(&:name)
     end
 
-    def total
-      Money.new(all.sum(:balance_cents))
+    def for_user(user)
+      where(user_id: user.id)
+    end
+
+    def total(accounts=nil)
+      accounts ||= all
+      Money.new(accounts.sum(:balance_cents))
+    end
+
+    def total_for_user(user)
+      total(for_user(user))
     end
   end
 

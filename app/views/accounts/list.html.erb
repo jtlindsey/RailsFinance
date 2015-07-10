@@ -54,9 +54,9 @@
 
           <tbody>
             <% Liability.account_type_groups.each do |group| %>
-              <%= render partial: 'account_type_group', collection: group.all, as: :account %>
-              <% if group.exists? %>
-                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= number_to_currency(group.total) %></td></tr>
+              <%= render partial: 'account_type_group', collection: group.for_user(current_user), as: :account %>
+              <% if group.exists?(user_id: current_user.id) %>
+                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= number_to_currency(group.total_for_user(current_user)) %></td></tr>
               <% end %>
             <% end %>
           </tbody>
@@ -65,7 +65,7 @@
       </div>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <Strong>Subtotal Liabilities <%= number_to_currency(@liabilities_total) %></Strong>
+          <Strong>Subtotal Liabilities <%= number_to_currency(Liability.total_for_user(current_user)) %></Strong>
         </div>
       </div>
     </div>
