@@ -8,12 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<% if notice.present? %>
-  <p class="notice"><%= notice %></p>
-<% end %> 
-<% if alert.present? %>
-  <p class="alert"><%= alert %></p>  
-<% end %>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -25,7 +20,6 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'Rails Finance', accounts_path, class: "navbar-brand" %>
-
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,18 +30,33 @@
         <%= nav_link "All Accounts", "/list_accounts" %>
         <%= nav_link "New Account", "/accounts/new" %>
       </ul>
+<!-- login/Logout button -->
+      <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="user-welcome"><%= nav_link current_user.email, "/" %></li>
-          <li>
-          <%= link_to 'Logout', destroy_user_session_path(current_user), method: :delete, class: "btn btn-inverse navbar-btn" %>
-          </li>
-        </ul>
+        <li><%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
+      <% else %>
+        <li><%= button_to('Login', accounts_path, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
       <% end %>
+      </ul>
+<!-- END login/Logout button -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<!-- flash messages with bootstrap -->
+<% if notice.present? %>
+  <div class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Great! </strong><%= notice %>
+  </div>
+<% end %>
 
+<% if alert.present? %>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Not so fast! </strong><%= alert %>
+  </div>
+<% end %>
+<!-- END flash messages with bootstrap -->
 <div class="container-fluid">
  <%= yield %>
 </div>
