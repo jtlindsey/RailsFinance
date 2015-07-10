@@ -35,7 +35,7 @@
       <% if user_signed_in? %>
         <li><%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
       <% else %>
-        <li><%= button_to('Login', accounts_path, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
+        <li><%= button_to('Login', new_user_session_path, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
       <% end %>
       </ul>
 <!-- END login/Logout button -->

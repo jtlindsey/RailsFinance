@@ -53,29 +53,10 @@
           </thead>
 
           <tbody>
-            <% a = [] %>
-            <% subtotal = 0 %>
-            <% @liabilities_list.each do |account| %>
-              <tr>
-                <td><%= account.type %></td>
-                <td><%= link_to "#{account.name} #{account.last4}", account_transactions_path(account_id: account.id) %></td>
-                <td><%= account.status %></td>
-                <td><%= number_to_currency(account.balance) %></td>
-              </tr>
-                <% a.push(account.type) %>
-
-
-              <% if a.last == account.type %>
-                <% subtotal += account.balance %>
-                <% a.push(account.type) unless a.include?(account.type) %>
-              <% end %>
-
-              <%# byebug %>
-
-              <% if a[a.length-2] != a[a.length-1] %>
-                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= subtotal %></td></tr>
-                <% a.clear %>
-                <% subtotal = 0 %>
+            <% Liability.account_type_groups.each do |group| %>
+              <%= render partial: 'account_type_group', collection: group.all, as: :account %>
+              <% if group.exists? %>
+                <tr style="background-color: gray;"><td></td><td></td><td></td><td>Total: <%= number_to_currency(group.total) %></td></tr>
               <% end %>
             <% end %>
           </tbody>
