@@ -68,7 +68,7 @@
       <div class="panel-heading">Spending by Category This Month</div>
       <div class="panel-body fixed-panel-height">
 
-        <%= pie_chart Account.spending_by_category_chartkick, 
+        <%= pie_chart Account.spending_by_category_chartkick(current_user), 
         library: {is3D: true, backgroundColor: "#B2E6FF", pieSliceText: 'key', 
           height: 265, chartArea: {top:0, left:20, height: '100%'} } %>
 
@@ -78,7 +78,7 @@
 
   <div class="col-md-6">
     <div class="panel panel-primary">
-      <div class="panel-heading">Net Worth <%= number_to_currency(Account.user_networth) %></div>
+      <div class="panel-heading">Net Worth <%= number_to_currency(Account.user_networth(current_user)) %></div>
       <div class="panel-body fixed-panel-height">
 
 

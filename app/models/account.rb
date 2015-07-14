@@ -43,10 +43,11 @@ class Account < ActiveRecord::Base
     Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
   end
 
-  def self.spending_by_category_chartkick
+  def self.spending_by_category_chartkick(user = nil)
     @category_names = []
     @category_totals = []
-    Category.order(:name).where(category_type: 'Expense').each do |category|
+    category_collection = user ? user.categories : Category
+    category_collection.order(:name).where(category_type: 'Expense').each do |category|
         @category_totals.push(convert_money_to_number(spending_query_by_month(category)))
         @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
     end
@@ -76,9 +77,10 @@ class Account < ActiveRecord::Base
 
 
 #alternate for networth bar chart
-  def self.user_networth
-    a = Account.where(type: Asset.types.values).inject(0) { |sum, account| sum + account.balance }
-    l = Account.where(type: Liability.types.values).inject(0) { |sum, account| sum + account.balance }
+  def self.user_networth(user=nil)
+    account_collection = user ? user.accounts : self
+    a = account_collection.where(type: Asset.types.values).inject(0) { |sum, account| sum + account.balance }
+    l = account_collection.where(type: Liability.types.values).inject(0) { |sum, account| sum + account.balance }
     a - l
   end
 

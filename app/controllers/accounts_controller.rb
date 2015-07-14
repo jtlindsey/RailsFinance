@@ -4,9 +4,9 @@ class AccountsController < ApplicationController
 
 
   def financial_summary
-    @accounts = Account.all
-    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
-    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
+    @accounts = current_user.accounts
+    @assets_list = current_user.accounts.order('LOWER(name)').where(type: Asset.types.values)
+    @liabilities_list = current_user.accounts.order('LOWER(name)').where(type: Liability.types.values)
 
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
@@ -19,18 +19,18 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @favorite_accounts = Account.order('LOWER(name)').where(status: 'Open').where(favorite: true)
-    @budget_watching = BudgetItem.watch_items
+    @favorite_accounts = current_user.accounts.order('LOWER(name)').where(status: 'Open').where(favorite: true)
+    @budget_watching = BudgetItem.watch_items(current_user)
 
     # @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
               # :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
 
-    @accounts = Account.all
+    @accounts = current_user.accounts
 
     # Budget message...move to model
-    if BudgetItem.all.count >= 1 && BudgetItem.where(watch: true).count < 1
+    if current_user.budget_items.count >= 1 && current_user.budget_items.where(watch: true).count < 1
       @budget_tracking_message = "Click Here to add Budget Items to Watch List." 
-    elsif BudgetItem.all.count < 1
+    elsif current_user.budget_items.count < 1
       @budget_tracking_message = "Click Here To Create a Budget."
     end
     # END Budget message...move to model

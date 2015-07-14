@@ -13,8 +13,8 @@ module AccountsHelper
   #defaul (old method not using helper) is ok but can't change color of bars differently
   def networth_data
     [
-      {name: "Assets", data: {"NetWorth": Account.assets}}, 
-      {name: "Liabilities", data: {"NetWorth": Account.liabilities}}
+      {name: "Assets", data: {"NetWorth": current_user.accounts.assets}}, 
+      {name: "Liabilities", data: {"NetWorth": current_user.accounts.liabilities}}
     ]
   end
 

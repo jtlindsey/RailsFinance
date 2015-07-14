@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :categories
   resources :budget_items
   # resources :transactions
-  root 'accounts#index'
+  # root 'accounts#index'
   # root 'welcome#index'
+  root 'pages#index'
 
   resources :accounts do
     resources :transactions
