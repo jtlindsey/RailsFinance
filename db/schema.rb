@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20150710214021) do
     t.integer  "credit_limit"
     t.decimal  "interest_rate"
     t.boolean  "favorite",                 default: false
-    t.datetime "created_at",               default: '2015-07-07 22:17:55', null: false
-    t.datetime "updated_at",               default: '2015-07-07 22:17:55', null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "user_id"
   end
 
