@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710214021) do
+ActiveRecord::Schema.define(version: 20150714190955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20150710214021) do
     t.integer  "credit_limit"
     t.decimal  "interest_rate"
     t.boolean  "favorite",                 default: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",               default: '2015-07-07 22:17:55', null: false
+    t.datetime "updated_at",               default: '2015-07-07 22:17:55', null: false
     t.integer  "user_id"
   end
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150710214021) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.boolean  "watch",        default: false
+    t.integer  "user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150710214021) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
