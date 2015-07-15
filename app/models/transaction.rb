@@ -90,23 +90,23 @@ class Transaction < ActiveRecord::Base
     %w(Deposit Withdrawal Transfer)
   end
 
-  def self.category_list
+  def self.category_list(user)
     #list of categories for form
     [
-      ['Income', Category.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }],
-      ['Expense', Category.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
+      ['Income', user.categories.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }],
+      ['Expense', user.categories.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
     ]
   end
 
-  def self.deposit_category_list
+  def self.deposit_category_list(user)
     [
-      ['Income', Category.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }]
+      ['Income', user.categories.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }]
     ]
   end
 
-  def self.withdrawal_category_list
+  def self.withdrawal_category_list(user)
     [
-      ['Expense', Category.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
+      ['Expense', user.categories.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
     ]
   end
 

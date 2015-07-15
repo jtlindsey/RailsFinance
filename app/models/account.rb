@@ -32,22 +32,22 @@ class Account < ActiveRecord::Base
     money.to_s.gsub(/[$,]/,'').to_f
   end
 
-  def self.spending_by_category_google_charts
+  # def self.spending_by_category_google_charts
+  #   @category_names = []
+  #   @category_totals = []
+  #   Category.order(:name).where(category_type: 'Expense').each do |category|
+  #       @category_totals.push(convert_money_to_number(spending_query(category)))
+  #       @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
+  #   end
+
+  #   Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
+  # end
+
+  def self.spending_by_category_chartkick(user)
     @category_names = []
     @category_totals = []
-    Category.order(:name).where(category_type: 'Expense').each do |category|
-        @category_totals.push(convert_money_to_number(spending_query(category)))
-        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
-    end
-
-    Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
-  end
-
-  def self.spending_by_category_chartkick(user = nil)
-    @category_names = []
-    @category_totals = []
-    category_collection = user ? user.categories : Category
-    category_collection.order(:name).where(category_type: 'Expense').each do |category|
+    # category_collection = user ? user.categories : Category
+    user.categories.order(:name).where(category_type: 'Expense').each do |category|
         @category_totals.push(convert_money_to_number(spending_query_by_month(category)))
         @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
     end
@@ -77,24 +77,25 @@ class Account < ActiveRecord::Base
 
 
 #alternate for networth bar chart
-  def self.user_networth(user=nil)
-    account_collection = user ? user.accounts : self
-    a = account_collection.where(type: Asset.types.values).inject(0) { |sum, account| sum + account.balance }
-    l = account_collection.where(type: Liability.types.values).inject(0) { |sum, account| sum + account.balance }
+  def self.user_networth(user)
+    # account_collection = user ? user.accounts : self
+    a = user.accounts.where(type: Asset.types.values).inject(0) { |sum, account| sum + account.balance }
+    l = user.accounts.where(type: Liability.types.values).inject(0) { |sum, account| sum + account.balance }
     a - l
   end
 
   def self.assets
-    @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
+    @assets_list = Account.where(type: Asset.types.values)
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
 
     convert_money_to_number(@assets_total)
   end
   def self.liabilities
-    @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
+    @liabilities_list = Account.where(type: Liability.types.values)
     @liabilities_total = 0
     @liabilities_list.each {|liability| @liabilities_total += liability.balance }
+    
     convert_money_to_number(@liabilities_total)
   end
 #end alternate

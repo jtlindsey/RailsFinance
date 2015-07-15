@@ -94,7 +94,7 @@ class AccountsController < ApplicationController
 
   def list
     # @accounts = Account.all
-    @assets_list = Account.order(:type).order('LOWER(name)').where(type: Asset.types.values, user_id: current_user.id)
+    @assets_list = current_user.accounts.order(:type).order('LOWER(name)').where(type: Asset.types.values, user_id: current_user.id)
 
     @assets_total = 0
     @assets_list.each {|asset| @assets_total += asset.balance }
