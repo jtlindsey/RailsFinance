@@ -16,17 +16,17 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @account = Account.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id])
     @transaction = @account.transactions.build
 
     #move to model and view
     #list all accounts except current for account transfer
-    @account_transfer_list = Account.order('LOWER(name)').where.not(id: @account.id, status: 'Closed')  
+    @account_transfer_list = current_user.accounts.order('LOWER(name)').where.not(id: @account.id, status: 'Closed')  
   end
 
   # GET /transactions/1/edit
   def edit
-    @account = Account.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id])
     @transaction = Transaction.find(params[:id])
   end
 
@@ -59,7 +59,7 @@ class TransactionsController < ApplicationController
       #redirect_to account_transfers_path(withdrawl.account, withdrawl), notice: 'Transaction was successfully created.'
 
     else
-      @account = Account.find(params[:account_id])
+      @account = current_user.accounts.find(params[:account_id])
       @transaction = @account.transactions.build(transaction_params)
       if @transaction.save
         redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully created.'  
@@ -72,7 +72,7 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
-    @account = Account.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id])
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html { redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully updated.' }
@@ -87,7 +87,7 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
-    @account = Account.find(params[:account_id])
+    @account = current_user.accounts.find(params[:account_id])
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
     #byebug
