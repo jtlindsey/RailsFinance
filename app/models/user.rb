@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :accounts
   has_many :transactions, through: :accounts
+  has_many :budget_items
+  has_many :categories
 end

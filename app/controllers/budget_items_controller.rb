@@ -5,7 +5,7 @@ class BudgetItemsController < ApplicationController
   # GET /budget_items
   # GET /budget_items.json
   def index
-    @budget_items = BudgetItem.all
+    @budget_items = current_user.budget_items
   end
 
   # GET /budget_items/1
@@ -14,12 +14,12 @@ class BudgetItemsController < ApplicationController
   end
 
   def show_all
-    @budget_items = BudgetItem.all
+    @budget_items = current_user.budget_items
   end
 
   # GET /budget_items/new
   def new
-    @budget_item = BudgetItem.new
+    @budget_item = current_user.budget_items.build
   end
 
   # GET /budget_items/1/edit
@@ -29,7 +29,7 @@ class BudgetItemsController < ApplicationController
   # POST /budget_items
   # POST /budget_items.json
   def create
-    @budget_item = BudgetItem.new(budget_item_params)
+    @budget_item = current_user.budget_items.build(budget_item_params)
 
     respond_to do |format|
       if @budget_item.save
@@ -69,7 +69,7 @@ class BudgetItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_budget_item
-      @budget_item = BudgetItem.find(params[:id])
+      @budget_item = current_user.budget_items.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -19,44 +19,43 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [x] Implement bootstrap
 - [x] Category create, edit, delete (Inceme and Expense Categories)
 - [x] Budget create, edit, delete
+- [x] Implement pie and bar charts using chartkick.com or charts.js
+- [x] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
 - [ ] Transaction(transfer) edit(as one block action)
 - [ ] Credit Cards, Loans, etc (Balance, Limit, Interest rage, and ability to sort by order should be paid off for lowest total interest paid)
+- [ ] User create, edit, delete
 - [ ] Calculate Mortgage Payments
 - [ ] Track mortgage (fixed) with and without escrow
 - [ ] Handle Escrow (P&I, Taxes, Insurance, and PMI or other additions)
-- [ ] User create, edit, delete
 - [ ] Setup multi-tenancy structure without using gem
 - [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
 - [ ] Consider using activeadmin gem
 - [ ] Home page with overview and profile summary
-- [ ] Implement pie and bar charts using chartkick.com or charts.js
 - [ ] Cross platform compatible with Windows, Mac, Linux, iOS, Android OS (test on all)
-- [ ] Resize Text
-- [x] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
+- [ ] Check browser Resize Text
 - [ ] Create query page for multiple types of querys (spending, income, expenses, by payee, by category, )
 - [ ] Add graph options to query page
 - [ ] Print as pdf (custom print.css)
-- [ ] Export to .txt and .csv file
-- [ ] Export transactions to excel
 - [ ] Add files to transactions (receipts as image or pdf, clicking on view transaction shows receipt preview and allows download of reciept copy)
 - [ ] Database backup
 - [ ] Update software without loosing existing data
-- [ ] Budgeting, test integration and tracking with categories accounts
-- [ ] Graphs..bar and pie and list (quick view change of expenses for week, month, quarter, 6-months, year)
 - [ ] Graphs for others by link to page to create
 - [ ] Graphs printable
-- [ ] Net-worth tracking
+- [x] Net-worth tracking
+
+
+### Priority 2 Features
+- [ ] 4 Color theme options via settings in user accounts page for each user
+- [ ] Export to .txt and .csv file
+- [ ] Export transactions to excel
+- [ ] Goal to purchase / saving progress page
+- [ ] Built in loan comparison calculators
+- [ ] Produce Amortization Charts
+- [ ] Graphs..bar and pie and list options(quick view change of expenses for week, month, quarter, 6-months, year)
 - [ ] Create Getting Started Guide (Easy Quick Start Guide)
 - [ ] Create User Guide with screen shots
 - [ ] Create Getting started video
 - [ ] Create feature video
-
-### Priority 2 Features
-- [ ] 4 Color theme options via settings in user accounts page for each user
-- [ ] Goal to purchase / saving progress page
-- [ ] Built in loan comparison calculators
-- [ ] Produce Amortization Charts
-- [ ] User accounts
 - [ ] Support ticket location for easy submission and tracking
 - [ ] Desktop / Web app sync
 - [ ] Home page view grouping...(that can be changed by drag and drop?)

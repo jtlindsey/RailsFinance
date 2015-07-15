@@ -9,8 +9,9 @@ class BudgetItem < ActiveRecord::Base
     %w(Weekly Bi-Weekly Monthly Quarterly Yearly)
   end
 
-  def self.watch_items
-    where(watch: true).to_a.sort do |a,b|
+  def self.watch_items(user=nil)
+    collection = user ? user.budget_items : self
+    collection.where(watch: true).to_a.sort do |a,b|
       b.spent.to_f/b.amount_cents.to_f <=> a.spent.to_f/a.amount_cents.to_f
     end
   end  
