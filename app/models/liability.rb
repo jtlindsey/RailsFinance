@@ -3,8 +3,7 @@ class Liability < Account
   validates :last4, length: {maximum: 4}
   validates :status, inclusion: {in: ['Open', 'Closed']}
 
-  # Class methods grouped here
-  class << self
+  class << self # Class methods grouped here
     def statuses
       ['Open', 'Closed']
     end
@@ -18,24 +17,27 @@ class Liability < Account
         'Mortgage (fixed)' => Mortgage
       }
     end
-
+    # User liability display
     def account_type_groups
       types.values.sort_by(&:name)
     end
 
-    def for_user(user)
-      where(user_id: user.id)
+    def for_user(user) # for account_type_group partial collection
+      where(user_id: user.id).order('LOWER(name)')
     end
 
-    def total(accounts=nil)
-      accounts ||= all
-      Money.new(accounts.sum(:balance_cents))
+    def liabilities_total(user)
+      Money.new(where(user_id: user.id).sum(:balance_cents))
     end
 
-    def total_for_user(user)
-      total(for_user(user))
+    def total_balance_for_account_type(user)
+      total_all = 0
+      where(user_id: user.id).each do 
+        |x| total_all += x.transactions.map {|transaction| transaction.applied_amount}.sum
+      end
+      total_all
     end
+    # User liability display end
   end
-
   # Instance methods follow here
 end
