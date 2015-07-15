@@ -93,11 +93,13 @@ class AccountsController < ApplicationController
   end
 
   def list
-    # @accounts = Account.all
-    # @assets_list = current_user.accounts.order(:type).order('LOWER(name)').where(type: Asset.types.values, user_id: current_user.id)
+    @assets_total = current_user.accounts.order(:type).order('LOWER(name)').where(type: Asset.types.values, user_id: current_user.id).each.inject(0) do |sum, asset| 
+      sum += asset.balance
+    end
 
-    # @assets_total = 0
-    # @assets_list.each {|asset| @assets_total += asset.balance }
+    @liabilities_total = current_user.accounts.order(:type).order('LOWER(name)').where(type: Liability.types.values, user_id: current_user.id).each.inject(0) do |sum, liability| 
+      sum += liability.balance
+    end
   end
 
   def options    

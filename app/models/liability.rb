@@ -30,7 +30,7 @@ class Liability < Account
       Money.new(where(user_id: user.id).sum(:balance_cents))
     end
 
-    def total_balance_for_account_type(user)
+    def total_balance_for_account_type(user) #for nested row of totals in all liabilites table
       total_all = 0
       where(user_id: user.id).each do 
         |x| total_all += x.transactions.map {|transaction| transaction.applied_amount}.sum

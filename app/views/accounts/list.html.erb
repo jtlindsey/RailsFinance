@@ -30,7 +30,7 @@
       </div>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <Strong>Total Assets <%= number_to_currency(Asset.assets_total(current_user)) %></Strong>
+          <Strong>Total Assets <%= number_to_currency(@assets_total) %></Strong>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
       </div>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <Strong>Total Liabilities <%= number_to_currency(Liability.liabilities_total(current_user)) %></Strong>
+          <Strong>Total Liabilities <%= number_to_currency(@liabilities_total) %></Strong>
         </div>
       </div>
     </div>
