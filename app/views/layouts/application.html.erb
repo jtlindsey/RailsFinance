@@ -1,74 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Finance</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+  <head>
+    <title>Finance</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <% if user_signed_in? %>
+      <%= render 'layouts/signed_in' %>
+    <% else %>
+      <%= render 'layouts/not_signed_in' %>
+    <% end %>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Rails Finance', root_path, class: "navbar-brand" %>
+    <!-- flash messages with bootstrap -->
+    <% if notice.present? %>
+      <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Great! </strong><%= notice %>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Not so fast! </strong><%= alert %>
+      </div>
+    <% end %>
+    <!-- END flash messages with bootstrap -->
+
+    <div class="container-fluid">
+     <%= yield %>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <%= nav_link "Options", "/options" %>
-        <%= nav_link "Budget", "/budget_show_all" %>
-        <%= nav_link "All Accounts", "/list_accounts" %>
-        <%= nav_link "New Account", "/accounts/new" %>
-      </ul>
-<!-- login/Logout button -->
-      <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <li><%= button_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
-      <% else %>
-        <li><%= button_to('Login', new_user_session_path, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
-      <% end %>
-      </ul>
-<!-- END login/Logout button -->
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<!-- logged in user info -->
-<div class="session-info">
-  <% if user_signed_in? %>
-    Welcome. Today is <%= Time.now.strftime("%A, %d %b %Y") %>, logged In as <%= current_user.email %>
-  <% else %>
-    Welcome. Today is <%= Time.now.strftime("%A, %d %b %Y") %>
-  <% end %>
-</div>
-<!-- logged in user info -->
-<!-- flash messages with bootstrap -->
-<% if notice.present? %>
-  <div class="alert alert-success">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Great! </strong><%= notice %>
-  </div>
-<% end %>
-
-<% if alert.present? %>
-  <div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Not so fast! </strong><%= alert %>
-  </div>
-<% end %>
-<!-- END flash messages with bootstrap -->
-<div class="container-fluid">
- <%= yield %>
-</div>
-
-</body>
+  </body>
 </html>
