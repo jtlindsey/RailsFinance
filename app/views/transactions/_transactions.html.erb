@@ -16,6 +16,7 @@
               <th>Deposit</th>
               <th>Withdrawal</th>
               <th>Balance</th>
+              <th>Uploads</th>
               <th></th> <!-- added these to get past DataTables js error -->
               <th></th> <!-- added these to get past DataTables js error -->
               <th></th> <!-- added these to get past DataTables js error -->
@@ -41,6 +42,8 @@
                 <% end %>
 
                 <td><%= number_to_currency(transaction.new_balance) %></td>
+
+                <td>Uploads</td>
 
 
                 <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
@@ -71,6 +74,7 @@
     <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
     <tr><td>Deposit</td><td><%= "temp" %></td></tr>
     <tr><td>Balance</td><td><%= "temp" %></td></tr>
+    <tr><td>Uploads</td><td>Uploads</td></tr>
     <tr>
       <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
       <% if transaction.transfer_ref != nil %>

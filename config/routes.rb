@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :accounts do
-    resources :transactions
+    resources :transactions do
+      resources :documents
+    end
     #will be for transfers controller when refactoring is done for transfers
     #resources :transfers, only: %i[show post]    
   end

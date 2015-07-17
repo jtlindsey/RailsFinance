@@ -3,9 +3,10 @@ class Transaction < ActiveRecord::Base
   # has_one :linked_transaction, class: 'Transaction', foreign_key: 'transfer_ref'
   #belongs_to :deposit, class_name: "Transaction"
 
-  #validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
+  validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
+  mount_uploaders :documents, DocumentUploader
 
   monetize :amount_cents
 

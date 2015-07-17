@@ -1,0 +1,8 @@
+<h1>Uploaded documents:</h1>
+<ul>
+<% @transaction.documents.each do |document| %>
+  <li><%= link_to document.url, document.url %></li>
+<% end %>
+</ul>
+
+<%= link_to "Upload new document", edit_account_transaction_path(@account, @transaction, redirect_to: account_transaction_documents_path(@account, @transaction)) %>

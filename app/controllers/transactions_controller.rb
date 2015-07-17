@@ -75,7 +75,7 @@ class TransactionsController < ApplicationController
     @account = current_user.accounts.find(params[:account_id])
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to account_transaction_path(@account, @transaction, redirect_to: params[:redirect_to]), notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: account_transaction_path(@account, @transaction) }
       else
         format.html { render :edit }
@@ -101,7 +101,8 @@ class TransactionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
-      @transaction = Transaction.find(params[:id])
+      @account = current_user.accounts.find(params[:account_id])
+      @transaction = @account.transactions.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -114,7 +115,10 @@ class TransactionsController < ApplicationController
         :comment, 
         :amount, 
         :from_account_id, 
-        :to_account_id
+        :to_account_id,
+        {:documents => []},
+        :documents_cache,
+        :remove_documents
         #:transfer_ref
       )
     end
