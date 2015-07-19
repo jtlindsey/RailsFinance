@@ -36,17 +36,28 @@
   <div class="field">
     <%= f.label :date %><br>
     <%= f.date_select :date %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= f.label :documents %><br>
-    <%= f.file_field :documents, multiple: true %>
-    <%= f.hidden_field :documents_cache %>
+
+    <br><label>Uploaded documents:</label>
+    <ul>
+    <% @transaction.documents.each do |document| %>
+      <li><%= link_to document.url, document.url %></li>
+    <% end %>
+    </ul>
+
     <label>
       <%= f.check_box :remove_documents %>
       Remove documents
-    </label>    
-  </div>
+    </label>
+
+    <br><label>Add documents:</label>
+    <%= f.file_field :documents, multiple: true %>
+    <%= f.hidden_field :documents_cache %>
+    
+  </div><br>
 
   <div class="actions">
     <%= f.submit %>
