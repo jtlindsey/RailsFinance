@@ -43,7 +43,11 @@
 
                 <td><%= number_to_currency(transaction.new_balance) %></td>
 
-                <td><%= link_to 'Uploads', account_transaction_documents_path(transaction.account, transaction) %> </td>
+                <% if transaction.documents.count > 0 %>
+                <td><%= link_to transaction.documents.count, account_transaction_path(transaction.account, transaction) %> </td>
+                <% else %>
+                <td>none</td>
+                <% end %>
 
                 <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
                 <% if transaction.transfer_ref != nil %>
@@ -73,7 +77,13 @@
     <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
     <tr><td>Deposit</td><td><%= "temp" %></td></tr>
     <tr><td>Balance</td><td><%= "temp" %></td></tr>
-    <tr><td>Uploads</td><td>Uploads</td></tr>
+    <tr><td>Uploads</td>
+      <% if transaction.documents.count > 0 %>
+      <td><%= link_to transaction.documents.count, account_transaction_path(transaction.account, transaction) %> </td>
+      <% else %>
+      <td>none</td>
+      <% end %>
+    </tr>
     <tr>
       <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
       <% if transaction.transfer_ref != nil %>

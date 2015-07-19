@@ -126,8 +126,6 @@ class Transaction < ActiveRecord::Base
 
   def delete_corresponding_transactions
     #destroy corresponding transactions
-    puts 'transfer_ref.inspect'
-    puts transfer_ref.inspect
     if transfer_ref != nil
       linked_transaction = Transaction.find_by(id: transfer_ref)
       linked_transaction.delete

@@ -25,5 +25,18 @@
   <%= @transaction.amount %>
 </p>
 
+<p>
+  <strong>Uploaded Documents:</strong>
+  <% if @transaction.documents.count > 0 %>
+    <% @transaction.documents.each do |document| %>
+    <ul>
+      <li><%= link_to document.url, document.url %></li>
+    </ul>
+    <% end %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_account_transaction_path(account_id: params[:account_id], id: params[:id]) %> |
 <%= link_to 'Back', params[:redirect_to] || account_transactions_path(account_id: params[:account_id]) %>
