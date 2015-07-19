@@ -2,7 +2,7 @@ require 'carrierwave/orm/activerecord'
 # encoding: utf-8
 
 class DocumentUploader < CarrierWave::Uploader::Base
-
+  after :remove, :delete_empty_upstream_dirs
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -48,5 +48,15 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def delete_empty_upstream_dirs
+    path = ::File.expand_path(store_dir, root)
+    Dir.delete(path) # fails if path not empty dir
+
+    #path = ::File.expand_path(base_store_dir, root)
+    #Dir.delete(path) # fails if path not empty dir
+  rescue SystemCallError
+    true # nothing, the dir is not empty
+  end
 
 end
