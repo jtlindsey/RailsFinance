@@ -30,7 +30,7 @@
   <% if @transaction.documents.count > 0 %>
     <% @transaction.documents.each do |document| %>
     <ul>
-      <li><%= link_to document.url, document.url %></li>
+      <li><%= link_to URI(document.url).path.split('/').last, document.url %></li>
     </ul>
     <% end %>
   <% else %>

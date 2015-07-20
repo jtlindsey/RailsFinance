@@ -44,7 +44,7 @@
     <br><label>Uploaded documents:</label>
     <ul>
     <% @transaction.documents.each do |document| %>
-      <li><%= link_to document.url, document.url %></li>
+      <li><%= link_to URI(document.url).path.split('/').last, document.url %></li>
     <% end %>
     </ul>
 
