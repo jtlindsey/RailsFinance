@@ -1,4 +1,7 @@
 class Transaction < ActiveRecord::Base
+  MAX_DOCUMENT_COUNT = 5
+  attr_accessor :remove_document
+
   belongs_to :account
   # has_one :linked_transaction, class: 'Transaction', foreign_key: 'transfer_ref'
   #belongs_to :deposit, class_name: "Transaction"
@@ -133,5 +136,6 @@ class Transaction < ActiveRecord::Base
     #end destroy corresponding transactions
     true
   end
+
 end
 
