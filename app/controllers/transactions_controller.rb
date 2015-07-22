@@ -75,19 +75,19 @@ class TransactionsController < ApplicationController
     @account = current_user.accounts.find(params[:account_id])
     respond_to do |format|      
       permitted_transaction_params = transaction_params
-      if permitted_transaction_params[:remove_document].present?
-        permitted_transaction_params[:remove_document].keys.map(&:to_i).sort.reverse.each do |index|
-          @transaction.documents.slice!(index, 1)
-        end
-      end
+      # if permitted_transaction_params[:remove_document].present?
+      #   permitted_transaction_params[:remove_document].keys.map(&:to_i).sort.reverse.each do |index|
+      #     @transaction.documents.slice!(index, 1)
+      #   end
+      # end
       if permitted_transaction_params[:documents].present?
         permitted_transaction_params[:documents] = @transaction.documents.map(&:file) + permitted_transaction_params[:documents]
       else
         permitted_transaction_params[:documents] = @transaction.documents.map(&:file)
       end
-      if permitted_transaction_params[:documents].empty?
-        permitted_transaction_params[:remove_documents] = true
-      end
+      # if permitted_transaction_params[:documents].empty?
+      #   permitted_transaction_params[:remove_documents] = true
+      # end
       if @transaction.update(permitted_transaction_params)
         format.html { redirect_to account_transaction_path(@account, @transaction, redirect_to: params[:redirect_to]), notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: account_transaction_path(@account, @transaction) }
