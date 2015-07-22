@@ -80,6 +80,7 @@ class TransactionsController < ApplicationController
       #     @transaction.documents.slice!(index, 1)
       #   end
       # end
+      # byebug
       if permitted_transaction_params[:documents].present?
         permitted_transaction_params[:documents] = @transaction.documents.map(&:file) + permitted_transaction_params[:documents]
       else
