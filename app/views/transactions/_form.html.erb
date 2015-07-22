@@ -44,6 +44,10 @@
     <br><label>Uploaded documents:</label>
     <ul>
     <% @transaction.documents.each do |document| %>
+      <li>
+        <%#= check_box_tag "transaction[remove_document][#{index}]" %><strong>Remove? </strong>
+        <%= link_to URI(document.url).path.split('/').last, document.url %>
+      </li>
     <% end %>
     </ul>
 
