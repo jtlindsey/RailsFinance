@@ -1,3 +1,30 @@
+carrierwave to consider if unable to get add/remove working properly:
+
+create documents table for uploaded documents, table columns are document, and user id
+transaction column named 'documents' should be changed to reference documents table/documents for user
+
+user should be able to add multiple documents
+
+user should be able to delete individual documents
+
+user should be able to delete all documents
+
+test that each condition appropriatly changes the view, database, and folders. because the last fix only removed filename in view but later discovered original files were still in folder when trying to delete individual files.
+
+refs to check out:
+https://github.com/carrierwaveuploader/carrierwave
+https://github.com/carrierwaveuploader/carrierwave/wiki
+https://github.com/richardkmichael/carrierwave-activerecord
+http://corlewsolutions.com/articles/article-1-prevent-uploads-with-duplicate-file-name-in-carrierwave-and-rails 
+http://makandracards.com/makandra/16999-common-mistakes-when-storing-file-uploads-with-rails
+
+
+
+
+
+
+
+
 create starter list of categories for user automatically when new user account is created
 
 change sort on first column to be descending by default (most recent first)
