@@ -13,6 +13,11 @@
       </ul>
     </div>
   <% end %>
+  <strong>Uploaded Files</strong><br>
+  <% @documents_list.each do |document| %>
+    <%#= link_to document.efile.file.filename, document.efile_url %>
+    <%= document.efile.file.filename %><br>
+  <% end %><br>
 
   <div class="field">
     <%= f.label :document %><br>

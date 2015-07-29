@@ -14,11 +14,12 @@ class DocumentsController < ApplicationController
   def new
     @transaction = Transaction.find(params[:transaction_id])
     @document = @transaction.documents.build
+    @documents_list = Document.where(:transaction_id => params[:transaction_id])
   end
 
   def edit
-    @transaction = Transaction.find(params[:transaction_id])
-    @document = Document.find(params[:id])
+    # @transaction = Transaction.find(params[:transaction_id])
+    # @document = Document.find(params[:id])
   end
 
   def create
