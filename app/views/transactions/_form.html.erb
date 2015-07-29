@@ -37,31 +37,6 @@
     <%= f.label :date %><br>
     <%= f.date_select :date %>
   </div><br>
-
-  <div class="field">
-    <%= f.label :documents %><br>
-
-    <br><label>Uploaded documents:</label>
-    <ul>
-    <% @transaction.documents.each do |document| %>
-      <li>
-        <%#= check_box_tag "transaction[remove_document][#{index}]" %><strong>Remove? </strong>
-        <%= link_to URI(document.url).path.split('/').last, document.url %>
-      </li>
-    <% end %>
-    </ul>
-
-    <label>
-      <%= f.check_box :remove_documents %>
-      Remove documents
-    </label>
-
-    <br><label>Add documents:</label>
-    <%= f.file_field :documents, multiple: true %>
-    <%= f.hidden_field :documents_cache %>
-    
-  </div><br>
-
   <div class="actions">
     <%= f.submit %>
   </div>

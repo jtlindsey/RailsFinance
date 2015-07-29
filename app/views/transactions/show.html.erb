@@ -26,15 +26,22 @@
 </p>
 
 <p>
-  <strong>Uploaded Documents:</strong>
+  <strong>Uploaded Documents: </strong><%= link_to 'New Document', new_account_transaction_document_path(transaction_id: @transaction.id) %>
   <% if @transaction.documents.count > 0 %>
-    <% @transaction.documents.each do |document| %>
-    <ul>
-      <li><%= link_to URI(document.url).path.split('/').last, document.url %></li>
-    </ul>
-    <% end %>
+
+    <table>
+      <tbody>
+        <strong>Documents for this transaction: </strong>
+        <% @transaction.documents.each do |document| %>
+          <tr>
+            <td><%= link_to 'Destroy', account_transaction_document_path(@account.id, @transaction.id, document.id), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to document.efile.file.filename, document.efile_url %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
   <% else %>
-    None
+    <br>None
   <% end %>
 </p>
 

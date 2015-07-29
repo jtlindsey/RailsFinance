@@ -1,15 +1,11 @@
 class Transaction < ActiveRecord::Base
-  MAX_DOCUMENT_COUNT = 5
-  attr_accessor :remove_document
 
   belongs_to :account
-  # has_one :linked_transaction, class: 'Transaction', foreign_key: 'transfer_ref'
-  #belongs_to :deposit, class_name: "Transaction"
+  has_many :documents, dependent: :destroy
 
   validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
-  mount_uploaders :documents, DocumentUploader
 
   monetize :amount_cents
 
@@ -138,4 +134,3 @@ class Transaction < ActiveRecord::Base
   end
 
 end
-

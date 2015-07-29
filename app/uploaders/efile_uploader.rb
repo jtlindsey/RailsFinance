@@ -1,7 +1,6 @@
-require 'carrierwave/orm/activerecord'
 # encoding: utf-8
 
-class DocumentUploader < CarrierWave::Uploader::Base
+class EfileUploader < CarrierWave::Uploader::Base
   after :remove, :delete_empty_upstream_dirs
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -58,5 +57,4 @@ class DocumentUploader < CarrierWave::Uploader::Base
   rescue SystemCallError
     true # nothing, the dir is not empty
   end
-
 end
