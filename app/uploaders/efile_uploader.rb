@@ -1,14 +1,18 @@
+require 'carrierwave/processing/mime_types'
 # encoding: utf-8
 
 class EfileUploader < CarrierWave::Uploader::Base
-  after :remove, :delete_empty_upstream_dirs
+  include CarrierWave::MimeTypes
+  process :set_content_type
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+  after :remove, :delete_empty_upstream_dirs
+
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  # storage :file
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
