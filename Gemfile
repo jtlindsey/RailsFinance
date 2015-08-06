@@ -49,7 +49,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'money-rails'
 gem 'devise'
 gem 'carrierwave'
-gem 'fog-google' #all-clouds-in-one library 'fog'
+gem 'fog' #all-clouds-in-one library 'fog'
+# https://github.com/carrierwaveuploader/carrierwave/blob/v0.10.0/README.md
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
