@@ -49,7 +49,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'money-rails'
 gem 'devise'
 gem 'carrierwave'
-gem 'mime-types', '~> 2.6.1'
 gem 'fog-google' #all-clouds-in-one library 'fog'
 
 group :development, :test do
