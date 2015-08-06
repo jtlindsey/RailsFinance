@@ -1,5 +1,7 @@
 class Document < ActiveRecord::Base
   mount_uploader :efile, EfileUploader
+  validates_presence_of :efile
+
   # "You tried to define an association named transaction on the model Category, 
   # but this will conflict with a method transaction already defined by Active Record. 
   # Please choose a different association name."
