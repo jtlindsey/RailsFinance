@@ -1,9 +1,6 @@
-require 'carrierwave/processing/mime_types'
 # encoding: utf-8
 
 class EfileUploader < CarrierWave::Uploader::Base
-  include CarrierWave::MimeTypes
-  process :set_content_type
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
