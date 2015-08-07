@@ -12,7 +12,11 @@
 <br>
 
 <script>
+
   $(document).ready(function() {
-    $('#transactions').dataTable();
+    var custom_table = $('#transactions').dataTable();
+    // sort a column descending (at position 0 in the array (base 0)
+    custom_table.fnSort( [ [0,'desc'] ] );
   } );
+
 </script>
