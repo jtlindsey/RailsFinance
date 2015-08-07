@@ -6,6 +6,21 @@
   *= require main
 */
 
+/*hide hour min sec from new transaction view*/
+/*but store user selected date and current time for better ordering in table*/
+/*temporary till better option found*/
+#transaction_date_4i {
+  display: none;
+}
+#transaction_date_5i {
+  display: none;
+}
+#transaction_date_6i {
+  display: none;
+}
+/*hide hour min sec from view but store in database*/
+
+
 .navbar {
   margin-bottom: 0px !important;
 }

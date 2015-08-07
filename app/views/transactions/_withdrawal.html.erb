@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date %>
+    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
   </div>
   <div class="actions">
     <%= f.submit %>
