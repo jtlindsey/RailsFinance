@@ -44,6 +44,11 @@ class EfileUploader < CarrierWave::Uploader::Base
     %w(pdf doc docx txt jpg jpeg gif png)
   end
 
+  #sets fog_attributes type as attachment so file opens download file as link
+  def fog_attributes
+    {'Content-Disposition' => "attachment"}
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
@@ -59,4 +64,5 @@ class EfileUploader < CarrierWave::Uploader::Base
   rescue SystemCallError
     true # nothing, the dir is not empty
   end
+
 end

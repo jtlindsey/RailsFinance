@@ -35,7 +35,7 @@
         <% @transaction.documents.each do |document| %>
           <% if document.efile_url != nil %>
             <tr>
-              <td><%= link_to 'Destroy', account_transaction_document_path(@account.id, @transaction.id, document.id), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to document.efile.file.filename, document.efile_url %> </td>
+              <td><%= link_to 'Destroy', account_transaction_document_path(@account.id, @transaction.id, document.id), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to document.efile_identifier, document.efile_url %></td>
             </tr>
           <% end %>
         <% end %>

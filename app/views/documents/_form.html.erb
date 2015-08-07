@@ -16,8 +16,8 @@
   <strong>Uploaded Files</strong><br>
   <% if @documents_list != nil %>
     <% @documents_list.each do |document| %>
-      <%#= link_to document.efile.file.filename, document.efile_url %>
-      <%= document.efile.file.filename %><br>
+      <%#= link_to document.efile_identifier, document.efile_url %>
+      <%= document.efile_identifier %><br>
     <% end %><br>
   <% end %>
   <div class="field">
