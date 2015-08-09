@@ -1,0 +1,96 @@
+<div class="row visible-sm-block visible-md-block visible-lg-block">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading panels-text">
+        <%= "(#{@account.type})-#{@account.name} #{@account.last4} " %><%= link_to "Edit", account_path(@account.id), title: 'Edit Account' %>
+      </div>
+      <div class="panel-body">
+        <table id="transactions" class="transactions-for-checking table table-striped table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Payee</th>
+              <th>Category</th>
+              <th>Comment</th>
+              <th>Deposit</th>
+              <th>Withdrawal</th>
+              <th>Balance</th>
+              <th>Uploads</th>
+              <th></th> <!-- added these to get past DataTables js error -->
+              <th></th> <!-- added these to get past DataTables js error -->
+              <th></th> <!-- added these to get past DataTables js error -->
+            </tr>
+          </thead>
+
+          <tbody>
+            <% transactions.each do |transaction| %>
+              <tr>
+                <td><%= transaction.date.to_date %></td>
+                <td><%= transaction.payee %></td>
+                <td><%= transaction.category %></td> <!-- transction category -->
+                <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
+
+                <% if transaction.transaction_type == 'Deposit' %>
+                  <td><%= number_to_currency(transaction.applied_amount) %></td> <!-- transction deposit -->
+                  <td><%= "" %></td> <!-- transction withdrawal -->
+                <% end %>
+                <% if transaction.transaction_type == 'Withdrawal' %>
+                  <td><%= "" %></td> <!-- transction deposit -->
+                  <td><%= number_to_currency(transaction.applied_amount) %></td> <!-- transction withdrawal -->
+                <% end %>
+
+                <td><%= number_to_currency(transaction.new_balance) %></td>
+
+                <% if transaction.documents.count > 0 %>
+                <td><%= link_to transaction.documents.count, account_transaction_path(transaction.account, transaction) %> </td>
+                <% else %>
+                <td>none</td>
+                <% end %>
+
+                <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
+                <% if transaction.transfer_ref != nil %>
+                <td>Delete Only</td>
+                <% else %>
+                <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
+                <% end %>
+                <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Mobile -->
+<% transactions.each_with_index do |transaction, i| %>
+  <table class="visible-xs-block table table-striped">
+  <tbody>
+    <tr><td>Date</td><td><%= "#{transaction.date.to_date}" %></td></tr>
+    <tr><td>Payee</td><td><%= transaction.payee %></td></tr>
+    <tr><td>Category</td><td><%= transaction.category %></td></tr>
+    <tr><td>Comment</td><td><%= truncate(transaction.comment) %></td></tr>
+    <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
+    <tr><td>Deposit</td><td><%= "temp" %></td></tr>
+    <tr><td>Balance</td><td><%= "temp" %></td></tr>
+    <tr><td>Uploads</td>
+      <% if transaction.documents.count > 0 %>
+      <td><%= link_to transaction.documents.count, account_transaction_path(transaction.account, transaction) %> </td>
+      <% else %>
+      <td>none</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= link_to 'Show', account_transaction_path(transaction.account, transaction) %></td>
+      <% if transaction.transfer_ref != nil %>
+      <td>Delete Only</td>
+      <% else %>
+      <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
+      <% end %>
+      <td><%= link_to 'Destroy', account_transaction_path(transaction.account, transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  </tbody>
+  </table>
+<% end %>
+<!-- End Mobile -->
