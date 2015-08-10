@@ -2,6 +2,9 @@ class Account < ActiveRecord::Base
   has_many :transactions, dependent: :destroy
   # above line is to destroy all transactions when account is deleted (dependent: :destroy)
   monetize :balance_cents
+  monetize :loan_amount_cents
+  monetize :minimum_payment_cents
+  monetize :minimum_escrow_payment_cents
 
   after_create :opening_deposit_transaction
 
@@ -129,5 +132,9 @@ class Account < ActiveRecord::Base
       comment: 'Opening Deposit',
       date: DateTime.now
     )
+  end
+
+  def self.terms
+    %w(15yr 20yr 30yr)
   end
 end

@@ -11,23 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728214355) do
+ActiveRecord::Schema.define(version: 20150809192819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "type"
-    t.string   "name",          limit: 45
-    t.string   "last4",         limit: 4
-    t.string   "status",                   default: "Open"
-    t.integer  "balance_cents", limit: 8
+    t.string   "name",                         limit: 45
+    t.string   "last4",                        limit: 4
+    t.string   "status",                                  default: "Open"
+    t.integer  "balance_cents",                limit: 8
     t.integer  "credit_limit"
     t.decimal  "interest_rate"
-    t.boolean  "favorite",                 default: false
+    t.boolean  "favorite",                                default: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mortgage_term"
+    t.integer  "loan_amount_cents"
+    t.integer  "minimum_payment_cents"
+    t.integer  "minimum_escrow_payment_cents"
   end
 
   create_table "budget_items", force: :cascade do |t|
@@ -59,13 +63,16 @@ ActiveRecord::Schema.define(version: 20150728214355) do
     t.datetime "date"
     t.string   "payee"
     t.text     "comment"
-    t.integer  "amount_cents",     limit: 8
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "amount_cents",            limit: 8
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "transaction_type"
     t.integer  "account_id"
     t.string   "category"
     t.integer  "transfer_ref"
+    t.integer  "interest_payment_cents"
+    t.integer  "principal_payment_cents"
+    t.integer  "payment_amount_cents"
   end
 
   create_table "users", force: :cascade do |t|

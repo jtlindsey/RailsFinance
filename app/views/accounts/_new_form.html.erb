@@ -25,6 +25,22 @@
     <%= f.label :last4 %><br>
     <%= f.text_field :last4 %>
   </div>
+  <div class="field">
+    <%= f.label :mortgage_term %><br>
+    <%= f.select :mortgage_term, Account.terms %>
+  </div>
+  <div class="field">
+    <%= f.label :loan_amount %><br>
+    <%= f.text_field :loan_amount, value: number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_payment, "Minimum (P/I) Payment" %><br>
+    <%= f.text_field :minimum_payment, value: number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_escrow_payment, "Minimum (Escrow) Payment" %><br>
+    <%= f.text_field :minimum_escrow_payment, value: number_to_currency(0) %>
+  </div>
   <% if @account.persisted? %>
     <div class="field">
       <%= f.label :status %><br>

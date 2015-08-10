@@ -115,7 +115,10 @@ class TransactionsController < ApplicationController
         :comment, 
         :amount, 
         :from_account_id, 
-        :to_account_id
+        :to_account_id,
+        :interest_payment,
+        :principal_payment,
+        :payment_amount
       )
     end
 

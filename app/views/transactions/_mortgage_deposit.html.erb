@@ -1,0 +1,55 @@
+<!-- Charge is deposit -->
+<%= form_for(@transaction, 
+             as: :transaction,
+             url: 
+             @transaction.id ? account_transaction_path(@account, @transaction) : account_transactions_path) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.hidden_field :transaction_type, :value =>'Deposit' %>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount, :value => number_to_currency(0) %>
+  </div>
+
+  <!-- <div class="field"> -->
+    <%#= f.label :interest_payment %>
+    <%= f.hidden_field :interest_payment, :value => number_to_currency(0) %>
+  <!-- </div> -->
+  <!-- <div class="field"> -->
+    <%#= f.label :principal_payment %>
+    <%= f.hidden_field :principal_payment, :value => number_to_currency(0) %>
+  <!-- </div> -->
+  <!-- <div class="field"> -->
+    <%#= f.label :payment_amount %>
+    <%= f.hidden_field :payment_amount, :value => number_to_currency(0) %>
+  <!-- </div> -->
+
+  <!-- <div class="field"> -->
+    <%#= f.label :payee %>
+    <%= f.hidden_field :payee, :value => @transaction.account.name %>
+  <!-- </div> -->
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select :category, Transaction.charge_category_list(current_user), {include_blank: 'Please Select'} %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

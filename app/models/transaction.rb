@@ -3,12 +3,16 @@ class Transaction < ActiveRecord::Base
   belongs_to :account
   has_many :documents, dependent: :destroy
 
-  validates :amount, :numericality => {:greater_than => -0.0001, message: 'should be greater than 0'}
+  validates :amount, :numericality => {greater_than_or_equal_to: 0, message: 'should be greater than 0'}
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   #validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer), message: 'has not been selected' }
 
   monetize :amount_cents
+  monetize :interest_payment_cents
+  monetize :principal_payment_cents
+  monetize :payment_amount_cents
 
+  before_save :calculate_mortgage_principal_interest_payment
   before_destroy :delete_corresponding_transactions
 
   # for virtual attributes in transactions form, entire transfer form changed to virual attributes
@@ -110,6 +114,18 @@ class Transaction < ActiveRecord::Base
     ]
   end
 
+  def self.charge_category_list(user) #charge is deposit to liability account
+    [
+      ['Expense', user.categories.where(category_type: 'Expense').order('LOWER(name)').map {|category| category.name.to_s }]
+    ]
+  end
+
+  def self.payment_category_list(user) #payment is withdrawal from liability account
+    [
+      ['Income', user.categories.where(category_type: 'Income').order('LOWER(name)').map {|category| category.name.to_s }]
+    ]
+  end
+
   def self.transfer_category_list
     [
       ['Transfer', ['Pay-Bill-Transfer','Other-Transfer']]
@@ -131,6 +147,39 @@ class Transaction < ActiveRecord::Base
     end 
     #end destroy corresponding transactions
     true
+  end
+
+
+  def calculate_mortgage_principal_interest_payment
+    if self.account.type == 'Mortgage' && self.transaction_type == 'Withdrawal'
+      self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
+      self.principal_payment = self.amount
+      self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
+    end 
+  end
+
+  def account_total(account_id)
+    Transaction.where(account_id: account_id).map {|transaction| transaction.applied_amount}.sum
+  end
+
+  def mortgage_payment_to_principal(transaction, payment)
+    # term = case transaction.account.term
+    #   when "30yr" then 30*12
+    #   when "20yr" then 20*12
+    #   when "15yr" then 15*12
+    #   else "Error"
+    # end
+
+    rate = transaction.account.interest_rate.to_f
+    monthly_rate = rate / 12
+    interest_payment = monthly_rate * account_total(transaction.account.id)
+    principal_payment = payment - (interest_payment/100)
+  end
+
+  def mortgage_payment_to_interest(transaction, payment)
+    rate = transaction.account.interest_rate.to_f
+    monthly_rate = rate / 12
+    interest_payment = ((monthly_rate * account_total(transaction.account.id))/100)
   end
 
 end
