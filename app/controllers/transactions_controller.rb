@@ -18,10 +18,12 @@ class TransactionsController < ApplicationController
   def new
     @account = current_user.accounts.find(params[:account_id])
     @transaction = @account.transactions.build
-
+# byebug
     #move to model and view
     #list all accounts except current for account transfer
-    @account_transfer_list = current_user.accounts.order('LOWER(name)').where.not(id: @account.id, status: 'Closed')  
+    # @account_transfer_list = current_user.accounts.order('LOWER(name)').where.not(id: @account.id, status: 'Closed') 
+    @asset_account_transfer_list = current_user.accounts.where(type: Asset.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
+    @liability_account_payment_list = current_user.accounts.where(type: Liability.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
   end
 
   # GET /transactions/1/edit
@@ -35,12 +37,16 @@ class TransactionsController < ApplicationController
   def create
     #refactor to seperate transfer_controller
     if transaction_params[:transaction_type] == "Transfer"
-                  # helper method in application controller (date_part_to_date)
-      ocurred_on = date_part_to_date(
-                                    transaction_params["date(1i)"],
-                                    transaction_params["date(2i)"],
-                                    transaction_params["date(3i)"]
-                                    )
+
+      ocurred_on = DateTime.new(
+                          transaction_params["date(1i)"].to_i,
+                          transaction_params["date(2i)"].to_i,
+                          transaction_params["date(3i)"].to_i,
+                          transaction_params["date(4i)"].to_i,
+                          transaction_params["date(5i)"].to_i,
+                          transaction_params["date(6i)"].to_i
+                          )
+
       withdrawal, deposit = Transaction.transfer(
                                       transaction_params[:amount], 
                                       ocurred_on,
@@ -57,6 +63,32 @@ class TransactionsController < ApplicationController
       redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
       # probably should be a new route ie..
       #redirect_to account_transfers_path(withdrawl.account, withdrawl), notice: 'Transaction was successfully created.'
+    
+    elsif transaction_params[:transaction_type] == "Payment"
+      ocurred_on = DateTime.new(
+                                transaction_params["date(1i)"].to_i,
+                                transaction_params["date(2i)"].to_i,
+                                transaction_params["date(3i)"].to_i,
+                                transaction_params["date(4i)"].to_i,
+                                transaction_params["date(5i)"].to_i,
+                                transaction_params["date(6i)"].to_i
+                                )
+
+      withdrawal, withdrawal_two = Transaction.payment(
+                                      transaction_params[:amount], 
+                                      ocurred_on,
+                                      transaction_params[:from_account_id],
+                                      transaction_params[:to_account_id],
+                                      transaction_params[:comment], 
+                                      transaction_params[:category],
+                                      transaction_params[:payee],
+
+                                      transaction_params[:interest_payment],
+                                      transaction_params[:principal_payment],
+                                      transaction_params[:payment_amount]
+                                      )
+
+      redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
 
     else
       @account = current_user.accounts.find(params[:account_id])

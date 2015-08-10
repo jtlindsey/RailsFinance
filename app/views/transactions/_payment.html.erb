@@ -13,24 +13,31 @@
       </ul>
     </div>
   <% end %>
-    <%= f.hidden_field :transaction_type, :value =>'Deposit' %>
+
+    <%= f.hidden_field :transaction_type, :value =>'Payment' %>
+    <%= f.hidden_field :from_account_id, :value => @account.id %>
 
     <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
     <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
     <%#= f.hidden_field :amount, value: number_to_currency(0) %>
     <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
-    
+
+<!--   <div class="field">
+    <%#= f.label :payment_amount %><br>
+    <%#= f.text_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
+  </div>  -->   
+
+  <div class="field">
+    <%= f.label :value, 'Payment To:' %><br>
+    <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>    
+  </div>
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>
   </div>
   <div class="field">
-    <%= f.label :payee %><br>
-    <%= f.text_field :payee %>
-  </div>
-  <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, Transaction.deposit_category_list(current_user), {include_blank: 'Please Select'} %>
+    <%= f.select :category, Transaction.payment_category_list, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>

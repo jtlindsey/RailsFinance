@@ -14,6 +14,13 @@
     </div>
   <% end %>
     <%= f.hidden_field :transaction_type, :value =>'Withdrawal' %>
+
+    <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
+    <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
+    <%#= f.hidden_field :amount, value: number_to_currency(0) %>
+    <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
+
+
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>

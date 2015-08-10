@@ -40,7 +40,10 @@ class Transaction < ActiveRecord::Base
         transaction_type: "Deposit", 
         comment: comment, 
         category: category, 
-        #payee: payee, 
+        #payee: payee,
+        interest_payment: 0,
+        principal_payment: 0,
+        payment_amount: 0, 
         payee: deposit_from_account_payee(from_account_id),
         account_id: to_account_id
         #deposit
@@ -52,6 +55,9 @@ class Transaction < ActiveRecord::Base
         transaction_type: "Withdrawal", 
         comment: comment, 
         category: category, 
+        interest_payment: 0,
+        principal_payment: 0,
+        payment_amount: 0,
         payee: withdrawal_to_account_payee(to_account_id),  
         account_id: from_account_id, 
         transfer_ref: @deposit_transaction.id
@@ -63,6 +69,51 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+
+
+
+
+  # TODO look into exception implementations
+  def self.payment(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee, interest_payment, principal_payment, payment_amount)
+    ActiveRecord::Base.transaction do 
+      @withdrawal_to_transaction = Transaction.create!(
+        amount: amount, 
+        date: ocurred_on, 
+        transaction_type: "Withdrawal", #payee account withdrawal
+        comment: comment, 
+        category: category, 
+        #payee: payee, 
+        payee: deposit_from_account_payee(from_account_id),
+
+        interest_payment: interest_payment,
+        principal_payment: principal_payment,
+        payment_amount: payment_amount,
+
+        account_id: to_account_id
+        #deposit
+      )
+      #byebug
+      @withdrawal_transaction = Transaction.create!(
+        amount: amount, 
+        date: ocurred_on, 
+        transaction_type: "Withdrawal",
+        comment: comment, 
+        category: category, 
+        payee: withdrawal_to_account_payee(to_account_id),  
+
+        interest_payment: 0,
+        principal_payment: 0,
+        payment_amount: 0,
+
+        account_id: from_account_id, 
+        transfer_ref: @withdrawal_to_transaction.id
+      )
+
+      @withdrawal_to_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
+      #byebug
+      [@withdrawal_transaction, @deposit_transaction]
+    end
+  end
 
   def previous_transactions
     # grab all transactions belonging to my same account with date/time previous to my date/time
@@ -91,7 +142,7 @@ class Transaction < ActiveRecord::Base
 
   def self.transaction_type
     #list of transaction types
-    %w(Deposit Withdrawal Transfer)
+    %w(Deposit Withdrawal Transfer Payment)
   end
 
   def self.category_list(user)
@@ -128,7 +179,13 @@ class Transaction < ActiveRecord::Base
 
   def self.transfer_category_list
     [
-      ['Transfer', ['Pay-Bill-Transfer','Other-Transfer']]
+      ['Transfer', ['Other-Transfer']]
+    ]
+  end 
+
+  def self.payment_category_list
+    [
+      ['Payment', ['Bill-Payment']]
     ]
   end 
 
@@ -151,6 +208,8 @@ class Transaction < ActiveRecord::Base
 
 
   def calculate_mortgage_principal_interest_payment
+    self.payment_amount = self.amount if self.payment_amount == 0
+
     if self.account.type == 'Mortgage' && self.transaction_type == 'Withdrawal'
       self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
       self.principal_payment = self.amount
