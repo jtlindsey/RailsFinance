@@ -69,10 +69,6 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-
-
-
-
   # TODO look into exception implementations
   def self.payment(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee, interest_payment, principal_payment, payment_amount)
     ActiveRecord::Base.transaction do 
@@ -90,11 +86,10 @@ class Transaction < ActiveRecord::Base
         payment_amount: payment_amount,
 
         account_id: to_account_id
-        #deposit
       )
       #byebug
       @withdrawal_transaction = Transaction.create!(
-        amount: amount, 
+        amount: payment_amount, 
         date: ocurred_on, 
         transaction_type: "Withdrawal",
         comment: comment, 
@@ -103,15 +98,14 @@ class Transaction < ActiveRecord::Base
 
         interest_payment: 0,
         principal_payment: 0,
-        payment_amount: 0,
+        payment_amount: payment_amount,
 
         account_id: from_account_id, 
         transfer_ref: @withdrawal_to_transaction.id
       )
 
       @withdrawal_to_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
-      #byebug
-      [@withdrawal_transaction, @deposit_transaction]
+      [@withdrawal_transaction, @withdrawal_to_transaction]
     end
   end
 
@@ -208,13 +202,13 @@ class Transaction < ActiveRecord::Base
 
 
   def calculate_mortgage_principal_interest_payment
-    self.payment_amount = self.amount if self.payment_amount == 0
-
-    if self.account.type == 'Mortgage' && self.transaction_type == 'Withdrawal'
-      self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
-      self.principal_payment = self.amount
-      self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
-    end 
+    if self.transfer_ref == nil #don't run if updating after self.payment block calls update 
+      if self.account.type == 'Mortgage' && self.transaction_type == 'Withdrawal'
+        self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
+        self.principal_payment = self.amount
+        self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
+      end 
+    end
   end
 
   def account_total(account_id)

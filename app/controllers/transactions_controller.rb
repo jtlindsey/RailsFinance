@@ -82,7 +82,6 @@ class TransactionsController < ApplicationController
                                       transaction_params[:comment], 
                                       transaction_params[:category],
                                       transaction_params[:payee],
-
                                       transaction_params[:interest_payment],
                                       transaction_params[:principal_payment],
                                       transaction_params[:payment_amount]
