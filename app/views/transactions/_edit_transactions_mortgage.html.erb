@@ -1,0 +1,70 @@
+<%= form_for(@transaction, 
+             as: :transaction,
+             url: current_user_account_transaction_path(redirect_to: params[:redirect_to]),
+             html: { multipart: true }) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @transaction.transaction_type == 'Deposit' %>
+    <div class="field">
+      <%= f.label :transaction_type %><br>
+      <%= "Charge" %>
+    </div>
+    <div class="field">
+      <%= f.label :amount, "Charge amount" %><br>
+      <%= number_to_currency(@transaction.amount) %>
+    </div>
+  <% end %>
+
+  <% if @transaction.transaction_type == 'Withdrawal' %>
+    <div class="field">
+      <%= f.label :transaction_type %><br>
+      <%= "Payment" %>
+    </div>
+    <div class="field">
+      <%= f.label :payment_amount %><br>
+      <%= number_to_currency(@transaction.payment_amount) %>
+    </div>
+    <div class="field">
+      <%= f.label :interest_payment %><br>
+      <%= number_to_currency(@transaction.interest_payment) || number_to_currency(0) %>
+    </div>
+    <div class="field">
+      <%= f.label :principal_payment %><br>
+      <%= number_to_currency(@transaction.principal_payment) || number_to_currency(0) %>
+    </div>
+    <div class="field">
+      <%= f.label "Escrow Payment" %><br>
+      <%= "" %>
+      <%#= f.text_field :amount %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :payee %><br>
+    <%= @transaction.payee %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= @transaction.category %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
