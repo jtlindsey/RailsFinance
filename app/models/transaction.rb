@@ -202,11 +202,16 @@ class Transaction < ActiveRecord::Base
 
 
   def calculate_mortgage_principal_interest_payment
-    if self.transfer_ref == nil #don't run if updating after self.payment block calls update 
+    if self.transfer_ref == nil #don't run if updating after self.payment block calls update after transfer 
       if self.account.type == 'Mortgage' && self.transaction_type == 'Withdrawal'
+        @additional_interest = self.interest_payment
+        @additional_principal = self.principal_payment
+
         self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
         self.principal_payment = self.amount
         self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
+        self.payment_amount = (self.payment_amount + @additional_interest + @additional_principal)
+        self.interest_payment
       end 
     end
   end
@@ -226,13 +231,13 @@ class Transaction < ActiveRecord::Base
     rate = transaction.account.interest_rate.to_f
     monthly_rate = rate / 12
     interest_payment = monthly_rate * account_total(transaction.account.id)
-    principal_payment = payment - (interest_payment/100)
+    principal_payment = (payment - (interest_payment/100)) + @additional_principal
   end
 
   def mortgage_payment_to_interest(transaction, payment)
     rate = transaction.account.interest_rate.to_f
     monthly_rate = rate / 12
-    interest_payment = ((monthly_rate * account_total(transaction.account.id))/100)
+    interest_payment = ((monthly_rate * account_total(transaction.account.id))/100) + @additional_interest
   end
 
 end

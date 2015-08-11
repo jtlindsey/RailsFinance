@@ -17,32 +17,38 @@
 
   <h4>New payment</h4>
 
-
     <%= f.hidden_field :transaction_type, value: 'Withdrawal' %>
 
   <div class="field">
-    <%= f.label :payment_amount %><br>
-    <%= f.text_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
+    <%= f.label "Minimum Payment" %><br>
+    <%= number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
   </div>
-  <!-- <div class="field"> -->
-    <%#= f.label :interest_payment %>
-    <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
-  <!-- </div> -->
-  <!-- <div class="field"> -->
-    <%#= f.label :principal_payment %>
-    <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
-  <!-- </div> -->
+
+  <%= f.hidden_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
+
+  <div class="field">
+    <%= f.label :interest_payment, "Additional Interest Payment" %><br>
+    <%= f.text_field :interest_payment, value: number_to_currency(0) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :principal_payment, "Additional Principal Payment" %><br>
+    <%= f.text_field :principal_payment, value: number_to_currency(0) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Additional Escrow Payment" %><br>
+    <%#= f.text_field :payment_amount, value: number_to_currency(0) %>
+    <%#= f.text_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
+  </div>
+
   <!-- <div class="field"> -->
     <%#= f.label :amount %>
     <%= f.hidden_field :amount, value: number_to_currency(0) %>
   <!-- </div> -->
 
-
-
-  <!-- <div class="field"> -->
-    <%#= f.label :payee %>
     <%= f.hidden_field :payee, value: @transaction.account.name %>
-  <!-- </div> -->
+
   <div class="field">
     <%= f.label :category %><br>
     <%= f.select :category, Transaction.payment_category_list, {include_blank: 'Please Select'} %>
