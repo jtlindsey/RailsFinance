@@ -1,3 +1,5 @@
 class PersonalLoan < Liability
-  # TODO implement self.fields just like CreditCard and make sure all other account classes have this
+  def fields
+    super + %w(last4 loan_amount interest_rate minimum_payment)
+  end
 end

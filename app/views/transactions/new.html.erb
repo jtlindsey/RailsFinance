@@ -1,15 +1,14 @@
 <h3>New Transaction</h3>
 <p><%= "#{@account.name} #{@account.last4} (#{@account.type}) Balance: #{number_to_currency(account_total(@account.id))}" %></p>
 
-<%# begin %> 
+<% begin %> 
 <!-- Will render partials created with account name..like _transactions.html.erb -->
   <%= render "new_transactions_#{@account.type.underscore}", transactions: @transactions %>
-<%# rescue %>
+<% rescue %>
 <!-- Default condition when partial doesn't exist -->
-  <%#= render "new_transactions_all", transactions: @transactions %>
-<%# end %>
+  <%= render "new_transactions_all", transactions: @transactions %>
+<% end %>
 
-<br>
 <br>
 
 <%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>

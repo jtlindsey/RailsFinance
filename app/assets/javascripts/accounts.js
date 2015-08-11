@@ -19,7 +19,6 @@ $(document).on('page:change', function() {
     }
   }
 
-  // TODO make sure switching type reorders fields also in the future
   if ($('#edit_account').size() > 0) {
     var showCorrectFieldsPerAccountType = function() {
       $('.field').hide();
@@ -34,100 +33,18 @@ $(document).on('page:change', function() {
     showCorrectFieldsPerAccountType();
   }
 
-  $('#new_account input[type=submit]').hide();
-
-  var getVisibleIndex = function() {
-    var accountType = $('#account_type').val();
-    var visibleIndex = -1;
-    $('.field.' + accountType).filter(function(i) {
-      return ($(this).is(':visible')) ? (visibleIndex = i) && true : false;
-    });
-    return visibleIndex;
-  };
-
-
-  if (($('#new_account').size() > 0)) {
-    var determineAvailableUserActionsAfterPerformingNext = function() {
-      var newVisibleIndex = getVisibleIndex();
-      var maxIndex = getFieldCount() - 1;
-      if (newVisibleIndex == maxIndex) {
-        $('#next').hide();
-        $('#new_account input[type=submit]').show();
-      }
-      if (newVisibleIndex > 0) {
-        $('#prev').show();
+  if ($('#new_account').size() > 0) {
+    var showCorrectFieldsPerAccountType = function() {
+      $('.field').hide();
+      var accountType = $('#account_type').val();
+      var fields = accountFields[accountType];
+      for (field of fields) {
+        var field = $('#account_' + field).closest('.field');
+        field.show();
       }
     };
-
-    var accountErrorsFields = [];
-    try {
-      var accountErrors = JSON.parse($('#account_errors').val());
-      for(var field in accountErrors) accountErrorsFields.push(field);
-    } catch(jsonException) {
-      //ignore errors without crashing
-    }
-
-    $('.field').hide();
-    var accountType = $('#account_type').val();      
-    var firstFieldToShow = $('.field.' + accountType).first();
-    if (accountErrorsFields.length > 0) {
-      var firstErrorField = accountErrorsFields[0];
-      firstFieldToShow = $('.field label[for=account_' + firstErrorField + ']').closest('.field');
-    }
-    firstFieldToShow.show({
-      duration: 0,
-      complete: determineAvailableUserActionsAfterPerformingNext
-    });
-
-    // TODO Support ordered showing of fields
-    $('#next').click(function() {
-        var accountType = $('#account_type').val();
-        var visibleIndex = getVisibleIndex();
-        var fieldToHide = $('.field.'+accountType)[visibleIndex];
-        $(fieldToHide).hide({
-          duration: 0,
-          complete: function() {
-            var nextElementIndex = visibleIndex + 1;
-            var fieldToShow = $('.field.'+accountType)[nextElementIndex];
-            $(fieldToShow).show({
-              duration: 0,
-              complete: determineAvailableUserActionsAfterPerformingNext
-            });
-          }
-        });
-
-      }
-    );
-
-    var determineAvailableUserActionsAfterPerformingPrevious = function() {
-      var visibleIndex = getVisibleIndex();
-      if (visibleIndex == 0) {
-        $('#prev').hide();
-      }
-      var maxIndex = getFieldCount() - 1;
-      if (visibleIndex < maxIndex) {
-        $('#next').show();
-        $('#new_account input[type=submit]').hide();
-      }
-    };
-
-    $('#prev').click(function() {
-        var accountType = $('#account_type').val();
-        var visibleIndex = getVisibleIndex();
-        var fieldToHide = $('.field.'+accountType)[visibleIndex];
-        $(fieldToHide).hide({
-          duration: 0,
-          complete: function() {
-            var previousElementIndex = visibleIndex - 1;
-            var fieldToShow = $('.field.'+accountType)[previousElementIndex];
-            $(fieldToShow).show({
-              duration: 0,
-              complete: determineAvailableUserActionsAfterPerformingPrevious
-            });
-          }
-        });
-
-      }
-    );
+    $('#account_type').change(showCorrectFieldsPerAccountType);
+    showCorrectFieldsPerAccountType();
   }
+
 });

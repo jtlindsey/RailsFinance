@@ -1,30 +1,56 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-  <li><a data-toggle="tab" href="#deposit">Deposit</a></li>
-  <li><a data-toggle="tab" href="#withdrawal">Withdrawal</a></li>
-  <li><a data-toggle="tab" href="#transfer">Transfer</a></li>
-  <li><a data-toggle="tab" href="#payment">Payment</a></li>
-</ul>
+<% if @transaction.errors.any? %>
+  <div class="alert alert-warning">
+    <strong>Error!</strong><span> Click transaction type to see errors.</span>
+  </div>
+<% end %>
 
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h4>HOME</h4>
-    <p>Choose a transaction. or list transacions here?</p>
+<% if @account.class.superclass.name == "Liability" %>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <a class="btn btn-primary" id="liability-charge" role="button">Charge</a>
+      <a class="btn btn-primary" id="liability-payment" role="button">Payment</a>
+    </div>
+
+    <div class="row">
+      <div id="form" style="display:none;"></div>
+    </div>
+
   </div>
-  <div id="deposit" class="tab-pane fade">
-    <h3>Deposit</h3>
-    <%= render 'deposit' %>
+
+<% else %><!-- Assets -->
+
+  <div class="container-fluid">
+    <div class="row">
+      <a class="btn btn-primary" id="deposit" role="button">Deposit</a>
+      <a class="btn btn-primary" id="withdrawal" role="button">Withdrawal</a>
+      <a class="btn btn-primary" id="transfer" role="button">Transfer</a>
+      <a class="btn btn-primary" id="payment" role="button">Payment</a>
+    </div>
+
+    <div class="row">
+      <div id="form" style="display:none;"></div>
+    </div>
   </div>
-  <div id="withdrawal" class="tab-pane fade">
-    <h3>Withdrawal</h3>
-    <%= render 'withdrawal' %>
-  </div>
-  <div id="transfer" class="tab-pane fade">
-    <h3>Transfer</h3>
-    <%= render 'transfer' %>
-  </div>
-  <div id="payment" class="tab-pane fade">
-    <h3>Payment</h3>
-    <%= render 'payment' %>
-  </div>
-</div>
+
+<% end %>
+
+
+
+
+
+
+<!-- TEST -->
+
+<script>
+$('#liability-charge').click(function() {
+  $('#form').html("<%= j (render 'liability_deposit') %>");
+  $('#form').slideDown(350);
+});
+
+$('#liability-payment').click(function() {
+  $('#form').html("<%= j (render 'liability_withdrawal') %>");
+  $('#form').slideDown(350);
+});
+</script>

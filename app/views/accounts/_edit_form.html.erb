@@ -13,6 +13,9 @@
       </ul>
     </div>
   <% end %>
+
+  <%= f.hidden_field :minimum_escrow_payment, :value => number_to_currency(0) %>
+
   <div class="field">
     <%= f.label :type %><br>
     <%= f.select :type, Account.types %>
@@ -25,16 +28,6 @@
     <%= f.label :last4 %><br>
     <%= f.text_field :last4 %>
   </div>
-  <% if @account.persisted? %>
-    <div class="field">
-      <%= f.label :status %><br>
-      <%= f.select :status, Asset.statuses %>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :favorite, "Favorite?" %><br>
-    <%= f.check_box :favorite %>
-  </div>
   <div class="field">
     <%= f.label :balance %><br>
     <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
@@ -45,7 +38,25 @@
   </div>
   <div class="field">
     <%= f.label :interest_rate %><br>
-    <%= f.text_field :interest_rate %>
+    <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate) || number_to_percentage(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :loan_amount %><br>
+    <%= f.text_field :loan_amount, value: number_to_currency(@account.loan_amount) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_payment %><br>
+    <%= f.text_field :minimum_payment, value: number_to_currency(@account.minimum_payment) || number_to_currency(0) %>
+  </div>
+  <% if @account.persisted? %>
+    <div class="field">
+      <%= f.label :status %><br>
+      <%= f.select :status, Asset.statuses %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :favorite, "Favorite?" %><br>
+    <%= f.check_box :favorite %>
   </div>
   <div class="actions">
     <%= f.submit %>
