@@ -13,6 +13,20 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="field">
+    <%= f.label :interest_payment %><br>
+    <%= f.text_field :interest_payment, :value => number_to_currency(@transaction.interest_payment) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :principal_payment %><br>
+    <%= f.text_field :principal_payment, :value => number_to_currency(@transaction.principal_payment) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_amount %><br>
+    <%= f.text_field :payment_amount, :value => number_to_currency(@transaction.payment_amount) || number_to_currency(0) %>
+  </div>
+
   <div class="field">
     <%= f.label :transaction_type %><br>
     <%= f.select :transaction_type, Transaction.transaction_type, {include_blank: 'Please Select'} %>

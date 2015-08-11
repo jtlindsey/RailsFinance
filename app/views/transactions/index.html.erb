@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]) %>
+<div class="row">
+  <div class="col-md-12">
+  <%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]), class: "btn btn-sm btn-primary" %>
+  </div>
+</div>
+<br>
 
 <% begin %> 
 <!-- Will render partials created with account name..like _transactions.html.erb -->

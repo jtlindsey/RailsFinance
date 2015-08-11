@@ -1,25 +1,29 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-  <li><a data-toggle="tab" href="#deposit">Charge</a></li><!-- Charge is deposit -->
-  <li><a data-toggle="tab" href="#withdrawal">Payment</a></li> <!-- Payment is withdrawal -->
-</ul>
+<div class="container-fluid">
 
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h4>HOME</h4>
-    <p>Mortgage</p>
-    <p>Choose a transaction. or list transacions here?</p>
+  <div class="row">
+    <a class="btn btn-primary" id="charge" role="button">Charge</a>
+    <a class="btn btn-primary" id="payment" role="button">Payment</a>
   </div>
-  <div id="deposit" class="tab-pane fade">
-    <h3>Charge</h3>
-    <%= render 'mortgage_deposit' %> <!-- Charge is deposit -->
+
+  <div class="row">
+    <div id="form" style="display:none;"></div>
   </div>
-  <div id="withdrawal" class="tab-pane fade">
 
-    <h3>Payment...consider redirect to account list</h3>
-
-    <h4>Choose account to make payment from (dynamically generate list of links)</h4><br>
-
-    <%= render 'mortgage_withdrawal' %> <!-- Payment is withdrawal -->
-  </div>
 </div>
+
+
+
+
+
+<!-- TEST -->
+<script>
+$('#charge').click(function() {
+  $('#form').html("<%= j (render 'mortgage_deposit') %>");
+  $('#form').slideDown(350);
+});
+
+$('#payment').click(function() {
+  $('#form').html("<%= j (render 'mortgage_withdrawal') %>");
+  $('#form').slideDown(350);
+});
+</script>
