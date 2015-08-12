@@ -1,8 +1,8 @@
 $(document).on('page:change', function() {
-  var getFieldCount = function() {
-    var accountType = $('#account_type').val();
-    return $('.field.' + accountType).size();
-  };
+  // var getFieldCount = function() {
+  //   var accountType = $('#account_type').val();
+  //   return $('.field.' + accountType).size();
+  // };
 
   // Add classes to label each field under its account type for later easy grabbing in jQueries
   var accountFields = {}
