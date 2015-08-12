@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
   monetize :minimum_escrow_payment_cents
 
   validates :name, length: { minimum: 2, message: 'must contain two or more characters' }
+  validates :last4, length: { maximum: 4, message: "can't be more than 4 characters" }
   validates :type, inclusion: { in: proc {Account.types.values.map {|key, value| key.name}} }
 
   after_create :opening_deposit_transaction

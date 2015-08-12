@@ -44,7 +44,7 @@
   </div>
   <div class="field">
     <%= f.label :interest_rate %><br>
-    <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate) || number_to_percentage(0) %>
+    <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate) %>
   </div>
   <div class="field">
     <%= f.label :minimum_escrow_payment, "Minimum (Escrow) Payment" %><br>
