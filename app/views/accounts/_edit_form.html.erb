@@ -14,10 +14,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.select :type, Account.types %>
+  <div>
+    <strong>Account Type</strong><br>
+    <%= @account.type %>
   </div>
+
+  <%= f.hidden_field :type %>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
