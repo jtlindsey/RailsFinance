@@ -14,8 +14,6 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :minimum_escrow_payment, :value => number_to_currency(0) %>
-
   <div class="field">
     <%= f.label :type %><br>
     <%= f.select :type, Account.types %>
@@ -29,16 +27,8 @@
     <%= f.text_field :last4 %>
   </div>
   <div class="field">
-    <%= f.label :balance %><br>
-    <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
-  </div>
-  <div class="field">
-    <%= f.label :credit_limit %><br>
-    <%= f.text_field :credit_limit %>
-  </div>
-  <div class="field">
-    <%= f.label :interest_rate %><br>
-    <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate) || number_to_percentage(0) %>
+    <%= f.label :mortgage_term %><br>
+    <%= f.select :mortgage_term, Account.terms, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :loan_amount %><br>
@@ -47,6 +37,22 @@
   <div class="field">
     <%= f.label :minimum_payment %><br>
     <%= f.text_field :minimum_payment, value: number_to_currency(@account.minimum_payment) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit %><br>
+    <%= f.text_field :credit_limit, value: number_to_currency(@account.credit_limit) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :interest_rate %><br>
+    <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate) || number_to_percentage(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_escrow_payment, "Minimum (Escrow) Payment" %><br>
+    <%= f.text_field :minimum_escrow_payment, value: number_to_currency(@account.minimum_escrow_payment) || number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :balance %><br>
+    <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
   </div>
   <% if @account.persisted? %>
     <div class="field">
@@ -58,8 +64,9 @@
     <%= f.label :favorite, "Favorite?" %><br>
     <%= f.check_box :favorite %>
   </div>
-  <div class="actions">
+  <div class="actions"><br>
     <%= f.submit %>
   </div>
+
 
 <% end %>

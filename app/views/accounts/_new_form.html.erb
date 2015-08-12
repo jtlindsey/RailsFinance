@@ -13,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= f.label :type %><br>
     <%= f.select :type, Account.types %>
@@ -27,19 +28,31 @@
   </div>
   <div class="field">
     <%= f.label :mortgage_term %><br>
-    <%= f.select :mortgage_term, Account.terms %>
+    <%= f.select :mortgage_term, Account.terms, {include_blank: 'Please Select'} %>
   </div>
   <div class="field">
     <%= f.label :loan_amount %><br>
     <%= f.text_field :loan_amount, value: number_to_currency(0) %>
   </div>
   <div class="field">
-    <%= f.label :minimum_payment, "Minimum (P/I) Payment" %><br>
+    <%= f.label :minimum_payment %><br>
     <%= f.text_field :minimum_payment, value: number_to_currency(0) %>
   </div>
   <div class="field">
     <%= f.label :minimum_escrow_payment, "Minimum (Escrow) Payment" %><br>
     <%= f.text_field :minimum_escrow_payment, value: number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit %><br>
+    <%= f.text_field :credit_limit, value: number_to_currency(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :interest_rate %><br>
+    <%= f.text_field :interest_rate, value: number_to_percentage(0) %>
+  </div>
+  <div class="field">
+    <%= f.label :balance %><br>
+    <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
   </div>
   <% if @account.persisted? %>
     <div class="field">
@@ -47,18 +60,6 @@
       <%= f.select :status, Asset.statuses %>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :balance %><br>
-    <%= f.text_field :balance, value: number_to_currency(@account.balance) %>
-  </div>
-  <div class="field">
-    <%= f.label :credit_limit %><br>
-    <%= f.text_field :credit_limit %>
-  </div>
-  <div class="field">
-    <%= f.label :interest_rate %><br>
-    <%= f.text_field :interest_rate %>
-  </div>
 
   <div class="actions"><br>
     <%= f.submit %>
