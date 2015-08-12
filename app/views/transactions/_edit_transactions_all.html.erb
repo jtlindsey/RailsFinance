@@ -1,0 +1,24 @@
+<% if @account.class.superclass.name == "Liability" %>
+
+  <% if @transaction.transaction_type == 'Withdrawal' %>
+    <%= render "edit_transactions_withdrawal_#{@account.class.superclass.name.underscore}", transactions: @transactions %>
+  <% end %>
+
+  <% if @transaction.transaction_type == 'Deposit' %>
+    <%= render "edit_transactions_deposit_#{@account.class.superclass.name.underscore}", transactions: @transactions %>
+  <% end %>
+
+<% end %>
+
+
+<% if @account.class.superclass.name == "Asset" %>
+
+  <% if @transaction.transaction_type == 'Withdrawal' %>
+    <%= render "edit_transactions_withdrawal_#{@account.class.superclass.name.underscore}", transactions: @transactions %>
+  <% end %>
+
+  <% if @transaction.transaction_type == 'Deposit' %>
+    <%= render "edit_transactions_deposit_#{@account.class.superclass.name.underscore}", transactions: @transactions %>
+  <% end %>
+
+<% end %>
