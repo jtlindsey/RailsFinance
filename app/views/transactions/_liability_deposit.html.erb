@@ -14,35 +14,17 @@
     </div>
   <% end %>
 
-
-
-
-
-
-
-
   <h3>Charge</h3>
 
-    <%= f.hidden_field :interest_payment, :value => number_to_currency(0) %>
-    <%= f.hidden_field :principal_payment, :value => number_to_currency(0) %>
-
-
-
-  <div class="field">
-    <%= f.label "Minimum Payment" %><br>
-    <%= number_to_currency(@transaction.account.minimum_payment) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :payment_amount %><br>
-    <%= f.text_field :payment_amount, :value => number_to_currency(@transaction.payment_amount) || number_to_currency(0) %>
-  </div>
-
+    <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
+    <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
+    <%= f.hidden_field :minimum_payment, value: number_to_currency(0) %>
+    <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
     <%= f.hidden_field :transaction_type, value: 'Deposit' %>
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount, :value => number_to_currency(0) %>
   </div>
   <div class="field">
     <%= f.label :payee %><br>

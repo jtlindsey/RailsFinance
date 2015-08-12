@@ -13,6 +13,7 @@ class Transaction < ActiveRecord::Base
   monetize :payment_amount_cents
 
   before_save :calculate_mortgage_principal_interest_payment
+  before_save :calculate_liability_payment_amount
   before_destroy :delete_corresponding_transactions
 
   # for virtual attributes in transactions form, entire transfer form changed to virual attributes
@@ -241,6 +242,14 @@ class Transaction < ActiveRecord::Base
     rate = transaction.account.interest_rate.to_f
     monthly_rate = rate / 12
     interest_payment = ((monthly_rate * account_total(transaction.account.id))/100) + @additional_interest
+  end
+
+  def calculate_liability_payment_amount
+    if self.transaction_type == "Withdrawal" && self.account.class.superclass.name == "Liability"
+      if self.account.type != 'Mortgage'
+        self.amount = (self.account.minimum_payment || 0) + self.payment_amount
+      end
+    end
   end
 
 end
