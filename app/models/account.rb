@@ -6,6 +6,9 @@ class Account < ActiveRecord::Base
   monetize :minimum_payment_cents
   monetize :minimum_escrow_payment_cents
 
+  validates :name, length: { minimum: 2, message: 'must contain two or more characters' }
+  validates :type, inclusion: { in: proc {Account.types.values.map {|key, value| key.name}} }
+
   after_create :opening_deposit_transaction
 
   #gives me access to helpers outside the view when account_details method is called
@@ -130,7 +133,10 @@ class Account < ActiveRecord::Base
       payee: 'Opening Deposit',
       category: 'Opening Deposit',
       comment: 'Opening Deposit',
-      date: DateTime.now
+      date: DateTime.now,
+      interest_payment: 0,
+      principal_payment: 0,
+      payment_amount: 0
     )
   end
 

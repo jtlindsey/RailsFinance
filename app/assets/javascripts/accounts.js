@@ -45,6 +45,8 @@ $(document).on('page:change', function() {
     };
     $('#account_type').change(showCorrectFieldsPerAccountType);
     showCorrectFieldsPerAccountType();
+
+    $("#account_type").prepend("<option value='' selected='selected'>Please Select</option>");
   }
 
 });
