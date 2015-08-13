@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.select :category, Transaction.category_list(current_user) %>
+    <%= f.select :category, Transaction.deposit_category_list(current_user) %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>

@@ -53,4 +53,33 @@ $('#liability-payment').click(function() {
   $('#form').html("<%= j (render 'liability_withdrawal') %>");
   $('#form').slideDown(350);
 });
+
+$('#deposit').click(function() {
+  $('#form').html("<%= j (render 'deposit') %>");
+  $('#form').slideDown(350);
+});
+
+$('#withdrawal').click(function() {
+  $('#form').html("<%= j (render 'withdrawal') %>");
+  $('#form').slideDown(350);
+});
+
+$('#transfer').click(function() {
+  $('#form').html("<%= j (render 'transfer') %>");
+  $('#form').slideDown(350);
+});
+
+
+
+
+$('#payment').click(function() {
+  $('#form').html("<%= j (render 'payment') %>");
+  $('#form').slideDown(350);
+});
+
+
+
+
+
+
 </script>

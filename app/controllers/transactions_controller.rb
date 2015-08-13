@@ -24,6 +24,7 @@ class TransactionsController < ApplicationController
     # @account_transfer_list = current_user.accounts.order('LOWER(name)').where.not(id: @account.id, status: 'Closed') 
     @asset_account_transfer_list = current_user.accounts.where(type: Asset.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
     @liability_account_payment_list = current_user.accounts.where(type: Liability.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
+    @liability_account_payment_list_account_ids = @liability_account_payment_list.map {|account| account.id}
   end
 
   # GET /transactions/1/edit

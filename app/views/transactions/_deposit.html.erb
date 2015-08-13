@@ -13,20 +13,15 @@
       </ul>
     </div>
   <% end %>
-    <%= f.hidden_field :transaction_type, :value =>'Deposit' %>
-
+    <%= f.hidden_field :transaction_type, value: 'Deposit' %>
     <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
     <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
-    <%#= f.hidden_field :amount, value: number_to_currency(0) %>
     <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
+    <%= f.hidden_field :payee, value: @account.name %>
     
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :payee %><br>
-    <%= f.text_field :payee %>
   </div>
   <div class="field">
     <%= f.label :category %><br>
