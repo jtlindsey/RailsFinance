@@ -95,19 +95,22 @@ class Transaction < ActiveRecord::Base
     
 # byebug
 
-  if Account.find_by(id: to_account_id).type == "Mortgage"
-    @mortgage_account = Account.find_by(id: to_account_id)
-    calculate_mortgage_principal_interest_payment_two(amount, payment_amount, interest_payment, principal_payment)
-    # calculate_mortgage_principal_interest_payment(total_payment)
-    # @total_payment_from_acc = amount + payment_amount
-    @payment_amount = amount + payment_amount
-    @total_payment_from_acc = @principal_payment
-  else
-    @total_payment_from_acc = amount + payment_amount
-    @interest_payment = interest_payment
-    @principal_payment = principal_payment
-    @payment_amount = payment_amount
-  end
+    if Account.find_by(id: to_account_id).type == "Mortgage"
+      @mortgage_account = Account.find_by(id: to_account_id)
+      calculate_mortgage_principal_interest_payment_two(amount, payment_amount, interest_payment, principal_payment)
+      # calculate_mortgage_principal_interest_payment(total_payment)
+      # @total_payment_from_acc = amount + payment_amount
+      @payment_amount = amount + payment_amount + interest_payment + principal_payment
+      @interest_payment = @interest_payment + interest_payment
+      @principal_payment = @principal_payment + principal_payment
+
+      @total_payment_from_acc = @principal_payment
+    else
+      @total_payment_from_acc = amount + payment_amount
+      @interest_payment = interest_payment
+      @principal_payment = principal_payment
+      @payment_amount = payment_amount
+    end
     
     ActiveRecord::Base.transaction do 
 
@@ -127,7 +130,7 @@ class Transaction < ActiveRecord::Base
 
       #money is coming from this account transaction
       @withdrawal_transaction = Transaction.create!(
-        amount: amount + payment_amount, 
+        amount: amount + payment_amount + principal_payment + interest_payment, 
         date: ocurred_on, 
         transaction_type: "Withdrawal",
         comment: comment, 
@@ -143,8 +146,6 @@ class Transaction < ActiveRecord::Base
       @withdrawal_to_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
       [@withdrawal_transaction, @withdrawal_to_transaction]
     end
-    #puts "************************TRNASACTION INFO MORTGAGE**************************"
-    #puts @withdrawal_to_transaction
   end
 
   def previous_transactions
@@ -311,63 +312,10 @@ class Transaction < ActiveRecord::Base
     interest_payment = ((monthly_rate * account_total(transaction.account.id))/100) + @additional_interest
   end
 
-  def calculate_liability_payment_amount
-    if self.transaction_type == "Withdrawal" && self.account.class.superclass.name == "Liability"
-      if self.account.type != 'Mortgage'
-        self.amount = (self.account.minimum_payment || 0) + self.payment_amount
-      end
-    end
-  end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   def self.calculate_mortgage_principal_interest_payment_two(amount, payment_amount, interest_payment, principal_payment)
-# byebug
-
-      @additional_interest = interest_payment
-      @additional_principal = principal_payment
-
-      # amount = amount + payment_amount
-      amount = mortgage_payment_to_principal_two(@mortgage_account, (amount-@mortgage_account.minimum_escrow_payment.to_f))
-      @principal_payment = amount
-      @interest_payment = mortgage_payment_to_interest_two(@mortgage_account, amount-@mortgage_account.minimum_escrow_payment.to_f)
-      @principal_payment = (@principal_payment + @additional_interest + @additional_principal)
-      @interest_payment
-
-
-# byebug
-
-# self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
-# self.principal_payment = self.amount
-# self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
-# self.payment_amount = (self.payment_amount + @additional_interest + @additional_principal)
-# self.interest_payment
-
-
-
-
-
-
-
-      # self.interest_payment
-# @total_payment_from_acc
-    # @interest_payment = interest_payment
-    # @principal_payment = principal_payment
-    # @payment_amount = payment_amount
+    amount = mortgage_payment_to_principal_two(@mortgage_account, (amount-@mortgage_account.minimum_escrow_payment.to_f))
+    @principal_payment = amount
+    @interest_payment = mortgage_payment_to_interest_two(@mortgage_account, amount-@mortgage_account.minimum_escrow_payment.to_f)
   end
 
   def self.account_total_two(account_id)
@@ -375,29 +323,26 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.mortgage_payment_to_principal_two(transaction_account, payment)
-    # term = case transaction.account.term
-    #   when "30yr" then 30*12
-    #   when "20yr" then 20*12
-    #   when "15yr" then 15*12
-    #   else "Error"
-    # end
-
     rate = transaction_account.interest_rate.to_f
     monthly_rate = rate / 12
     @interest_payment = monthly_rate * account_total_two(@mortgage_account.id)
-    # byebug
-    @principal_payment = (payment - (@interest_payment.to_f/100)) + @additional_principal
+    @principal_payment = (payment - (@interest_payment.to_f/100))
     @payment_amount = @principal_payment
     @principal_payment
-
-    # byebug good here
   end
 
   def self.mortgage_payment_to_interest_two(transaction, payment)
     rate = @mortgage_account.interest_rate.to_f
     monthly_rate = rate / 12
-    interest_payment = ((monthly_rate * account_total_two(@mortgage_account.id))/100) + @additional_interest
+    interest_payment = ((monthly_rate * account_total_two(@mortgage_account.id))/100).to_f
   end
 
+  def calculate_liability_payment_amount
+    if self.transaction_type == "Withdrawal" && self.account.class.superclass.name == "Liability"
+      if self.account.type != 'Mortgage'
+        self.amount = (self.account.minimum_payment || 0) + self.payment_amount
+      end
+    end
+  end
 
 end
