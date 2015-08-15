@@ -19,13 +19,18 @@
 
     <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
     <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
-    <%#= f.hidden_field :amount, value: number_to_currency(0) %>
     <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
-    
-  <div class="field">
-    <%= f.label :value, 'Transfer To:' %><br>
-    <%= f.collection_select :to_account_id, @asset_account_transfer_list, :id, :account_details, {include_blank: 'Please Select'} %>    
+
+  <div class="field" id="payment-to-account">
+  <%= f.label 'Payment To:' %><br>
+  <!-- Handle nil case -->
+    <% if @asset_account_transfer_list != nil %>
+      <%= f.collection_select :to_account_id, @asset_account_transfer_list, :id, :account_details, {include_blank: 'Please Select'} %>
+    <% else %>
+      <%= "Error" %>
+    <% end %>
   </div>
+
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>

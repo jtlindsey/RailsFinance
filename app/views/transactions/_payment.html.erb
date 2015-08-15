@@ -22,8 +22,13 @@
   <%= f.hidden_field :transfer_ref, value: 0 %>
 
   <div class="field" id="payment-to-account">
-    <%= f.label 'Payment To:' %><br>
-    <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>
+  <%= f.label 'Payment To:' %><br>
+  <!-- Handle nil case -->
+    <% if @liability_account_payment_list != nil %>
+      <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>
+    <% else %>
+      <%= "Error" %>
+    <% end %>
   </div>
 
 <!-- 
