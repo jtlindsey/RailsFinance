@@ -1,3 +1,9 @@
+add fallback or rollback to transaction destroy on transfers. currecntly a partial failure will leave one account with a transfer ref that dosen't exist.
+"undefined method `delete' for nil:NilClass"
+tested with morgtage payment from asset account
+
+
+
 uncomment rescute actions on transaction edit, new and show after testing
 
 use helper code and create link to ref account for payee, if payment or trasnfer, payee == transfer_ref find_by(id: transfer_ref).name, link, else payee == payee

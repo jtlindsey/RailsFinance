@@ -18,13 +18,13 @@ class TransactionsController < ApplicationController
   def new
     @account = current_user.accounts.find(params[:account_id])
     @transaction = @account.transactions.build
-# byebug
+
     #move to model and view
     #list all accounts except current for account transfer
     # @account_transfer_list = current_user.accounts.order('LOWER(name)').where.not(id: @account.id, status: 'Closed') 
     @asset_account_transfer_list = current_user.accounts.where(type: Asset.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
-    @liability_account_payment_list = current_user.accounts.where(type: Liability.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')
-    @liability_account_payment_list_account_ids = @liability_account_payment_list.map {|account| account.id}
+    @liability_account_payment_list = current_user.accounts.where(type: Liability.types.values).where.not(id: @account.id, status: 'Closed').order('LOWER(name)')    
+    @liability_accounts_payment_list_minimum_payments = @liability_account_payment_list.map {|account| account.minimum_payment.to_f + account.minimum_escrow_payment.to_f}
   end
 
   # GET /transactions/1/edit

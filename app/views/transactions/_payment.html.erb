@@ -14,27 +14,42 @@
     </div>
   <% end %>
 
-  <div class="field" id="payment-to-account">
-    <%= f.label :value, 'Payment To:' %><br>
-    <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>
-<%# @liability_account_payment_list_account_ids %>
-<%# byebug %>
-<!-- get array of list and pass to @idme -->
-<!-- then get array of all text and pass to idme -->
-<!-- pass conditional array match (for index 1 pass id from collection index 1) -->
+  <%= f.hidden_field :amount, :id => "min-payment-field-hidden" %>
+  <%= f.hidden_field :transaction_type, :value =>'Payment' %>
+  <%= f.hidden_field :from_account_id, :value => @account.id %>
+  <%= f.hidden_field :payee, value: @transaction.account.name %>
 
+  <div class="field" id="payment-to-account">
+    <%= f.label 'Payment To:' %><br>
+    <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>
   </div>
 
+<!-- 
+In order to have the correct information viewable to user and
+submitted for the payment_to account, all relevent information needs to be
+stored in array during original controller action (new transaction), otherwise 
+i would need to figure out how to do ajax call on portion of controller action 
+or create different controller action and change how all deposit, withdrwal, 
+transfer, and payments are rendered. Since the first 3 were rendered correctly, 
+i went with this method to make payments work correctly without having to change 
+how deposit, withdrwal and transfers worked.
 
-
+So the payment_to account pull the needed information into array:
+    @liability_accounts_payment_list_minimum_payments = 
+      minimum_payment + minimum_escrow_payment 
+and call them by their index since they are collected in same order as 
+accounts listed in dropdown menu.
+-->
 
   <% @payment_list_ids = @liability_account_payment_list_account_ids %>
   <% @f = f %>
+
+  <div>
+    <%= f.label "Minimum Payment" %>
+    <div id="min-payment-field"></div>
+  </div>
+
   <div id="to-account-form" style="display:none;"></div>
-
-
-
-
 
 <% end %>
 
@@ -53,24 +68,18 @@ jQuery(function(){
     var regExp = /\(([^)]+)\)\s\$/;
     var matches = regExp.exec(selected_item);
 
-
-
-// array of account ids in order of list
-var okagain = "<%= j @payment_list_ids.to_json %>";
-console.log(okagain);
-
-
-
-
-
-
-
-
-
+    // array of minimum payments from accounts in list converted from ruby to js
+    var min_payments = <%= raw @liability_accounts_payment_list_minimum_payments %>;
+    // set the js variable to the appropriate minimum payment
+    var selected_account_min_payment = min_payments[selected_item_index-1];
 
     switch (matches[1]) {
       case 'Mortgage':
         $('#to-account-form').html("<%= j render 'payment_to_mortgage', f: @f %>");
+
+        $("#min-payment-field-hidden").val(selected_account_min_payment);
+        $("#min-payment-field").html(selected_account_min_payment);
+
         $('#to-account-form').slideDown(350);
         break;
       case 'PersonalLoan':
@@ -78,6 +87,10 @@ console.log(okagain);
       case 'StudentLoan':
       case 'OtherLiability':
         $('#to-account-form').html("<%= j render 'payment_to_all_other_liabilities', f: @f %>");
+
+        $("#min-payment-field-hidden").val(selected_account_min_payment);
+        $("#min-payment-field").html(selected_account_min_payment);
+
         $('#to-account-form').slideDown(350);
         break;
       default:

@@ -1,15 +1,6 @@
 
+  <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
 
-  <%= f.hidden_field :transaction_type, :value =>'Payment' %>
-  <%= f.hidden_field :amount, value: number_to_currency(0) %>
-  <%= f.hidden_field :payee, value: @transaction.account.name %>
-
-  <%= f.hidden_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
-
-  <div class="field">
-    <%= f.label "Minimum Payment" %><br>
-    <%= number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) || 0 %>
-  </div>
   <div class="field">
     <%= f.label :interest_payment, "Additional Interest Payment" %><br>
     <%= f.text_field :interest_payment, value: number_to_currency(0) %>
