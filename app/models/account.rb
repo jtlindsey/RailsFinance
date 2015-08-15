@@ -7,7 +7,11 @@ class Account < ActiveRecord::Base
   monetize :minimum_escrow_payment_cents
 
   validates :name, length: { minimum: 2, message: 'must contain two or more characters' }
-  validates :last4, length: { maximum: 4, message: "can't be more than 4 characters" }
+  validates_format_of :name, with: /\A[\sa-z0-9]+\Z/i, message: 'can only contain numbers and letters'
+
+  validates :last4, length: { maximum: 4 }
+  validates_format_of :last4, allow_blank: true, with: /\A[0-9]+\Z/, message: "can only contain numbers (no spaces)"
+
   validates :type, inclusion: { in: proc {Account.types.values.map {|key, value| key.name}} }
 
   after_create :opening_deposit_transaction
