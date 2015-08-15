@@ -34,8 +34,8 @@ class Account < ActiveRecord::Base
     "#{name} #{last4} (#{type}) #{get_helpers.number_to_currency(balance)}"
   end
 
-  def self.spending_query(category)
-    Transaction.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+  def self.spending_query(user, category)
+    user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
   end
 
   def self.convert_money_to_number(money)
@@ -59,32 +59,16 @@ class Account < ActiveRecord::Base
     @category_totals = []
     # category_collection = user ? user.categories : Category
     user.categories.order(:name).where(category_type: 'Expense').each do |category|
-        @category_totals.push(convert_money_to_number(spending_query_by_month(category)))
-        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
+        @category_totals.push(convert_money_to_number(spending_query_by_month(user, category)))
+        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(user, category))}" )
     end
 
     @spending = Hash[@category_names.zip @category_totals]
   end
 
-  def self.spending_query_by_month(category)
-    Transaction.order(:category).where(transaction_type: 'Withdrawal').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+  def self.spending_query_by_month(user, category)
+    user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
   end
-
-  # def self.networth
-  #   @assets_list = Account.order('LOWER(name)').where(type: Asset.types.values)
-  #   @liabilities_list = Account.order('LOWER(name)').where(type: Liability.types.values)
-
-  #   @assets_total = 0
-  #   @assets_list.each {|asset| @assets_total += asset.balance }
-
-  #   @liabilities_total = 0
-  #   @liabilities_list.each {|liability| @liabilities_total += liability.balance }
-
-  #   [
-  #     ["Assets", convert_money_to_number(@assets_total)], 
-  #     ["Liabilities", convert_money_to_number(@liabilities_total)]
-  #   ]
-  # end
 
 
 #alternate for networth bar chart
@@ -95,19 +79,19 @@ class Account < ActiveRecord::Base
     a - l
   end
 
-  def self.assets
-    @assets_list = Account.where(type: Asset.types.values)
-    @assets_total = 0
-    @assets_list.each {|asset| @assets_total += asset.balance }
+  def self.assets(user)
+    assets_list = user.accounts.where(type: Asset.types.values)
+    assets_total = 0
+    assets_list.each {|asset| assets_total += asset.balance }
 
-    convert_money_to_number(@assets_total)
+    convert_money_to_number(assets_total)
   end
-  def self.liabilities
-    @liabilities_list = Account.where(type: Liability.types.values)
-    @liabilities_total = 0
-    @liabilities_list.each {|liability| @liabilities_total += liability.balance }
+  def self.liabilities(user)
+    liabilities_list = user.accounts.where(type: Liability.types.values)
+    liabilities_total = 0
+    liabilities_list.each {|liability| liabilities_total += liability.balance }
     
-    convert_money_to_number(@liabilities_total)
+    convert_money_to_number(liabilities_total)
   end
 #end alternate
 
