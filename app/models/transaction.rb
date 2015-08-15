@@ -12,7 +12,7 @@ class Transaction < ActiveRecord::Base
   monetize :principal_payment_cents
   monetize :payment_amount_cents
 
-  # before_save :calculate_mortgage_principal_interest_payment
+  before_save :calculate_mortgage_principal_interest_payment
   before_save :calculate_liability_payment_amount
   before_destroy :delete_corresponding_transactions
 
@@ -70,40 +70,19 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   # TODO look into exception implementations
-  def self.payment(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee, interest_payment, principal_payment, payment_amount)
+  def self.payment(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee, interest_payment, principal_payment, payment_amount, transfer_ref)
     amount = amount.to_f if amount.class == String
     payment_amount = payment_amount.to_f if payment_amount.class == String
     interest_payment = interest_payment.to_f if interest_payment.class == String
     principal_payment = principal_payment.to_f if principal_payment.class == String
 
-    
-# byebug
-
     if Account.find_by(id: to_account_id).type == "Mortgage"
       @mortgage_account = Account.find_by(id: to_account_id)
       calculate_mortgage_principal_interest_payment_two(amount, payment_amount, interest_payment, principal_payment)
-      # calculate_mortgage_principal_interest_payment(total_payment)
-      # @total_payment_from_acc = amount + payment_amount
       @payment_amount = amount + payment_amount + interest_payment + principal_payment
       @interest_payment = @interest_payment + interest_payment
       @principal_payment = @principal_payment + principal_payment
-
       @total_payment_from_acc = @principal_payment
     else
       @total_payment_from_acc = amount + payment_amount
@@ -113,7 +92,6 @@ class Transaction < ActiveRecord::Base
     end
     
     ActiveRecord::Base.transaction do 
-
       #money is going to pay this account transaction
       @withdrawal_to_transaction = Transaction.create!(
         amount: @total_payment_from_acc, #on mortgage this is to principal
@@ -125,7 +103,8 @@ class Transaction < ActiveRecord::Base
         interest_payment: @interest_payment,
         principal_payment: @principal_payment,  
         payment_amount: @payment_amount,
-        account_id: to_account_id
+        account_id: to_account_id,
+        transfer_ref: transfer_ref
       )
 
       #money is coming from this account transaction
@@ -249,38 +228,11 @@ class Transaction < ActiveRecord::Base
           @additional_interest = self.interest_payment
           @additional_principal = self.principal_payment
 
-          # puts "*****************************************MORTGAGE INFO**********************************"
-          # puts "self and Amount"
-          # puts self.amount
-          # puts "self and principal payment"
-          # puts self.principal_payment
-          # puts "self and payment amount"
-          # puts self.payment_amount
-          # puts "self and interest payment"
-          # puts self.interest_payment
-          # puts "transfer ref"
-          # puts self.transfer_ref
-
-
           self.amount = mortgage_payment_to_principal(self, self.payment_amount-self.account.minimum_escrow_payment)
           self.principal_payment = self.amount
           self.interest_payment = mortgage_payment_to_interest(self, self.payment_amount-self.account.minimum_escrow_payment)
           self.payment_amount = (self.payment_amount + @additional_interest + @additional_principal)
           self.interest_payment
-
-          # byebug
-          # puts "*****************************************MORTGAGE INFO**********************************"
-          # puts "self and Amount"
-          # puts self.amount
-          # puts "self and principal payment"
-          # puts self.principal_payment
-          # puts "self and payment amount"
-          # puts self.payment_amount
-          # puts "self and interest payment"
-          # puts self.interest_payment
-          # puts "transfer ref"
-          # puts self.transfer_ref
-
         end 
       end
     end
@@ -302,8 +254,6 @@ class Transaction < ActiveRecord::Base
     monthly_rate = rate / 12
     interest_payment = monthly_rate * account_total(transaction.account.id)
     principal_payment = (payment - (interest_payment/100)) + @additional_principal
-
-    # byebug
   end
 
   def mortgage_payment_to_interest(transaction, payment)

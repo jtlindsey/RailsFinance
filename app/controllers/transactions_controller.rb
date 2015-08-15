@@ -85,7 +85,8 @@ class TransactionsController < ApplicationController
                                       transaction_params[:payee],
                                       transaction_params[:interest_payment],
                                       transaction_params[:principal_payment],
-                                      transaction_params[:payment_amount]
+                                      transaction_params[:payment_amount],
+                                      transaction_params[:transfer_ref]
                                       )
 
       redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
@@ -150,7 +151,8 @@ class TransactionsController < ApplicationController
         :to_account_id,
         :interest_payment,
         :principal_payment,
-        :payment_amount
+        :payment_amount,
+        :transfer_ref
       )
     end
 

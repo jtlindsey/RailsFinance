@@ -18,13 +18,15 @@
   <h4>New payment</h4>
 
     <%= f.hidden_field :transaction_type, value: 'Withdrawal' %>
+    <%= f.hidden_field :amount, value: number_to_currency(0) %>
+    <%= f.hidden_field :payee, value: @transaction.account.name %>
+    <%= f.hidden_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
+
 
   <div class="field">
     <%= f.label "Minimum Payment" %><br>
     <%= number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
   </div>
-
-  <%= f.hidden_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
 
   <div class="field">
     <%= f.label :interest_payment, "Additional Interest Payment" %><br>
@@ -41,13 +43,6 @@
     <%#= f.text_field :payment_amount, value: number_to_currency(0) %>
     <%#= f.text_field :payment_amount, value: number_to_currency(@transaction.account.minimum_payment + @transaction.account.minimum_escrow_payment) %>
   </div>
-
-  <!-- <div class="field"> -->
-    <%#= f.label :amount %>
-    <%= f.hidden_field :amount, value: number_to_currency(0) %>
-  <!-- </div> -->
-
-    <%= f.hidden_field :payee, value: @transaction.account.name %>
 
   <div class="field">
     <%= f.label :category %><br>

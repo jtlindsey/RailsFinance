@@ -18,6 +18,8 @@
   <%= f.hidden_field :transaction_type, :value =>'Payment' %>
   <%= f.hidden_field :from_account_id, :value => @account.id %>
   <%= f.hidden_field :payee, value: @transaction.account.name %>
+  <!-- transfer ref set to zero to identify as type of transfer in models before_save action -->
+  <%= f.hidden_field :transfer_ref, value: 0 %>
 
   <div class="field" id="payment-to-account">
     <%= f.label 'Payment To:' %><br>
