@@ -4,6 +4,10 @@ class Transaction < ActiveRecord::Base
   has_many :documents, dependent: :destroy
 
   validates :amount, :numericality => {greater_than_or_equal_to: 0, message: 'should be greater than 0'}
+  
+  validates_format_of :payee, allow_blank: true, with: /\A[\sa-z0-9 :]+\Z/i, message: 'can only contain numbers and letters and spaces'
+  validates_format_of :comment, allow_blank: true, with: /\A[\sa-z0-9 :]+\Z/i, message: 'can only contain numbers and letters and spaces'
+
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer Payment), message: 'has not been selected' }
 
