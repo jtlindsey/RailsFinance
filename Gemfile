@@ -46,9 +46,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'money-rails'
-gem 'devise'
-gem 'carrierwave'
+gem 'money-rails' #...cents etc for currency columns
+gem 'devise' #user accounts
+gem 'carrierwave' #uploading files
 gem 'fog' #all-clouds-in-one library 'fog'
 # https://github.com/carrierwaveuploader/carrierwave/blob/v0.10.0/README.md
 
