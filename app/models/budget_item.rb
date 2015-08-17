@@ -1,4 +1,5 @@
 class BudgetItem < ActiveRecord::Base
+  belongs_to :user
 
   validate :is_users_category
   validates :period, inclusion: {in: %w(Weekly Bi-Weekly Monthly Quarterly Yearly), message: 'has not been selected' }
