@@ -1,5 +1,5 @@
 class BudgetItem < ActiveRecord::Base
-include Rails.application.routes.url_helpers
+
   validate :is_users_category
   validates :period, inclusion: {in: %w(Weekly Bi-Weekly Monthly Quarterly Yearly), message: 'has not been selected' }
 
