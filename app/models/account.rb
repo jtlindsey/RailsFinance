@@ -34,6 +34,18 @@ class Account < ActiveRecord::Base
     "#{name} #{last4} (#{type}) #{get_helpers.number_to_currency(balance)}"
   end
 
+  def self.asset_account_transfer_list(user, account)
+    user.accounts.where(type: Asset.types.values).where.not(id: account.id, status: 'Closed').order('LOWER(name)')
+  end
+
+  def self.liability_account_payment_list(user, account)
+    user.accounts.where(type: Liability.types.values).where.not(id: account.id, status: 'Closed').order('LOWER(name)')    
+  end
+
+  def self.liability_accounts_payment_list_minimum_payments(user, account)
+    liability_account_payment_list(user, account).map {|account| account.minimum_payment.to_f + account.minimum_escrow_payment.to_f}
+  end
+
   def self.spending_query(user, category)
     user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
   end
@@ -43,21 +55,10 @@ class Account < ActiveRecord::Base
     money.to_s.gsub(/[$,]/,'').to_f
   end
 
-  # def self.spending_by_category_google_charts
-  #   @category_names = []
-  #   @category_totals = []
-  #   Category.order(:name).where(category_type: 'Expense').each do |category|
-  #       @category_totals.push(convert_money_to_number(spending_query(category)))
-  #       @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(category))}" )
-  #   end
-
-  #   Gchart.pie_3d(:size => '650x250', :data => @category_totals, :labels => @category_names )
-  # end
-
   def self.spending_by_category_chartkick(user)
     @category_names = []
     @category_totals = []
-    # category_collection = user ? user.categories : Category
+
     user.categories.order(:name).where(category_type: 'Expense').each do |category|
         @category_totals.push(convert_money_to_number(spending_query_by_month(user, category)))
         @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(user, category))}" )

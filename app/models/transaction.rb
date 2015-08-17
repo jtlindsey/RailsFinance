@@ -5,8 +5,8 @@ class Transaction < ActiveRecord::Base
 
   validates :amount, :numericality => {greater_than_or_equal_to: 0, message: 'should be greater than 0'}
   
-  validates_format_of :payee, allow_blank: true, with: /\A[\sa-z0-9 :]+\Z/i, message: 'can only contain numbers and letters and spaces'
-  validates_format_of :comment, allow_blank: true, with: /\A[\sa-z0-9 :]+\Z/i, message: 'can only contain numbers and letters and spaces'
+  validates_format_of :payee, allow_blank: true, with: /\A[\s\w :]+\Z/i, message: 'can only contain numbers, letters and spaces'
+  validates_format_of :comment, allow_blank: true, with: /\A[\s\w \-'\ \,'\ \.'\ \!'\ \?'\ \"'\ \$'\ :]+\Z/i, message: "can only contain numbers, letters and common sentence characters"
 
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer Payment), message: 'has not been selected' }
@@ -23,9 +23,6 @@ class Transaction < ActiveRecord::Base
   # for virtual attributes in transactions form, entire transfer form changed to virual attributes
   attr_accessor :from_account_id, :to_account_id
 
-  def to_account_payee
-  end
-
   def self.deposit_from_account_payee(from_account_id)
     a = Account.find_by(id: from_account_id)
     "From account: #{a.name} #{a.last4}"
@@ -38,23 +35,21 @@ class Transaction < ActiveRecord::Base
 
   # TODO look into exception implementations
   def self.transfer(amount, ocurred_on, from_account_id, to_account_id, comment, category, payee)
-    ActiveRecord::Base.transaction do 
-      @deposit_transaction = Transaction.create!(
+    Transaction.transaction do 
+      deposit_transaction = Transaction.create(
         amount: amount, 
         date: ocurred_on, 
         transaction_type: "Deposit", 
         comment: comment, 
         category: category, 
-        #payee: payee,
         interest_payment: 0,
         principal_payment: 0,
         payment_amount: 0, 
         payee: deposit_from_account_payee(from_account_id),
         account_id: to_account_id
-        #deposit
       )
       #byebug
-      @withdrawal_transaction = Transaction.create!(
+      withdrawal_transaction = Transaction.create(
         amount: amount, 
         date: ocurred_on, 
         transaction_type: "Withdrawal", 
@@ -65,12 +60,10 @@ class Transaction < ActiveRecord::Base
         payment_amount: 0,
         payee: withdrawal_to_account_payee(to_account_id),  
         account_id: from_account_id, 
-        transfer_ref: @deposit_transaction.id
+        transfer_ref: deposit_transaction.id
       )
 
-      @deposit_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
-      #byebug
-      [@withdrawal_transaction, @deposit_transaction]
+      [withdrawal_transaction, deposit_transaction]
     end
   end
 
@@ -95,9 +88,9 @@ class Transaction < ActiveRecord::Base
       @payment_amount = payment_amount
     end
     
-    ActiveRecord::Base.transaction do 
+    Transaction.transaction do 
       #money is going to pay this account transaction
-      @withdrawal_to_transaction = Transaction.create!(
+      withdrawal_to_transaction = Transaction.create(
         amount: @total_payment_from_acc, #on mortgage this is to principal
         date: ocurred_on, 
         transaction_type: "Withdrawal", #payee account withdrawal
@@ -112,7 +105,7 @@ class Transaction < ActiveRecord::Base
       )
 
       #money is coming from this account transaction
-      @withdrawal_transaction = Transaction.create!(
+      withdrawal_transaction = Transaction.create(
         amount: amount + payment_amount + principal_payment + interest_payment, 
         date: ocurred_on, 
         transaction_type: "Withdrawal",
@@ -123,11 +116,10 @@ class Transaction < ActiveRecord::Base
         principal_payment: 0,
         payment_amount: 0,
         account_id: from_account_id, 
-        transfer_ref: @withdrawal_to_transaction.id
+        transfer_ref: withdrawal_to_transaction.id
       )
 
-      @withdrawal_to_transaction.update_attributes(transfer_ref: @withdrawal_transaction.id)
-      [@withdrawal_transaction, @withdrawal_to_transaction]
+      [withdrawal_transaction, withdrawal_to_transaction]
     end
   end
 

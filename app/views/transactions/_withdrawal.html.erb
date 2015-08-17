@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :amount, "Withdrawal Amount" %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount, value: number_to_currency(0) %>
   </div>
   <div class="field">
     <%= f.label :payee %><br>

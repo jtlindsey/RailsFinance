@@ -23,12 +23,7 @@
 
   <div class="field" id="payment-to-account">
   <%= f.label 'Payment To:' %><br>
-  <!-- Handle nil case -->
-    <% if @liability_account_payment_list != nil %>
-      <%= f.collection_select :to_account_id, @liability_account_payment_list, :id, :account_details, {include_blank: 'Please Select'} %>
-    <% else %>
-      <%= "Error" %>
-    <% end %>
+      <%= f.collection_select :to_account_id, Account.liability_account_payment_list(current_user, @account), :id, :account_details, {include_blank: 'Please Select'} %>
   </div>
 
 <!-- 
@@ -48,7 +43,7 @@ and call them by their index since they are collected in same order as
 accounts listed in dropdown menu.
 -->
 
-  <% @payment_list_ids = @liability_account_payment_list_account_ids %>
+  <%# @payment_list_ids = @liability_account_payment_list_account_ids %>
   <% @f = f %>
 
   <div>
@@ -76,34 +71,43 @@ jQuery(function(){
     var matches = regExp.exec(selected_item);
 
     // array of minimum payments from accounts in list converted from ruby to js
-    var min_payments = <%= raw @liability_accounts_payment_list_minimum_payments %>;
+    var min_payments = <%= raw Account.liability_accounts_payment_list_minimum_payments(current_user, @account) %>;
     // set the js variable to the appropriate minimum payment
     var selected_account_min_payment = min_payments[selected_item_index-1];
 
-    switch (matches[1]) {
-      case 'Mortgage':
-        $('#to-account-form').html("<%= j render 'payment_to_mortgage', f: @f %>");
-
-        $("#min-payment-field-hidden").val(selected_account_min_payment);
-        $("#min-payment-field").html(selected_account_min_payment);
-
-        $('#to-account-form').slideDown(350);
-        break;
-      case 'PersonalLoan':
-      case 'CreditCard':
-      case 'StudentLoan':
-      case 'OtherLiability':
-        $('#to-account-form').html("<%= j render 'payment_to_all_other_liabilities', f: @f %>");
-
-        $("#min-payment-field-hidden").val(selected_account_min_payment);
-        $("#min-payment-field").html(selected_account_min_payment);
-
-        $('#to-account-form').slideDown(350);
-        break;
-      default:
-        $('#to-account-form').html("<br>" + "Contact support, an error has occurred");
-        $('#to-account-form').slideDown(350);
+    if (selected_item_index < 1) {
+      $('#to-account-form').hide();
+      $("#min-payment-field").hide();
     }
+    else {
+
+      switch (matches[1]) {
+        case 'Mortgage':
+          $('#to-account-form').html("<%= j render 'payment_to_mortgage', f: @f %>");
+
+          $("#min-payment-field-hidden").val(selected_account_min_payment);
+          $("#min-payment-field").html(selected_account_min_payment);
+
+          $('#to-account-form').slideDown(350);
+          break;
+        case 'PersonalLoan':
+        case 'CreditCard':
+        case 'StudentLoan':
+        case 'OtherLiability':
+          $('#to-account-form').html("<%= j render 'payment_to_all_other_liabilities', f: @f %>");
+
+          $("#min-payment-field-hidden").val(selected_account_min_payment);
+          $("#min-payment-field").html(selected_account_min_payment);
+
+          $('#to-account-form').slideDown(350);
+          break;
+        default:
+          $('#to-account-form').html("<br>" + "Contact support, an error has occurred");
+          $('#to-account-form').slideDown(350);
+      }
+
+    }
+
   });
 
 });

@@ -21,33 +21,54 @@
     <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
     <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
 
-  <div class="field" id="payment-to-account">
-  <%= f.label 'Payment To:' %><br>
-  <!-- Handle nil case -->
-    <% if @asset_account_transfer_list != nil %>
-      <%= f.collection_select :to_account_id, @asset_account_transfer_list, :id, :account_details, {include_blank: 'Please Select'} %>
-    <% else %>
-      <%= "Error" %>
-    <% end %>
+  <div class="field" id="transfer-to-account">
+  <%= f.label 'Transfer To:' %><br>
+    <%= f.collection_select :to_account_id, Account.asset_account_transfer_list(current_user, @account), :id, :account_details, {include_blank: 'Please Select'} %>
   </div>
 
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.select :category, Transaction.transfer_category_list, {include_blank: 'Please Select'} %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div id="transfer-to-account-form" style="display:none;">
+
+    <div class="field">
+      <%= f.label :amount %><br>
+      <%= f.text_field :amount, value: number_to_currency(0) %>
+    </div>
+    <div class="field">
+      <%= f.label :category %><br>
+      <%= f.select :category, Transaction.transfer_category_list, {include_blank: 'Please Select'} %>
+    </div>
+    <div class="field">
+      <%= f.label :comment %><br>
+      <%= f.text_area :comment %>
+    </div>
+    <div class="field">
+      <%= f.label :date %><br>
+      <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
   </div>
 <% end %>
+
+
+<script>
+
+jQuery(function(){
+
+  $("#transfer-to-account").change(function() {
+    var selected_item_index = $( "#transfer-to-account option:selected" ).index(); 
+
+    if (selected_item_index < 1) {
+      $('#transfer-to-account-form').hide();
+    }
+    else {
+      $('#transfer-to-account-form').show();
+      $('#transfer-to-account-form').slideDown(350);
+    }
+
+  });
+
+});
+
+</script>

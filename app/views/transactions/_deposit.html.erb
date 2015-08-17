@@ -13,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+  
     <%= f.hidden_field :transaction_type, value: 'Deposit' %>
     <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
     <%= f.hidden_field :principal_payment, value: number_to_currency(0) %>
@@ -21,7 +22,7 @@
     
   <div class="field">
     <%= f.label :amount, "Deposit Amount" %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount, value: number_to_currency(0) %>
   </div>
   <div class="field">
     <%= f.label :category %><br>
