@@ -1,0 +1,16 @@
+<div style="max-width: 320px; padding: 10px 15px 30px 15px; margin: 0 auto; background-color: #D3D3D3;">
+
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
+    <h3>Forgot your password?</h3>
+    <p>We'll send password reset instructions.</p>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+    </div>
+    <div style="text-align: right">
+      <%= f.submit 'Reset Password', :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+</div>
