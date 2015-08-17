@@ -1,8 +1,23 @@
 class BudgetItem < ActiveRecord::Base
-  validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
+include Rails.application.routes.url_helpers
+  validate :is_users_category
   validates :period, inclusion: {in: %w(Weekly Bi-Weekly Monthly Quarterly Yearly), message: 'has not been selected' }
-    
+
   monetize :amount_cents
+
+  def is_users_category
+    user = User.find(self.user_id)
+    if user.categories.count > 0
+      # byebug
+      category_list = user.categories.map {|category| category.name}
+      if category_list.include?(category) == false
+        self.errors.add(:category, "has not been selected") 
+      end
+    else
+      link = Rails.application.routes.url_helpers.categories_path
+      self.errors.add(:category, "you must add categories first, go to options and click category.")
+    end
+  end
 
   def self.period_list
     #list of periods for form
