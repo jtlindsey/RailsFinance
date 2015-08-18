@@ -19,11 +19,9 @@
       <div class="panel-heading">Usage by Logins</div>
       <div class="panel-body" >
 
-      <%= @visits.last.created_at %>
       <%#= area_chart @visits.group_by_day(:created_at).count %>
       <!-- Browser date matching rails app date -->
       <%= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count %>
-
 
       </div>
     </div>
