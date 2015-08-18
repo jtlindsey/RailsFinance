@@ -1,3 +1,20 @@
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading" style="background-color: red; color: black; font-weight: bold;">Administration</div>
+        <div class="panel-body" style="border: 3px solid; border-color: red;">
+
+          <p>
+            <%= link_to 'Admin Console', users_path, class: "btn btn-danger" %>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-primary">
