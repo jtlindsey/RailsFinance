@@ -1,5 +1,17 @@
-<div class="admin-header">User Administration</div>
 <% if current_user.admin? %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="admin-header"><i class="fa fa-cog fa-spin"></i> User Administration</div>
+      <div class="admin-body">
+
+        Updated at: <%= DateTime.now.strftime("%d-%b-%Y %H:%M%P") %>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-lg-3 col-md-6">
@@ -97,20 +109,21 @@
 </div>
 
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-danger">
-        <div class="panel-heading">Administration</div>
-        <div class="panel-body" >
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">Administration</div>
+      <div class="panel-body" >
 
 <!-- some details -->
 
-          <p>
-            <%= link_to 'Admin Console', users_path, class: "btn btn-danger" %>
-          </p>
+        <p>
+          <%= link_to 'Admin Console', users_path, class: "btn btn-danger" %>
+        </p>
 
-        </div>
       </div>
     </div>
   </div>
+</div>
+
 <% end %>

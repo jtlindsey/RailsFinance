@@ -76,8 +76,13 @@
   font-style: bold;
   font-size: 20px;
 
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 5px;
+  margin-bottom: 0px;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.admin-body {
+  padding: 0px 10px 0px 10px;
+  text-align: right;
 }
