@@ -26,7 +26,8 @@ class DocumentsController < ApplicationController
     @account = current_user.accounts.find(params[:account_id])
     @transaction = Transaction.find(params[:transaction_id])
     @document = @transaction.documents.build(document_params)
-
+    @document.user_id = current_user.id
+    
     respond_to do |format|
       if @document.save
         format.html { redirect_to account_transaction_path(@account, @transaction), notice: 'Document was successfully created.' }
