@@ -8,6 +8,9 @@ gem 'chartkick'
 #for charts
 gem 'googlecharts', '~> 1.6.10'
 
+#for use with chartkick group_by...
+gem 'groupdate'
+
 #for font-awesome icons
 gem 'font-awesome-rails'
 

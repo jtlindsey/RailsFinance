@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  # resources :documents
-  devise_for :users
+  # devise_for :users
+  #used with tracking login history
+  devise_for :users, :controllers => { :sessions => "track_sessions" }
   resources :users
+
   resources :pages
   resources :categories
   resources :budget_items

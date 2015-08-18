@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  
+
   before_filter do 
     redirect_to new_user_session_path unless current_user.admin?
   end
@@ -8,11 +8,12 @@ class UsersController < ApplicationController
 
   def index
     if current_user.admin?
-      # byebug
       @users = User.all
       @users_accounts = Account.all
       @users_transactions = Transaction.all
       @users_documents = Document.all
+
+      @visits = Visit.all
     end
   end
 
