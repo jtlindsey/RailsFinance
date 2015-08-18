@@ -50,4 +50,21 @@
   color: #337ab7;
 }
 
+/* Admin panels */
+.panel > .admin-panel-heading {
+  background-color: red; 
+  color: black; 
+  font-weight: bold;
+}
 
+.admin-panel-body {
+  border: 3px solid; 
+  border-color: red;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.huge {
+  font-size: 40px; 
+  color: red;
+}
