@@ -12,8 +12,8 @@
               <th>Payee</th>
               <th>Category</th>
               <th>Comment</th>
-              <th>Deposit</th>
-              <th>Withdrawal</th>
+              <th>Charge</th> <!-- is deposit -->
+              <th>Payment</th>
               <th>Balance</th>
               <th>Uploads</th>
               <th></th> <!-- added these to get past DataTables js error -->
@@ -78,12 +78,12 @@
           <tr><td>Comment</td><td><%= truncate(transaction.comment, length: 17) %></td></tr>
             
           <% if transaction.transaction_type == 'Deposit' %> <!-- charge is deposit -->
-            <tr><td>Deposit</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
-            <tr><td>Withdrawal</td><td><%= "" %></td></tr>
+            <tr><td>Charge</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
+            <tr><td>Payment</td><td><%= "" %></td></tr>
           <% end %>
           <% if transaction.transaction_type == 'Withdrawal' %> <!-- payment is withdrawal -->
-            <tr><td>Deposit</td><td><%= "" %></td></tr>
-            <tr><td>Withdrawal</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
+            <tr><td>Charge</td><td><%= "" %></td></tr>
+            <tr><td>Payment</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
           <% end %>
 
           <tr><td>Balance</td><td><%= number_to_currency(transaction.new_balance) %></td></tr>
