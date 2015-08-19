@@ -1,0 +1,5 @@
+<tr style="background: black"><td></td><td><%= "" %></td></tr>
+<tr><td>Type</td><td><%= account.type %></td></tr>
+<tr><td>Name</td><td><%= link_to truncate("#{account.name} #{account.last4}", length: 10), account_transactions_path(account_id: account.id) %></td></tr>
+<tr><td>Status</td><td><%= account.status %></td></tr>
+<tr><td>Balance</td><td><%= number_to_currency(account.balance) %></td></tr>

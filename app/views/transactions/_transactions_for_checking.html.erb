@@ -76,12 +76,20 @@
           <tr style="background: black"><td></td><td><%= "" %></td></tr>
           <tr><td>Date</td><td><%= "#{transaction.date.to_date}" %></td></tr>
           <tr><td>Check#</td><td><%= "temp" %></td></tr>
-          <tr><td>Payee</td><td><%= transaction.payee %></td></tr>
-          <tr><td>Category</td><td><%= transaction.category %></td></tr>
+          <tr><td>Payee</td><td><%= truncate(transaction.payee) %></td></tr>
+          <tr><td>Category</td><td><%= truncate(transaction.category) %></td></tr>
           <tr><td>Comment</td><td><%= truncate(transaction.comment) %></td></tr>
-          <tr><td>Withdrawal</td><td><%= "temp" %></td></tr>
-          <tr><td>Deposit</td><td><%= "temp" %></td></tr>
-          <tr><td>Balance</td><td><%= "temp" %></td></tr>
+
+          <% if transaction.transaction_type == 'Deposit' %> <!-- charge is deposit -->
+            <tr><td>Deposit</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
+            <tr><td>Withdrawal</td><td><%= "" %></td></tr>
+          <% end %>
+          <% if transaction.transaction_type == 'Withdrawal' %> <!-- payment is withdrawal -->
+            <tr><td>Deposit</td><td><%= "" %></td></tr>
+            <tr><td>Withdrawal</td><td><%= number_to_currency(transaction.applied_amount) %></td></tr>
+          <% end %>
+
+          <tr><td>Balance</td><td><%= number_to_currency(transaction.new_balance) %></td></tr>
           <tr><td>Uploads</td>
             <% if transaction.documents.count > 0 %>
             <td><%= link_to transaction.documents.count, account_transaction_path(transaction.account, transaction) %> </td>
