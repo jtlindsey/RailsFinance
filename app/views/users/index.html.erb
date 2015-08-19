@@ -74,7 +74,7 @@
                   </div>
               </div>
           </div>
-          <a href="#">
+          <a href="#" id="users-transactions">
               <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -97,7 +97,7 @@
                   </div>
               </div>
           </div>
-          <a href="#">
+          <a href="#" id="users-documents">
               <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -113,14 +113,13 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-danger">
-      <div class="panel-heading">Administration</div>
+      <div class="panel-heading">Other</div>
       <div class="panel-body" >
 
-<!-- some details -->
+        <a class="btn btn-danger" id="usage-logins" role="button">Login Usage Chart</a>
+        <a class="btn btn-danger" id="users-login-history" role="button">Users Login History</a>
 
-        <p>
-          <%= link_to 'Admin Console', users_path, class: "btn btn-danger" %>
-        </p>
+
 
       </div>
     </div>
@@ -135,29 +134,6 @@
 </div>
 
 <!-- End Partials -->
-
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-danger">
-      <div class="panel-heading">Usage by Logins Per Day</div>
-      <div class="panel-body" style="padding: 0;" >
-
-      <%#= area_chart @visits.group_by_day(:created_at).count %>
-      <!-- Browser date matching rails app date -->
-      <%= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count %>
-      <!-- size not correct, not filling div -->
-      <%#= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count, height: "300px" %>
-      <%#= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count, options: {
-            width: 800,
-            height: 100
-        } %>
-
-
-      </div>
-    </div>
-  </div>
-</div>
 
 <% end %>
 
@@ -175,6 +151,24 @@
     $('#admin-content-details').slideDown(350);
   });
 
+  $('#usage-logins').click(function() {
+    $('#admin-content-details').html("<%= j (render 'usage_logins') %>");
+    $('#admin-content-details').slideDown(350);
+  });
 
+  $('#users-transactions').click(function() {
+    $('#admin-content-details').html("<%= j (render 'users_transactions') %>");
+    $('#admin-content-details').slideDown(350);
+  });
+
+  $('#users-documents').click(function() {
+    $('#admin-content-details').html("<%= j (render 'users_documents') %>");
+    $('#admin-content-details').slideDown(350);
+  });
+
+  $('#users-login-history').click(function() {
+    $('#admin-content-details').html("<%= j (render 'users_login_history') %>");
+    $('#admin-content-details').slideDown(350);
+  });
 
 </script>

@@ -1,0 +1,18 @@
+<div class="col-md-12">
+  <div class="panel panel-danger">
+    <div class="panel-heading">Usage by Logins Per Day</div>
+    <div class="panel-body" style="padding: 0;" >
+
+    <%#= area_chart @visits.group_by_day(:created_at).count %>
+    <!-- Browser date matching rails app date -->
+    <%= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count %>
+    <!-- size not correct, not filling div -->
+    <%#= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count, height: "300px" %>
+    <%#= area_chart @visits.group_by_day(:created_at, format: "%B %d, %Y").count, options: {
+          width: 800,
+          height: 100
+      } %>
+
+    </div>
+  </div>
+</div>

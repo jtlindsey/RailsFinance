@@ -9,27 +9,21 @@
               <thead>
                 <tr>
                   <th>Created at</th>
+                  <th>Visit ID</th>
                   <th>User ID</th>
                   <th>Email</th>
-                  <th>Name</th>
-                  <th>Sign in count</th>
-                  <th>Current sign in ip</th>
-                  <th>Last sign in ip</th>
-                  <th>Admin</th>
+                  <th>Ip Address</th>
                 </tr>
               </thead>
 
               <tbody>
-                <% @users.each do |user| %>
+                <% @visits.each do |visit| %>
                   <tr>
-                    <td><%= user.created_at.to_date %></td>
-                    <td><%= user.id %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.name %></td>
-                    <td><%= user.sign_in_count %></td>
-                    <td><%= user.current_sign_in_ip %></td>
-                    <td><%= user.last_sign_in_ip %></td>
-                    <td><%= user.admin %></td>
+                    <td><%= visit.created_at %></td>
+                    <td><%= visit.id %></td>
+                    <td><%= visit.user_id %></td>
+                    <td><%= visit.user_email %></td>
+                    <td><%= visit.user_ip %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -42,18 +36,15 @@
           <div class="col-md-12">
 
             <div class="panel-primary">
-              <% @users.each do |user| %>
+              <% @visits.each do |visit| %>
                 <table class="table table-striped">
                 <tbody>
                   <tr style="background: black"><td></td><td><%= "" %></td></tr>
-                  <tr><td>User ID</td><td><%= user.id %></td></tr>
-                  <tr><td>Email</td><td><%= user.email %></td></tr>
-                  <tr><td>Name</td><td><%= user.name %></td></tr>
-                  <tr><td>Created at</td><td><%= "#{user.created_at.to_date}" %></td></tr>
-                  <tr><td>Sign in count</td><td><%= user.sign_in_count %></td></tr>
-                  <tr><td>Current sign in ip</td><td><%= user.current_sign_in_ip %></td></tr>
-                  <tr><td>Last sign in ip</td><td><%= user.last_sign_in_ip %></td></tr>
-                  <tr><td>Admin</td><td><%= user.admin %></td></tr>
+                  <tr><td>Created at</td><td><%= visit.created_at %></td></tr>
+                  <tr><td>Visit Id</td><td><%= visit.id %></td></tr>                  
+                  <tr><td>User ID</td><td><%= visit.user_id %></td></tr>
+                  <tr><td>Email</td><td><%= truncate(visit.user_email) %></td></tr>
+                  <tr><td>Ip Address</td><td><%= visit.user_ip %></td></tr>
                 </tbody>
                 </table>
               <% end %>

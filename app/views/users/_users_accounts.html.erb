@@ -1,0 +1,75 @@
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">User Details</div>
+      <div class="panel-body" >
+
+        <div class="row visible-sm-block visible-md-block visible-lg-block">
+          <div class="col-md-12">
+            <table id="transactions" class="transactions-for-checking table table-striped table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th>Created at</th>
+                  <th>User ID</th>
+                  <th>Type</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Last4</th>
+                  <th>Favorite?</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @users_accounts.each do |account| %>
+                  <tr>
+                    <td><%= account.created_at %></td>
+                    <td><%= account.user_id %></td>
+                    <td><%= account.type %></td>
+                    <td><%= account.id %></td>
+                    <td><%= account.name %></td>
+                    <td><%= account.last4 %></td>
+                    <td><%= account.favorite %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div> 
+
+        <!-- Mobile -->
+        <div class="row visible-xs-block">
+          <div class="col-md-12">
+
+            <div class="panel-primary">
+              <% @users_accounts.each do |account| %>
+                <table class="table table-striped">
+                <tbody>
+                  <tr style="background: black"><td></td><td><%= "" %></td></tr>
+                  <tr><td>Created at</td><td><%= account.created_at %></td></tr>
+                  <tr><td>User ID</td><td><%= account.user_id %></td></tr>
+                  <tr><td>Type</td><td><%= account.type %></td></tr>
+                  <tr><td>ID</td><td><%= account.id %></td></tr>
+                  <tr><td>Name</td><td><%= account.name %></td></tr>
+                  <tr><td>Last4</td><td><%= account.last4 %></td></tr>
+                  <tr><td>Favorite?</td><td><%= account.favorite %></td></tr>
+                </tbody>
+                </table>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+        <!-- End Mobile -->
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+// for dataTables
+$(document).ready(function() {
+  var custom_table = $('#transactions').dataTable();
+  // sort a column descending (at position 0 in the array (base 0)
+  custom_table.fnSort( [ [0,'desc'] ] );
+} );
+</script>

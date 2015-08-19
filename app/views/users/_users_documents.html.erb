@@ -1,0 +1,69 @@
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">User Details</div>
+      <div class="panel-body" >
+
+        <div class="row visible-sm-block visible-md-block visible-lg-block">
+          <div class="col-md-12">
+            <table id="transactions" class="transactions-for-checking table table-striped table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th>Created at</th>
+                  <th>User ID</th>
+                  <th>efile name</th>
+                  <th>ID</th>
+                  <th>Transaction ID</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @users_documents.each do |document| %>
+                  <tr>
+                    <td><%= document.created_at %></td>
+                    <td><%= document.user_id %></td>
+                    <td><%= document.efile.file.filename %></td>
+                    <td><%= document.id %></td>
+                    <td><%= document.transaction_id %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div> 
+
+        <!-- Mobile -->
+        <div class="row visible-xs-block">
+          <div class="col-md-12">
+
+            <div class="panel-primary">
+              <% @users_documents.each do |document| %>
+                <table class="table table-striped">
+                <tbody>
+                  <tr style="background: black"><td></td><td><%= "" %></td></tr>
+                  <tr><td>Created at</td><td><%= document.created_at %></td></tr>
+                  <tr><td>User ID</td><td><%= document.user_id %></td></tr>
+                  <tr><td>efile name</td><td><%= truncate(document.efile.file.filename) %></td></tr>
+                  <tr><td>ID</td><td><%= document.id %></td></tr>
+                  <tr><td>Transaction ID</td><td><%= document.transaction_id %></td></tr>
+                </tbody>
+                </table>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+        <!-- End Mobile -->
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+// for dataTables
+$(document).ready(function() {
+  var custom_table = $('#transactions').dataTable();
+  // sort a column descending (at position 0 in the array (base 0)
+  custom_table.fnSort( [ [0,'desc'] ] );
+} );
+</script>
