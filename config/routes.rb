@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :sessions => "track_sessions" }
   resources :users
 
-  resources :pages
+  resources :home
   resources :categories
   resources :budget_items
   # resources :transactions
   # root 'accounts#index'
   # root 'welcome#index'
-  root 'pages#index'
+  root 'home#index'
 
   resources :accounts do
     resources :transactions do

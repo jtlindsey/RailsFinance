@@ -1,0 +1,34 @@
+
+
+<div style="padding: 10px 15px; text-align: center; display: block;">
+
+  <h1>My Money O<span style="font-size: 0.4em;">n</span><span style="letter-spacing: -5px;">T</span><span style="font-size: 0.4em;">he</span>G<span style="font-size: 0.4em;">o</span></h1>
+  <p class="lead">An easy way to manage your money on the go. Free to use. Nothing to download.<br> A personal money manager that's compatible with Windows, Mac, Linux, Android and IOS.</p>
+
+</div>
+
+<div id="visitor-partials" style="display: none;"></div>
+
+
+
+
+
+<script>
+
+  $('#login').click(function() {
+    $('#visitor-partials').html("<%= j (render 'home_sign_in') %>");
+    $('#visitor-partials').slideDown(350);
+  });
+
+  $('#faq').click(function() {
+    $('#visitor-partials').html("<%= j (render 'faq') %>");
+    $('#visitor-partials').slideDown(350);
+  });
+
+  $('#contact').click(function() {
+    $('#visitor-partials').html("<%= j (render 'contact') %>");
+    $('#visitor-partials').slideDown(350);
+  });
+
+
+</script>

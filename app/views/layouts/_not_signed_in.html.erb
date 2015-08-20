@@ -14,17 +14,25 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <%= nav_link "Link 1", "/options" %>
-        <%= nav_link "Link 2", "/budget_show_all" %>
+        <li><a href="#" id="faq">FAQ</a></li>
+        <li><a href="#" id="contact">Contact</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><%= button_to('Login', new_user_session_path, :class => 'btn btn-large btn-inverse navbar-btn') %></li>
+
+
+      <% if controller_name == "home" && action_name == "index" %>
+
+        <li><button id="login" class="btn btn-default navbar-btn">Login/SignUp</button></li>
+
+      <% else %>
+
+        <li><%= button_to('Login/SignUp', new_user_session_path, :class => 'btn btn-default btn-inverse navbar-btn') %></li>
+
+      <% end %>
+
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<div class="session-info">
-  Welcome. Today is <%= Time.now.strftime("%A, %d %b %Y") %>
-</div>
