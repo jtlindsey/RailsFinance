@@ -15,9 +15,12 @@
 /* fixed panel height for pie chart, bar chart, favorites panel */
 @media screen and (min-width: 480px) {
   .fixed-panel-height {
-    height: 270px;
-    padding: 2px;
-    margin: 2px;
+    height: 270px; 
+    padding-top: 2px; 
+    padding-bottom: 2px;
+
+    padding-left: auto;
+    padding-right: auto;
   }
 }
 
