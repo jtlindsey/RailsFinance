@@ -1,7 +1,21 @@
-<h1> Financial Summary </h1>
-Current as of: <%= DateTime.now.strftime("%d-%b-%Y %l:%M%P") %><br>
+<h4 style="text-align: center;"> Financial Summary for <%= current_user.name %></h4>
+<h6 style="text-align: center;">Current as of: <%= DateTime.now.strftime("%d-%b-%Y %l:%M%P") %></h6>
 
-<h2>User's Net-Worth <%#= number_to_currency(@assets_total - @liabilities_total) %></h2>
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Net Worth <%= number_to_currency(Account.user_networth(current_user)) %></div>
+      <div class="panel-body fixed-panel-height">
+
+        <%#= column_chart networth_data, colors: ["green", "#FF0000"], library: {tooltip: {trigger: 'none'}, pointSize: 0, vAxis:  {format: "currency"}, backgroundColor: "#FFF", height: 265} %>
+
+        <%= column_chart networth_data, colors: ["green", "#FF0000"], library: {pointSize: 0, vAxis:  {format: "currency"}, backgroundColor: "#FFF", height: 265} %>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-6">
