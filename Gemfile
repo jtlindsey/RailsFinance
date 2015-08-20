@@ -69,5 +69,15 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  #Heroku recommends using a gem called Foreman. This will allow us to use our .env file by accessing the local variables before starting the application. 
+  gem 'foreman'
 end
 
+group :production do
+
+  #heroku dependency
+  gem 'rails_12factor'
+
+end
+
+ruby "2.2.1"
