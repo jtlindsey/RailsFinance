@@ -31,12 +31,13 @@
 <div class="col-md-6">
     <div class="panel panel-primary">
       <div class="panel-heading">Net Worth <%= number_to_currency(Account.user_networth(current_user)) %></div>
+      <div class="container-fluid">
       <div class="panel-body fixed-panel-height">
 
         <%#= column_chart networth_data, colors: ["green", "#FF0000"], library: {tooltip: {trigger: 'none'}, pointSize: 0, vAxis:  {format: "currency"}, backgroundColor: "#FFF", height: 265} %>
 
-        <%= column_chart networth_data, colors: ["green", "#FF0000"], library: {pointSize: 0, vAxis:  {format: "currency"}, backgroundColor: "#FFF", height: 265} %>
-
+        <%= column_chart networth_data, colors: ["green", "#FF0000"], library: {pointSize: 0, vAxis:  {format: "currency"}, legend: { position: 'top'}, backgroundColor: "#FFF", height: 265} %>
+</div>
       </div>
     </div>
   </div>

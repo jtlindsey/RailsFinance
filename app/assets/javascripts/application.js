@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require chartkick_googlechartjsapi
 //= require chartkick
 //= require turbolinks
 //= require bootstrap-sprockets

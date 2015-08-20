@@ -4,10 +4,13 @@
     <title>Finance</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+
     <% if user_signed_in? %>
       <%= render 'layouts/signed_in' %>
     <% else %>
@@ -15,22 +18,14 @@
     <% end %>
 
     <!-- flash messages with bootstrap -->
-    <% if notice.present? %>
-      <div class="alert alert-success">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Great! </strong><%= notice %>
-      </div>
-    <% end %>
-    <% if alert.present? %>
-      <div class="alert alert-danger">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Not so fast! </strong><%= alert %>
-      </div>
-    <% end %>
-    <!-- END flash messages with bootstrap -->
+    <div class="col-md-12">
+      <%= render 'layouts/messages' %>
+    </div>
+    <!-- flash messages with bootstrap -->
 
     <div class="container-fluid">
      <%= yield %>
     </div>
+
   </body>
 </html>
