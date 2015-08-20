@@ -27,5 +27,27 @@
      <%= yield %>
     </div>
 
+
+    <footer id="footer" style="text-align: center; padding-bottom: 4px;">
+      <p>
+        &copy; J Travis Lindsey<br>
+        MyMoneyOnTheGo.com 2015
+      </p>
+    </footer>
+
   </body>
 </html>
+
+<script>
+
+  $(document).ready(function() {
+
+   var docHeight = $(window).height();
+   var footerHeight = $('#footer').height() +15;
+   var footerTop = $('#footer').position().top + footerHeight;
+
+   if (footerTop < docHeight) {
+    $('#footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
+   }
+  });
+ </script>
