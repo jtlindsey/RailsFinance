@@ -133,4 +133,12 @@ class Account < ActiveRecord::Base
   def self.terms
     %w(15yr 20yr 30yr)
   end
+
+  def self.credit_used(user)
+    user.accounts.where(type: "CreditCard").map.inject(0) {|total, account| total += account.balance}.to_f
+  end
+
+  def self.credit_aval(user)
+    user.accounts.where(type: "CreditCard").map.inject(0) {|total, account| total += account.credit_limit}.to_f
+  end
 end
