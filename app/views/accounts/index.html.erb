@@ -82,13 +82,6 @@
       <div class="panel-body fixed-panel-height">
 
 
-        <%#= column_chart Account.networth, 
-                library: {
-                  backgroundColor: "#FFF", height: 265,
-                  :colors => ['green', 'red']
-                } %>
-
-
         <%= column_chart networth_data, colors: ["green", "#FF0000"], library: {pointSize: 0, vAxis:  {format: "currency"}, legend: { position: 'none'}, backgroundColor: "#FFF", height: 265} %>
 
 
