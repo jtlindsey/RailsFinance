@@ -47,11 +47,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address: "smtp.sendgrid.net",
   port: 25,
-  domain: "mymoneyotg.herokuapp.com",
   authentication: :plain,
-  enable_starttls_auto: true,
-  user_name: ENV["MY_EMAIL_USERNAME"],
-  password: ENV["MY_EMAIL_PASSWORD"]
+  user_name: ENV['SENDGRID_USERNAME'],
+  password: ENV['SENDGRID_PASSWORD'],
+  domain: ENV['SENDGRID_DOMAIN']
   }
 
 end
