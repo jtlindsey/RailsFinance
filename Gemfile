@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
 
+#to get environment variables to load in development and test
+gem 'dotenv-rails', :groups => [:development, :test]
+
 #for sending emails through app and heroku
 gem 'sendgrid'
 
