@@ -7,7 +7,7 @@ config.fog_public = false
   if Rails.env.development? || Rails.env.test?
     config.storage = :file
   else
-    config.cache_dir = "#{Rails.root}/tmp/uploads"
+    # config.cache_dir = "#{Rails.root}/tmp/uploads"
     
     config.fog_credentials = {
       :provider                         => 'Google',
