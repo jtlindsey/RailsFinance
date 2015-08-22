@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'bootstrap-sass'
 
 #for alternate style of charts
-# gem 'chartkick'
+gem 'chartkick'
 
 #for issue with chartkick fonts
 # gem 'google-webfonts-rails'
