@@ -16,7 +16,7 @@ gem 'font-awesome-rails'
 
 #datatabes for sorting and searching tables
 gem 'jquery-datatables-rails', '~> 3.3.0'
-# gem 'jquery-ui-rails'
+gem 'jquery-ui-rails'
 
 gem 'autoprefixer-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
