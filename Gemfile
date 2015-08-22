@@ -6,7 +6,7 @@ gem 'bootstrap-sass'
 gem 'chartkick'
 
 #for issue with chartkick fonts
-gem 'google-webfonts-rails'
+# gem 'google-webfonts-rails'
 
 #for use with chartkick group_by...
 gem 'groupdate'

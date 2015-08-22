@@ -182,8 +182,6 @@ GEM
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    google-webfonts-rails (0.0.4)
-      activesupport (> 3.2.0, < 5.0)
     groupdate (2.4.0)
       activesupport (>= 3)
     i18n (0.7.0)
@@ -313,7 +311,6 @@ DEPENDENCIES
   fog
   font-awesome-rails
   foreman
-  google-webfonts-rails
   groupdate
   jbuilder (~> 2.0)
   jquery-datatables-rails (~> 3.3.0)
