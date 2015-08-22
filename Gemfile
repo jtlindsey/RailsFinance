@@ -17,6 +17,8 @@ gem 'groupdate'
 #for font-awesome icons
 gem 'font-awesome-rails'
 
+#datatabes for sorting and searching tables
+gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'jquery-ui-rails'
 
 gem 'autoprefixer-rails'
@@ -57,9 +59,6 @@ gem 'fog' #all-clouds-in-one library 'fog'
 # https://github.com/carrierwaveuploader/carrierwave/blob/v0.10.0/README.md
 
 group :development, :test do
-  #datatabes for sorting and searching tables
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-  
   #temporary for console ouput formatting
   gem 'awesome_print'
 
