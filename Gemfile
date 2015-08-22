@@ -3,13 +3,9 @@ source 'https://rubygems.org'
 #for bootstrap-sass
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
-# gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 #for alternate style of charts
 gem 'chartkick'
-
-#for issue with chartkick fonts
-# gem 'google-webfonts-rails'
 
 #for use with chartkick group_by...
 gem 'groupdate'
@@ -31,8 +27,6 @@ gem 'pg'
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -43,12 +37,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
