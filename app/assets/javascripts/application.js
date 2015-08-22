@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-
 //= require chartkick
 //= require turbolinks
 //= require bootstrap-sprockets
