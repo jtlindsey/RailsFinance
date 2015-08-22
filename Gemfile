@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'bootstrap-sass'
+#for bootstrap-sass
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'sass-rails', '>= 3.2'
 
 #for alternate style of charts
 gem 'chartkick'
@@ -23,8 +25,7 @@ gem 'autoprefixer-rails'
 gem 'rails', '4.2.1'
 # Use postgres as the database for Active Record
 gem 'pg'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
