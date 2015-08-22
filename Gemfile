@@ -18,9 +18,6 @@ gem 'font-awesome-rails'
 # gem 'jquery-datatables-rails', '~> 3.3.0'
 # gem 'jquery-ui-rails'
 
-#temporary for console ouput formatting
-gem 'awesome_print'
-
 gem 'autoprefixer-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -60,11 +57,14 @@ gem 'fog' #all-clouds-in-one library 'fog'
 # https://github.com/carrierwaveuploader/carrierwave/blob/v0.10.0/README.md
 
 group :development, :test do
+  #temporary for console ouput formatting
+  gem 'awesome_print'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  # gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
