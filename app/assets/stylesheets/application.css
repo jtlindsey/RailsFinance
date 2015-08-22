@@ -2,8 +2,8 @@
   *= require_self
   *= require font-awesome
     //for custom css require dataTables/jquery.dataTables
-  *= require dataTables/jquery.dataTables 
-  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+  // require dataTables/jquery.dataTables 
+  // require dataTables/bootstrap/3/jquery.dataTables.bootstrap
   *= require main
 */
 
