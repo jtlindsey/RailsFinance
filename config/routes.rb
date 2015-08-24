@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+   
+  get 'contact', to: 'contacts#new', as: "contact"
+  resources "contacts", only: [:new, :create]
+
   # devise_for :users
   #used with tracking login history
   devise_for :users, :controllers => { :sessions => "track_sessions" }
