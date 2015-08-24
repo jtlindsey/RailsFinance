@@ -1,4 +1,36 @@
 Rails.application.routes.draw do
+
+   
+  get 'contact', to: 'contacts#new', as: "contact"
+  resources "contacts", only: [:new, :create]
+
+  # devise_for :users
+  #used with tracking login history
+  devise_for :users, :controllers => { :sessions => "track_sessions" }
+  resources :users
+
+  resources :home
+  resources :categories
+  resources :budget_items
+  # resources :transactions
+  # root 'accounts#index'
+  # root 'welcome#index'
+  root 'home#index'
+
+  resources :accounts do
+    resources :transactions do
+      resources :documents
+    end
+    #will be for transfers controller when refactoring is done for transfers
+    #resources :transfers, only: %i[show post]    
+  end
+
+  get 'list_accounts', to: 'accounts#list'
+  get 'options', to: 'accounts#options'
+  get 'financial_summary', to: 'accounts#financial_summary'
+  get 'budget_show_all', to: 'budget_items#show_all'
+  # resources :checkings, controller: :accounts
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
