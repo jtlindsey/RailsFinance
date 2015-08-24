@@ -159,7 +159,8 @@ class TransactionsController < ApplicationController
         :interest_payment,
         :principal_payment,
         :payment_amount,
-        :transfer_ref
+        :transfer_ref,
+        :check_number
       )
     end
 

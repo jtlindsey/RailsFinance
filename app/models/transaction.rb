@@ -11,6 +11,8 @@ class Transaction < ActiveRecord::Base
   #validates :category, inclusion: {in: Category.order(:name).map {|category| category.name}, message: 'has not been selected' }
   validates :transaction_type, inclusion: {in: %w(Deposit Withdrawal Transfer Payment), message: 'has not been selected' }
 
+  validates :check_number, numericality: { only_integer: true }, allow_blank: true
+
   monetize :amount_cents
   monetize :interest_payment_cents
   monetize :principal_payment_cents

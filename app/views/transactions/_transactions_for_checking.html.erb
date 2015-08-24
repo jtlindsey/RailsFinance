@@ -27,7 +27,7 @@
             <% transactions.each do |transaction| %>
               <tr>
                 <td><%= transaction.date.to_date %></td>
-                <td><%= "temp" %></td> <!-- transction check# -->
+                <td><%= transaction.check_number %></td> <!-- transction check# -->
                 <td><%= transaction.payee %></td>
                 <td><%= transaction.category %></td> <!-- transction category -->
                 <td><%= truncate(transaction.comment) %></td> <!-- transction comment -->
@@ -75,7 +75,7 @@
         <tbody>
           <tr style="background: black"><td></td><td><%= "" %></td></tr>
           <tr><td>Date</td><td><%= "#{transaction.date.to_date}" %></td></tr>
-          <tr><td>Check#</td><td><%= "temp" %></td></tr>
+          <tr><td>Check#</td><td><%= transaction.check_number %></td></tr>
           <tr><td>Payee</td><td><%= truncate(transaction.payee) %></td></tr>
           <tr><td>Category</td><td><%= truncate(transaction.category) %></td></tr>
           <tr><td>Comment</td><td><%= truncate(transaction.comment) %></td></tr>

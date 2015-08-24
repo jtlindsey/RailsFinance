@@ -29,6 +29,12 @@
     <%= f.label :payee %><br>
     <%= f.text_field :payee %>
   </div>
+  <% if @account.type == "Checking" %>
+    <div class="field">
+      <%= f.label :check_number %><br>
+      <%= f.text_field :check_number %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :category %><br>
     <%= f.select :category, Transaction.withdrawal_category_list(current_user), {include_blank: 'Please Select'} %>
