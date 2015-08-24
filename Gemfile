@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 #for sending 'contact us' emails
-gem 'mail_form'
-gem 'simple_form'
+# gem 'mail_form'
+# gem 'simple_form'
 
 #for bootstrap-sass
 gem 'bootstrap-sass', '~> 3.3.5'
