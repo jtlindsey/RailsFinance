@@ -1,0 +1,41 @@
+<%= f.hidden_field :credit_limit, value: number_to_currency(0) %>
+
+<div class="form-group">
+  <%= f.label :name %><br>
+  <%= f.text_field :name, :required => true, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :last4 %><br>
+  <%= f.text_field :last4, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :mortgage_term %>
+  <%= @account.mortgage_term %>
+  <%= f.hidden_field :mortgage_term %>
+</div>
+<div class="form-group">
+  <%= f.label :loan_amount %><br>
+  <%= f.text_field :loan_amount, value: number_to_currency(@account.loan_amount), class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :minimum_payment, "Minimum Payment (P/I)" %><br>
+  <%= f.text_field :minimum_payment, value: number_to_currency(@account.minimum_payment), class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :minimum_escrow_payment, "Escrow Payment" %><br>
+  <%= f.text_field :minimum_escrow_payment, value: number_to_currency(@account.minimum_escrow_payment), class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :interest_rate %><br>
+  <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate), class: 'form-control' %>
+</div>
+<% if @account.persisted? %>
+  <div class="form-group">
+    <%= f.label :status %><br>
+    <%= f.select :status, Asset.statuses, class: 'form-control' %>
+  </div>
+<% end %>
+
+<div style="text-align: right">
+  <%= f.submit class: "btn btn-primary" %>
+</div>
