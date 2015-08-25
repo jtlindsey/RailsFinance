@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @favorite_accounts = current_user.accounts.order('LOWER(name)').order('type').where(status: 'Open').where(favorite: true)
+    @favorite_accounts = current_user.accounts.order('type').order('LOWER(name)').where(status: 'Open').where(favorite: true)
     @budget_watching = BudgetItem.watch_items(current_user)
 
     # @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
