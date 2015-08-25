@@ -1,5 +1,152 @@
-<h1>New Account</h1>
+<%= form_for(@account, as: :account, url: accounts_path) do |f| %>
 
-<%= render 'new_form' %>
+  <div style="max-width: 420px; padding: 10px 15px 30px 15px; margin: 0 auto; background-color: #D3D3D3; border-radius: 10px;">
 
-<%= link_to 'Back', accounts_path %>
+    <% if @account.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+        <ul>
+        <% @account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h3>New Account</h3>
+    <div class="form-group" id="account-type">
+      <%= f.label :type %><br>
+      <%= f.select :type, Account.types, {include_blank: 'Please Select'}, class: 'form-control' %>
+    </div>
+
+    <% @f = f %>
+    <div id="account-form-by-type"></div>
+
+    
+    <br><%= link_to 'Back', accounts_path %>
+  </div>
+<% end %>
+
+
+
+
+<!-- TEST -->
+<script>
+
+jQuery(function(){
+
+  var error_count = <%= j @account.errors.count.to_json.html_safe %>
+
+  $(document).ready(function() {
+    var selected_item = $( "#account-type option:selected" ).text();
+    if (error_count > 0) {
+      switch (selected_item) {
+        case 'Checkings':
+          $('#account-form-by-type').html("<%= j render 'form_checking', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Savings':
+          $('#account-form-by-type').html("<%= j render 'form_saving', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Cash':
+          $('#account-form-by-type').html("<%= j render 'form_cash', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Escrow':
+          $('#account-form-by-type').html("<%= j render 'form_escrow', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Other Asset':
+          $('#account-form-by-type').html("<%= j render 'form_other_asset', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Personal Loan':
+          $('#account-form-by-type').html("<%= j render 'form_personal_loan', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Credit Card':
+          $('#account-form-by-type').html("<%= j render 'form_credit_card', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Student Loan':
+          $('#account-form-by-type').html("<%= j render 'form_student_loan', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Other Liability':
+          $('#account-form-by-type').html("<%= j render 'form_other_liability', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Mortgage (fixed)':
+          $('#account-form-by-type').html("<%= j render 'form_mortgage', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        default:
+          $('#account-form-by-type').html("<br>" + "Contact support, an error has occurred");
+          $('#account-form-by-type').slideDown(350);
+      }
+    }
+  });
+
+  $("#account-type").change(function() {
+    var selected_item = $( "#account-type option:selected" ).text();
+    var selected_item_index = $( "#account-type option:selected" ).index(); 
+
+    if (selected_item_index < 1 && error_count == 0) {
+      $('#account-form-by-type').hide();
+    }
+    else {
+      switch (selected_item) {
+        case 'Checkings':
+          $('#account-form-by-type').html("<%= j render 'form_checking', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Savings':
+          $('#account-form-by-type').html("<%= j render 'form_saving', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Cash':
+          $('#account-form-by-type').html("<%= j render 'form_cash', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Escrow':
+          $('#account-form-by-type').html("<%= j render 'form_escrow', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Other Asset':
+          $('#account-form-by-type').html("<%= j render 'form_other_asset', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Personal Loan':
+          $('#account-form-by-type').html("<%= j render 'form_personal_loan', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Credit Card':
+          $('#account-form-by-type').html("<%= j render 'form_credit_card', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Student Loan':
+          $('#account-form-by-type').html("<%= j render 'form_student_loan', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Other Liability':
+          $('#account-form-by-type').html("<%= j render 'form_other_liability', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        case 'Mortgage (fixed)':
+          $('#account-form-by-type').html("<%= j render 'form_mortgage', f: @f %>");
+          $('#account-form-by-type').slideDown(350);
+          break;
+        default:
+          $('#account-form-by-type').html("<br>" + "Contact support, an error has occurred");
+          $('#account-form-by-type').slideDown(350);
+      }
+
+    }
+
+  });
+
+});
+
+</script>

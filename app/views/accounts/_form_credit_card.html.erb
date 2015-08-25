@@ -1,0 +1,37 @@
+<%= f.hidden_field :loan_amount, value: number_to_currency(0) %>
+<%= f.hidden_field :minimum_escrow_payment, value: number_to_currency(0) %>
+
+<div class="form-group">
+  <%= f.label :name %><br>
+  <%= f.text_field :name, :required => true, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :last4 %><br>
+  <%= f.text_field :last4, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :minimum_payment %><br>
+  <%= f.text_field :minimum_payment, value: number_to_currency(0), class: 'form-control' %>
+</div>
+<div class="field">
+  <%= f.label :credit_limit %><br>
+  <%= f.text_field :credit_limit, value: number_to_currency(0), class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :interest_rate %><br>
+  <%= f.text_field :interest_rate, value: number_to_percentage(0), class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :balance %><br>
+  <%= f.text_field :balance, value: number_to_currency(@account.balance), class: 'form-control' %>
+</div>
+<% if @account.persisted? %>
+  <div class="form-group">
+    <%= f.label :status %><br>
+    <%= f.select :status, Asset.statuses, class: 'form-control' %>
+  </div>
+<% end %>
+
+<div style="text-align: right">
+  <%= f.submit class: "btn btn-primary" %>
+</div>
