@@ -21,6 +21,10 @@
   <%= f.label :interest_rate %><br>
   <%= f.text_field :interest_rate, value: number_to_percentage(@account.interest_rate), class: 'form-control' %>
 </div>
+<div class="form-group">
+  <%= f.label :favorite, "Favorite?" %><br>
+  <%= f.check_box :favorite %>
+</div>
 <% if @account.persisted? %>
   <div class="form-group">
     <%= f.label :status %><br>

@@ -9,6 +9,10 @@
   <%= f.label :name %><br>
   <%= f.text_field :name, :required => true, class: 'form-control' %>
 </div>
+<div class="form-group">
+  <%= f.label :favorite, "Favorite?" %><br>
+  <%= f.check_box :favorite %>
+</div>
 <% if @account.persisted? %>
   <div class="form-group">
     <%= f.label :status %><br>
