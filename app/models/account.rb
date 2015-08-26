@@ -47,7 +47,9 @@ class Account < ActiveRecord::Base
   end
 
   def self.spending_query(user, category)
-    user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+    a = user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+    b = user.transactions.order(:category).where(transaction_type: 'Deposit').where(category: category.name).joins(:account).where(accounts: {type: Liability.types.values}).inject(0) {|output, transaction| output + transaction.amount}
+    a+b
   end
 
   def self.convert_money_to_number(money)
@@ -68,7 +70,9 @@ class Account < ActiveRecord::Base
   end
 
   def self.spending_query_by_month(user, category)
-    user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+    a = user.transactions.order(:category).where(transaction_type: 'Withdrawal').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).inject(0) {|output, transaction| output + transaction.amount}
+    b = user.transactions.order(:category).where(transaction_type: 'Deposit').where(date: Date.today.beginning_of_month..Date.today.end_of_month).where(category: category.name).joins(:account).where(accounts: {type: Liability.types.values}).inject(0) {|output, transaction| output + transaction.amount}
+    a+b
   end
 
 
