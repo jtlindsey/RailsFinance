@@ -11,10 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.select :category, Transaction.category_list(current_user), {include_blank: 'Please Select'} %>
+  <div class="field" id="budget-type">
+    <%= f.label :budget_type %><br>
+    <%= f.select :budget_type, BudgetItem.budget_type, {include_blank: 'Please Select'} %>
   </div>
+
+  <% @f = f %>
+  <div class="field" id="budget-category">
+  </div>
+
   <div class="field">
     <%= f.label :amount %><br>
     <%= f.text_field :amount %>
@@ -32,3 +37,32 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+
+
+<script>
+
+jQuery(function(){
+
+  $("#budget-type").change(function() {
+    var selected_item = $( "#budget-type option:selected" ).text();
+
+    switch (selected_item) {
+      case 'Income':
+        $('#budget-category').html("<%= j render 'category_income', f: @f %>");
+        $('#budget-category').slideDown(350);
+        break;
+      case 'Expense':
+        $('#budget-category').html("<%= j render 'category_expense', f: @f %>");
+        $('#budget-category').slideDown(350);
+        break;
+      default:
+        $('#budget-category').hide();
+    }
+
+  });
+
+});
+
+</script>

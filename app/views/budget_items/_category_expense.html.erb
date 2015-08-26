@@ -1,0 +1,3 @@
+
+    <%= f.label :category %><br>
+    <%= f.select :category, Transaction.withdrawal_category_list(current_user), {include_blank: 'Please Select'} %>

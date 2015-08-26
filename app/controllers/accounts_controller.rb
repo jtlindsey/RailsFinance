@@ -20,14 +20,15 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @favorite_accounts = current_user.accounts.order('type').order('LOWER(name)').where(status: 'Open').where(favorite: true)
-    @budget_watching = BudgetItem.watch_items(current_user)
+    @budget_expense_watching = BudgetItem.watch_expense_items(current_user)
+    @budget_income_watching = BudgetItem.watch_income_items(current_user)
 
     # @testing = Gchart.pie_3d(:title => 'ruby_fu', :size => '400x200',
               # :data => [10, 45, 45], :labels => ["DHH", "Rob", "Matt"] )
 
     @accounts = current_user.accounts
 
-    # Budget message...move to model
+    # Budget message...move to model or helper
     if current_user.budget_items.count >= 1 && current_user.budget_items.where(watch: true).count < 1
       @budget_tracking_message = "Click Here to add Budget Items to Watch List." 
     elsif current_user.budget_items.count < 1

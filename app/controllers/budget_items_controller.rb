@@ -5,7 +5,7 @@ class BudgetItemsController < ApplicationController
   # GET /budget_items
   # GET /budget_items.json
   def index
-    @budget_items = current_user.budget_items
+    @budget_items = current_user.budget_items.order(budget_type: "DESC")
   end
 
   # GET /budget_items/1
@@ -14,7 +14,8 @@ class BudgetItemsController < ApplicationController
   end
 
   def show_all
-    @budget_items = current_user.budget_items
+    @budget_income_items = current_user.budget_items.where(budget_type: "Income")
+    @budget_expense_items = current_user.budget_items.where(budget_type: "Expense")
   end
 
   # GET /budget_items/new
@@ -74,6 +75,6 @@ class BudgetItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def budget_item_params
-      params.require(:budget_item).permit(:category, :amount, :period, :watch)
+      params.require(:budget_item).permit(:category, :amount, :period, :watch, :budget_type)
     end
 end
