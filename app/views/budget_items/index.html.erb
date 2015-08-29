@@ -1,6 +1,12 @@
-<p id="notice"><%= notice %></p>
-
 <div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Budget item', new_budget_item_path, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>
+
+<br>
+
+<div class="row visible-sm-block visible-md-block visible-lg-block">
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading panels-text"><%= link_to 'View Budget', "/budget_show_all" %></div>
@@ -38,6 +44,48 @@
   </div>
 </div>
 
-<br>
 
-<%= link_to 'New Budget item', new_budget_item_path %>
+<!-- Mobile -->
+<div class="row visible-xs-block">
+  <div class="col-md-12">
+    <div class="panel-primary">
+      <div class="panel-heading panels-text"><%= link_to 'View Budget', "/budget_show_all" %></div>
+
+      <% @budget_items.each do |budget_item| %>
+          <table class="table table-striped table-hover table-condensed">
+          <tbody>
+            <tr style="background: black">
+              <td></td><td><%= "" %></td>
+            </tr>
+            <tr>
+              <th>Budget Type</th><td><%= budget_item.budget_type %></td>
+            </tr>
+            <tr>
+              <th>Category</th><td><%= budget_item.category %></td>
+            </tr>
+            <tr>
+              <th>Period</th> <td><%= budget_item.period %></td>
+            </tr>
+            <tr>
+              <th>Amount Budgeted</th><td><%= number_to_currency(budget_item.amount) %></td>
+            </tr>
+            <tr>
+              <th>Amount Spent</th><td><%= number_to_currency(budget_item.budget_spent(budget_item.period, current_user)) %></td>
+            </tr>
+            <tr>
+              <th>Watch</th><td><%= budget_item.watch ? 'Yes' : 'No' %></td>
+            </tr>
+            <tr>
+              <td><%= link_to 'Edit', edit_budget_item_path(budget_item) %></td><th></th>
+            </tr>
+            <tr>
+              <td><%= link_to 'Destroy', budget_item, method: :delete, data: { confirm: 'Are you sure?' } %></td><th></th>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<!-- End Mobile -->

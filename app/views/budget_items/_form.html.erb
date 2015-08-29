@@ -11,31 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field" id="budget-type">
-    <%= f.label :budget_type %><br>
-    <%= f.select :budget_type, BudgetItem.budget_type, {include_blank: 'Please Select'} %>
-  </div>
+    <div class="form-group" id="budget-type">
+      <%= f.label :budget_type %>
+      <%= f.select :budget_type, BudgetItem.budget_type, {include_blank: 'Please Select'}, class: 'form-control' %>
+    </div>
 
-  <% @f = f %>
-  <div class="field" id="budget-category">
-  </div>
+    <% @f = f %>
+    <div class="form-group" id="budget-category">
+    </div>
 
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :period %><br>
-    <%= f.select :period, BudgetItem.period_list, {include_blank: 'Please Select'} %>
-  </div>
-  <div class="field">
-    <%= f.label :watch, "Watch?" %><br>
-    <%= f.check_box :watch %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :amount %>
+      <%= f.text_field :amount, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :period %>
+      <%= f.select :period, BudgetItem.period_list, {include_blank: 'Please Select'}, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :watch, "Watch?" %>
+      <%= f.check_box :watch %>
+    </div>
+    <div style="text-align: right">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
 <% end %>
 
 

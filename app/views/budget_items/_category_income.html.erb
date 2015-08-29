@@ -1,4 +1,4 @@
 
     <%= f.label :category %><br>
-    <%= f.select :category, Transaction.deposit_category_list(current_user), {include_blank: 'Please Select'} %>
+    <%= f.select :category, Transaction.deposit_category_list(current_user), {include_blank: 'Please Select'}, class: 'form-control' %>
     
