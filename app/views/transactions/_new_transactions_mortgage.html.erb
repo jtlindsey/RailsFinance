@@ -1,15 +1,15 @@
-<div class="container-fluid">
 
-  <div class="row">
-    <a class="btn btn-primary" id="charge" role="button">Charge</a>
-    <a class="btn btn-primary" id="payment" role="button">Payment</a>
-  </div>
-
-  <div class="row">
-    <div id="form" style="display:none;"></div>
-  </div>
-
+<div class="form-group" id="transaction-type">
+  <label>Transaction Type</label>
+  <select class='form-control'>
+      <option value="" disabled selected>Please Select</option>
+      <option value="Charge">Charge</option>
+      <option value="Payment">Payment</option>
+  </select>
 </div>
+
+<div id="transaction-form-by-type" style="display:none;"></div>
+
 
 
 
@@ -17,13 +17,28 @@
 
 <!-- TEST -->
 <script>
-$('#charge').click(function() {
-  $('#form').html("<%= j (render 'mortgage_deposit') %>");
-  $('#form').slideDown(350);
+
+jQuery(function(){
+
+  $("#transaction-type").change(function() {
+    var selected_item = $( "#transaction-type option:selected" ).text();
+
+      switch (selected_item) {
+        case 'Charge':
+          $('#transaction-form-by-type').html("<%= j render 'mortgage_deposit' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Payment':
+          $('#transaction-form-by-type').html("<%= j render 'mortgage_withdrawal' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        default:
+          $('#transaction-form-by-type').html("<br>" + "Contact support, an error has occurred");
+          $('#transaction-form-by-type').slideDown(350);
+      }
+
+  });
+
 });
 
-$('#payment').click(function() {
-  $('#form').html("<%= j (render 'mortgage_withdrawal') %>");
-  $('#form').slideDown(350);
-});
 </script>

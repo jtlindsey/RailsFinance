@@ -1,85 +1,81 @@
-<% if @transaction.errors.any? %>
-  <div class="alert alert-warning">
-    <strong>Error!</strong><span> Click transaction type to see errors.</span>
-  </div>
-<% end %>
 
 <% if @account.class.superclass.name == "Liability" %>
 
-  <div class="container-fluid">
-
-    <div class="row">
-      <a class="btn btn-primary" id="liability-charge" role="button">Charge</a>
-      <a class="btn btn-primary" id="liability-payment" role="button">Payment</a>
+    <div class="form-group" id="transaction-type">
+      <label>Transaction Type</label>
+        <select class='form-control'>
+            <option value="" disabled selected>Please Select</option>
+            <option value="Liability-Charge">Charge</option>
+            <option value="Liability-Payment">Payment</option>
+        </select>
     </div>
 
-    <div class="row">
-      <div id="form" style="display:none;"></div>
-    </div>
-
-  </div>
+    <div id="transaction-form-by-type"></div>
 
 <% else %><!-- Assets -->
 
-  <div class="container-fluid">
-    <div class="row">
-      <a class="btn btn-primary" id="deposit" role="button">Deposit</a>
-      <a class="btn btn-primary" id="withdrawal" role="button">Withdrawal</a>
-      <a class="btn btn-primary" id="transfer" role="button">Transfer</a>
-      <a class="btn btn-primary" id="payment" role="button">Payment</a>
+    <div class="form-group" id="transaction-type">
+      <label>Transaction Type</label>
+      <select class='form-control'>
+          <option value="" disabled selected>Please Select</option>
+          <option value="Deposit">Deposit</option>
+          <option value="Withdrawal">Withdrawal</option>
+          <option value="Transfer">Transfer</option>
+          <option value="Payment">Payment</option>
+      </select>
     </div>
 
-    <div class="row">
-      <div id="form" style="display:none;"></div>
-    </div>
-  </div>
+    <div id="transaction-form-by-type"></div>
 
 <% end %>
-
 
 
 
 
 
 <!-- TEST -->
-
 <script>
-$('#liability-charge').click(function() {
-  $('#form').html("<%= j (render 'liability_deposit') %>");
-  $('#form').slideDown(350);
+
+
+jQuery(function(){
+
+  $("#transaction-type").change(function() {
+    var selected_item = $( "#transaction-type option:selected" ).val();
+// console.log(selected_item);
+
+
+      switch (selected_item) {
+        case 'Deposit':
+          $('#transaction-form-by-type').html("<%= j render 'deposit' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Withdrawal':
+          $('#transaction-form-by-type').html("<%= j render 'withdrawal' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Liability-Charge':
+          $('#transaction-form-by-type').html("<%= j render 'liability_deposit' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Liability-Payment':
+          $('#transaction-form-by-type').html("<%= j render 'liability_withdrawal' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Payment':
+          $('#transaction-form-by-type').html("<%= j render 'payment' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        case 'Transfer':
+          $('#transaction-form-by-type').html("<%= j render 'transfer' %>");
+          $('#transaction-form-by-type').slideDown(350);
+          break;
+        default:
+          $('#transaction-form-by-type').html("<br>" + "Contact support, an error has occurred");
+          $('#transaction-form-by-type').slideDown(350);
+      }
+
+  });
+
 });
-
-$('#liability-payment').click(function() {
-  $('#form').html("<%= j (render 'liability_withdrawal') %>");
-  $('#form').slideDown(350);
-});
-
-$('#deposit').click(function() {
-  $('#form').html("<%= j (render 'deposit') %>");
-  $('#form').slideDown(350);
-});
-
-$('#withdrawal').click(function() {
-  $('#form').html("<%= j (render 'withdrawal') %>");
-  $('#form').slideDown(350);
-});
-
-$('#transfer').click(function() {
-  $('#form').html("<%= j (render 'transfer') %>");
-  $('#form').slideDown(350);
-});
-
-
-
-
-$('#payment').click(function() {
-  $('#form').html("<%= j (render 'payment') %>");
-  $('#form').slideDown(350);
-});
-
-
-
-
-
 
 </script>

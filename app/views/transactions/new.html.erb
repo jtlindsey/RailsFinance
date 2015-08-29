@@ -1,14 +1,18 @@
-<h3>New Transaction</h3>
-<p><%= "#{@account.name} #{@account.last4} (#{@account.type}) Balance: #{number_to_currency(account_total(@account.id))}" %></p>
+<div style="max-width: 420px; padding: 10px 15px 30px 15px; margin: 0 auto; background-color: #D3D3D3; border-radius: 10px;">
 
-<% begin %> 
-<!-- Will render partials created with account name..like _transactions.html.erb -->
-  <%= render "new_transactions_#{@account.type.underscore}", transactions: @transactions %>
-<% rescue %>
-<!-- Default condition when partial doesn't exist -->
-  <%= render "new_transactions_all", transactions: @transactions %>
-<% end %>
+  <h3>New Transaction</h3>
+  <p><%= "#{@account.name} #{@account.last4} (#{@account.type}) Balance: #{number_to_currency(account_total(@account.id))}" %></p>
 
-<br>
+  <% begin %> 
+  <!-- Will render partials created with account name..like _transactions.html.erb -->
+    <%= render "new_transactions_#{@account.type.underscore}", transactions: @transactions %>
+  <% rescue %>
+  <!-- Default condition when partial doesn't exist -->
+    <%= render "new_transactions_all", transactions: @transactions %>
+  <% end %>
 
-<%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>
+  <br>
+  <%= link_to 'Back', account_transactions_path(account_id: params[:account_id]) %>
+  <%#= button_to('Back', account_transactions_path(account_id: params[:account_id]), :class => 'btn btn-default btn-primary') %>
+
+</div>

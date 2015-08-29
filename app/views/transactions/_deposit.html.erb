@@ -13,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
   
     <%= f.hidden_field :transaction_type, value: 'Deposit' %>
     <%= f.hidden_field :interest_payment, value: number_to_currency(0) %>
@@ -20,23 +21,24 @@
     <%= f.hidden_field :payment_amount, value: number_to_currency(0) %>
     <%= f.hidden_field :payee, value: @account.name %>
     
-  <div class="field">
+  <div class="form-group">
     <%= f.label :amount, "Deposit Amount" %><br>
-    <%= f.text_field :amount, value: number_to_currency(0) %>
+    <%= f.text_field :amount, value: number_to_currency(0), class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :category %><br>
-    <%= f.select :category, Transaction.deposit_category_list(current_user), {include_blank: 'Please Select'} %>
+    <%= f.select :category, Transaction.deposit_category_list(current_user), {include_blank: 'Please Select'}, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :date %><br>
-    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true %>
+    <%= f.datetime_select :date, :order => [:day, :month, :year], :include_seconds => true, class: 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div style="text-align: right">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
+
 <% end %>

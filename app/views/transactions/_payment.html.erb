@@ -21,9 +21,9 @@
   <!-- transfer ref set to zero to identify as type of transfer in models before_save action -->
   <%= f.hidden_field :transfer_ref, value: 0 %>
 
-  <div class="field" id="payment-to-account">
+  <div class="form-group" id="payment-to-account">
   <%= f.label 'Payment To:' %><br>
-      <%= f.collection_select :to_account_id, Account.liability_account_payment_list(current_user, @account), :id, :account_details, {include_blank: 'Please Select'} %>
+      <%= f.collection_select :to_account_id, Account.liability_account_payment_list(current_user, @account), :id, :account_details, {include_blank: 'Please Select'}, class: 'form-control' %>
   </div>
 
 <!-- 
@@ -86,7 +86,7 @@ jQuery(function(){
           $('#to-account-form').html("<%= j render 'payment_to_mortgage', f: @f %>");
 
           $("#min-payment-field-hidden").val(selected_account_min_payment);
-          $("#min-payment-field").html(selected_account_min_payment);
+          $("#min-payment-field").html('$'+selected_account_min_payment);
 
           $('#to-account-form').slideDown(350);
           break;
@@ -97,7 +97,7 @@ jQuery(function(){
           $('#to-account-form').html("<%= j render 'payment_to_all_other_liabilities', f: @f %>");
 
           $("#min-payment-field-hidden").val(selected_account_min_payment);
-          $("#min-payment-field").html(selected_account_min_payment);
+          $("#min-payment-field").html('$'+selected_account_min_payment);
 
           $('#to-account-form').slideDown(350);
           break;
