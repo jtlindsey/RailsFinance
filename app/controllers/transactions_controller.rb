@@ -57,7 +57,7 @@ class TransactionsController < ApplicationController
       deposit.transfer_ref = withdrawal.id
 
       if deposit.save
-        redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
+        redirect_to account_transactions_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
       else
         @transaction = deposit
         render :new
@@ -92,7 +92,7 @@ class TransactionsController < ApplicationController
       withdrawal_to.transfer_ref = withdrawal.id
 
       if withdrawal_to.save
-        redirect_to account_transaction_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
+        redirect_to account_transactions_path(withdrawal.account, withdrawal), notice: 'Transaction was successfully created.' 
       else
         @transaction = withdrawal_to
         render :new
@@ -102,7 +102,7 @@ class TransactionsController < ApplicationController
 
     else
       if @transaction.save
-        redirect_to account_transaction_path(@account, @transaction), notice: 'Transaction was successfully created.'  
+        redirect_to account_transactions_path(@account, @transaction), notice: 'Transaction was successfully created.'  
       else
         render :new
       end
