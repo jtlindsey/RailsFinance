@@ -11,15 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :category_type %><br>
-    <%= f.select :category_type, Category.category_types %>
+  <div class="form-group">
+    <%= f.label :category_type %>
+    <%= f.select :category_type, Category.category_types, {include_blank: 'Please Select'}, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div style="text-align: right">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
+
 <% end %>
