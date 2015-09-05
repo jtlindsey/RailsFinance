@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Finance</title>
+    <title>MyMoneyOnTheGo</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
@@ -28,26 +28,6 @@
     </div>
 
 
-    <footer id="footer" style="text-align: center; padding-bottom: 4px;">
-      <p>
-        &copy; J Travis Lindsey<br>
-        MyMoneyOnTheGo.com 2015
-      </p>
-    </footer>
-
+    <%= render 'layouts/footer' %>
   </body>
 </html>
-
-<script>
-
-  $(document).ready(function() {
-
-   var docHeight = $(window).height();
-   var footerHeight = $('#footer').height() +15;
-   var footerTop = $('#footer').position().top + footerHeight;
-
-   if (footerTop < docHeight) {
-    $('#footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
-   }
-  });
- </script>
