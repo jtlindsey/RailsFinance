@@ -1,5 +1,9 @@
 // Place custom css that apply to whole site here.
 
+.navbar {
+    border-radius: 0px !important;
+}
+
 /* change table hover color */
 .table-hover tbody tr:hover td {
   background-color: #000;
