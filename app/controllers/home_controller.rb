@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       # render :file => "/path/to/some/404_template", :status => 404
     end
   end
+
+  def faq
+  end
+
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-   
+  get 'faq', to: 'home#faq'
   get 'contact', to: 'contacts#new', as: "contact"
   resources "contacts", only: [:new, :create]
 
