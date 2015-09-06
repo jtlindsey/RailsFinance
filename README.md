@@ -26,15 +26,15 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 
 
 ### Priority 1 Features
-- [x] Create database schema design plan using mysql workbench http://www.mysql.com/products/workbench/
+- [x] Postgresql database
 - [x] Account create, edit, delete
 - [x] Transaction(deposit, withdrawal) create, edit, delete
 - [x] Transaction(transfer) create, and delete(as block action)
 - [x] Mobile friendly tables using single column mode when on phones
-- [x] Implement bootstrap
+- [x] Bootstrap it
 - [x] Category create, edit, delete (Inceme and Expense Categories)
 - [x] Budget create, edit, delete
-- [x] Implement pie and bar charts using chartkick.com or charts.js
+- [x] Pie and bar charts using chartkick.com or charts.js on home page
 - [x] Sort Transactions by category (Date, Check#, Description/memo, Category, Payment, Deposit, Balance)
 - [x] User create, edit, delete
 - [x] Track mortgage (fixed) with and without escrow
