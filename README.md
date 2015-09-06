@@ -18,6 +18,8 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Add graph options to query page
 - [ ] Update 'show' page for all account types to show all columns when looking at transactions
 - [ ] Database backup
+- [ ] Add HELP page
+- [ ] Update FAQ page
 - [ ] Create Getting Started Guide (Easy Quick Start Guide)
 - [ ] Create Getting started video
 - [ ] Create feature video
