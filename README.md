@@ -4,9 +4,24 @@ I've been using Microsoft Money for 10+ years but it's always been a pain that i
 
 Id like the desktop version of this to be based on the Node.js platform and be written in HTML, JavaScript, and CSS. That will be the next step after completing the Rails version. This feature list is primarily for the web version.
 
-## Features Planned 
+## Key 
 - [ ] =incomplete 
 - [x] =complete
+
+
+### Active-TODO
+- [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
+- [ ] Consider using activeadmin gem
+- [ ] Check browser Resize Text
+- [ ] Cross platform compatible with Windows, Mac, Linux, iOS, Android OS (test on all)
+- [ ] Create query page for multiple types of querys (spending, income, expenses, by payee, by category, )
+- [ ] Add graph options to query page
+- [ ] Update 'show' page for all account types to show all columns when looking at transactions
+- [ ] Database backup
+- [ ] Create Getting Started Guide (Easy Quick Start Guide)
+- [ ] Create Getting started video
+- [ ] Create feature video
+
 
 ### Priority 1 Features
 - [x] Create database schema design plan using mysql workbench http://www.mysql.com/products/workbench/
@@ -24,23 +39,13 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [x] Handle Escrow (P&I, Taxes, Insurance, and PMI or other additions)
 - [x] Home page with overview and profile summary
 - [x] Net-worth tracking
+- [x] Add files to transactions (receipts as image or pdf, clicking on view transaction shows receipt titles and allows download of reciept)
+- [x] Update software without loosing existing data
 - [ ] Transaction(transfer) edit(as one block action)
 - [ ] Credit Cards, Loans, etc (Balance, Limit, Interest rate, and ability to sort by order should be paid off for lowest total interest paid)
-- [ ] Consider using Ransack alone instead of activeadmin gem for search query forms
-- [ ] Consider using activeadmin gem
-- [ ] Cross platform compatible with Windows, Mac, Linux, iOS, Android OS (test on all)
-- [ ] Check browser Resize Text
-- [ ] Create query page for multiple types of querys (spending, income, expenses, by payee, by category, )
-- [ ] Add graph options to query page
 - [ ] Print as pdf (custom print.css)
-- [ ] Add files to transactions (receipts as image or pdf, clicking on view transaction shows receipt preview and allows download of reciept copy)
-- [ ] Database backup
-- [ ] Update software without loosing existing data
-- [ ] Graphs for others by link to page to create
+- [ ] Click budget to view all transactions for that budget category and period
 - [ ] Graphs printable
-- [ ] Create Getting Started Guide (Easy Quick Start Guide)
-- [ ] Create Getting started video
-- [ ] Create feature video
 
 
 ### Priority 2 Features
@@ -54,11 +59,6 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 - [ ] Create pdf User Guide with screen shots
 - [ ] Support ticket location for easy submission and tracking
 - [ ] Desktop / Web app sync
-
-
-### Paid Version
-The following features might be released in a paid version if not in the free open source version.
-
 - [ ] Investment Accounts
 - [ ] Stocks (static)
 - [ ] Bonds (static)
@@ -70,4 +70,4 @@ I will be learning along the way, using whatever tools I can find. In the end I 
 
 <br>
 Site is online at:<br>
-[Visit my site online!](http://www.mymoneyonthego.com/)
+[View app live](http://www.mymoneyonthego.com/)
