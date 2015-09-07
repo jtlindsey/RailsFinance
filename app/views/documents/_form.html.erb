@@ -20,12 +20,14 @@
       <%= document.efile_identifier %><br>
     <% end %><br>
   <% end %>
-  <div class="field">
-    <%= f.label :document %><br>
-    <%= f.file_field :efile %>
+
+  <div class="form-group">
+    <%= f.label :document %>
+    <%= f.file_field :efile, class: 'form-control btn btn-primary' %>
     <%= f.hidden_field :efile_cache %>
   </div>
-  <div class="actions">
-    <%= f.submit "Upload Document" %>
+  <div style="text-align: right">
+    <%= f.submit "Upload Document", :class => 'btn btn-primary' %>
   </div>
+
 <% end %>

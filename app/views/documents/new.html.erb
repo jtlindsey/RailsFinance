@@ -1,5 +1,11 @@
-<h1>New Document</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', account_transaction_path(@transaction.account, @transaction) %>
+<div style="max-width: 420px; padding: 10px 15px 30px 15px; margin: 0 auto; background-color: #D3D3D3; border-radius: 10px;">
+
+  <h1>New Document</h1>
+
+  <%= render 'form' %>
+  <br>
+  <%= link_to 'Back', account_transaction_path(@transaction.account, @transaction) %>
+</div>
+
