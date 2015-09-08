@@ -2,13 +2,13 @@ module BudgetItemsHelper
 
 #Income
   def over_income_budget_tag(budget_item)
-    #if user is equal or over budget
+    #if user income is equal or over budget
     #byebug
     if budget_item.budget_gain(budget_item.period, current_user) != 0 && (budget_item.budget_gain(budget_item.period, current_user) / budget_item.amount * 100) >= 100
-      "progress-bar-danger"
-    #if user spents more than 75% of budget
+      "progress-bar-success"
+    #if user income is more than 75% of budget
     elsif budget_item.budget_gain(budget_item.period, current_user) != 0 && (budget_item.budget_gain(budget_item.period, current_user) / budget_item.amount * 100) > 75
-      "progress-bar-warning"
+      "progress-bar-info"
     else
       ""
     end
