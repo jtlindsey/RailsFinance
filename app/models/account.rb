@@ -63,7 +63,7 @@ class Account < ActiveRecord::Base
 
     user.categories.order(:name).where(category_type: 'Expense').each do |category|
         @category_totals.push(convert_money_to_number(spending_query_by_month(user, category)))
-        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query(user, category))}" )
+        @category_names.push("#{category.name} #{get_helpers2.number_to_currency(spending_query_by_month(user, category))}" )
     end
 
     @spending = Hash[@category_names.zip @category_totals]
