@@ -51,7 +51,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'money-rails', "1.4.1" #...cents etc for currency columns
-#note: unresolved issue with money-rails 1.6.0 found when upgrading app to rails 4.2.5
+#note: unresolved issue with money-rails version 1.6.0 found when upgrading app to rails 4.2.5
 
 gem 'devise' #user accounts
 gem 'carrierwave' #uploading files
