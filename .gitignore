@@ -24,3 +24,6 @@ Procfile
 /tmp
 
 .DS_Store
+
+# Ignore byebug history file
+.byebug_history
