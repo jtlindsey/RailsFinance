@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
   database: finance_development
-  username: Travis
+  username: travis
   password: 
 
 # Warning: The database defined as "test" will be erased and
@@ -21,7 +21,7 @@ development:
 test:
   <<: *default
   database: finance_test
-  username: Travis
+  username: travis
   password: 
 
 production:
