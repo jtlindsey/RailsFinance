@@ -1,3 +1,11 @@
+## Update 15 March 2016
+This application is no longer being maintained. Time constraints have prevented me from being able to maintain the application properly (including monitoring application security). It will still be available yet on a slower economy (free for me) application server and no new registrations will be allowed. Existing users can still receive support through the contact page.
+
+I am building another application with a different approach. The current project is a desktop version available for Linux, Mac, Windows, ChromeOS using nw.js. After the desktop version is stable, a cloud database will be setup that will allow you to sync data across devices. When the project is at that point, this rails app will likely be taken down and re-built to support this functionality unless I decide to stick with js for the web version. 
+
+For developers that followed this project for experimental and learning, you probably noticed how slow the database got after a few hundred transactions per account. If you haven't figured out the problem, you can contact me [here](http://jtlindsey.com/contact.html) to get help with dramatically speeding up database queries. The original database is configured very poorly and I've discovered some changes that can improve it for anybody interested. The changes that offer the biggest gain require a complete schema redesign along with many query and template changes which I haven't had time to do.
+
+
 ## Personal Finance and Budgeting Software
 
 I've been using Microsoft Money for 10+ years but it's always been a pain that it is only available on Windows OS. Now that I primarily use Mac and Linux, I'd like to have something just as useful but cross platform compatible. Plus I'd like to be able to use it on mobile devices. There are many paid services that already offer this, but I wanted to make a free open source version. I'll try to update this readme as parts of the project are completed. Currently I don't have a lot of time to commit to the project, so progress may be slow.
