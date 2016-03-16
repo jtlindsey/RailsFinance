@@ -23,11 +23,11 @@
 
       <% if controller_name == "home" && action_name == "index" %>
 
-        <li><button id="login" class="btn btn-default navbar-btn">Login/SignUp</button></li>
+        <li><button id="login" class="btn btn-default navbar-btn">Login</button></li>
 
       <% else %>
 
-        <li><%= button_to('Login/SignUp', new_user_session_path, :class => 'btn btn-default btn-inverse navbar-btn') %></li>
+        <li><%= button_to('Login', new_user_session_path, :class => 'btn btn-default btn-inverse navbar-btn') %></li>
 
       <% end %>
 
