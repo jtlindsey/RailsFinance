@@ -1,5 +1,8 @@
+## Update 23 March 2016
+To simplify application maintenance inactive user accounts and user accounts with zero transaction accounts have been deleted. Existing users can still receive support through the contact page.
+
 ## Update 15 March 2016
-This application is no longer being maintained. Time constraints have prevented me from being able to maintain the application properly (including monitoring application security). It will still be available yet on a slower economy (free for me) application server and no new registrations will be allowed. Existing users can still receive support through the contact page.
+This application is no longer being maintained. Time constraints have prevented me from being able to maintain the application properly. It will still be available yet on a slower economy (free for me) application server and no new registrations will be allowed. Existing users can still receive support through the contact page.
 
 I am building another application with a different approach. The current project is a desktop version available for Linux, Mac, Windows, ChromeOS using nw.js. After the desktop version is stable, a cloud database will be setup that will allow you to sync data across devices. When the project is at that point, this rails app will likely be taken down and re-built to support this functionality unless I decide to stick with js for the web version. 
 
