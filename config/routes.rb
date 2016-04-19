@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # devise_for :users
   #used with tracking login history
-  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "track_sessions" }
+  devise_for :users, :controllers => { :sessions => "track_sessions" }
 
   resources :users
 
