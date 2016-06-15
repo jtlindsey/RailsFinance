@@ -147,5 +147,7 @@ FAQ
 ![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/7_faq2.png "FAQ")
 
 <br>
-Site is online at:<br>
+
+## Site is online at:
+
 [View app live](http://www.mymoneyonthego.com/)
