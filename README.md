@@ -81,6 +81,71 @@ Id like the desktop version of this to be based on the Node.js platform and be w
 ### Concerns
 I will be learning along the way, using whatever tools I can find. In the end I hope to provide an easy to maintain application with readable code.
 
+
+## Pics from Demo Account
+
+New Account with no accounts.
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/1_new.png "New account")
+
+Account with activity.
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/1_new_1.png "Account with activity")
+
+Options page.
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/2_options.png "Options")
+
+Budget.
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/3_budget_1.png "Budget")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/3_budget_2.png "Budget")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/3_budget_3.png "Budget")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/3_budget_4.png "Budget")
+
+All Accounts
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/4_all_accounts1.png "All A")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/4_all_accounts2.png "All A")
+
+Edit Account
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/5_edit_account1.png "Edit A")
+
+New Account
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/5_new_account1.png "Account")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/5_new_account2.png "Account")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/5_new_account3.png "Account")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/5_new_account4.png "Account")
+
+Transactions
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/8_some_transactions.png "Transactions")
+
+Financial Summary
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/9_financial_summary1.png "Financial Summary")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/9_financial_summary2.png "Financial Summary")
+
+Contact
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/6_contact.png "Contact")
+
+FAQ
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/7_faq.png "FAQ")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/7_faq2.png "FAQ")
+
 <br>
 Site is online at:<br>
 [View app live](http://www.mymoneyonthego.com/)
