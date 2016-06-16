@@ -146,6 +146,15 @@ FAQ
 
 ![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/7_faq2.png "FAQ")
 
+Admin View  
+
+Shows multiple tracking options that can be used to integrate additional security parameters for account access.
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/10_admin1.png "admin")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/10_admin2.png "admin")
+
+![alt text](https://raw.githubusercontent.com/jtlindsey/DemoPics/master/MyMoneyOTG_Rails/10_admin3.png "admin")
 <br>
 
 ## Site is online at:
