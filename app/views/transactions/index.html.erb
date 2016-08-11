@@ -1,7 +1,9 @@
 <!-- <p id="notice"><%= notice %></p> -->
 <div class="row">
   <div class="col-md-12">
-  <%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]), class: "btn btn-sm btn-primary" %>
+  <%= link_to 'New Transaction', new_account_transaction_path(account_id: params[:account_id]), class: "btn btn-sm btn-primary" %> | 
+
+  <%= link_to 'Transactions to json', account_transactions_path(@account) + ".json", class: "btn btn-sm btn-info" %>
   </div>
 </div>
 <br>
