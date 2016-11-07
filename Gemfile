@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # switching from webbrick to puma
-gem 'puma'
+# gem 'puma'
 
 #for sending 'contact us' emails
 gem 'mail_form'
