@@ -159,4 +159,4 @@ Shows multiple tracking options that can be used to integrate additional securit
 
 ## Site is online at:
 
-[View app live](http://www.mymoneyonthego.com/)
+[View app live](https://mymoneyotg.herokuapp.com/)
